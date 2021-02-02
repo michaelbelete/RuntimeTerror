@@ -1,6 +1,17 @@
-body{
-    font-family: 'Open Sans', sans-serif;
+body {
+  font-family: "Lato", sans-serif;
+  background-color: #e2e2e2;
 }
-#how{
-    
+.bg-primary {
+  background-color: #0d2f88 !important;
+}
+
+@media (min-width: 1200px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl {
+    max-width: 900px;
+  }
 }
