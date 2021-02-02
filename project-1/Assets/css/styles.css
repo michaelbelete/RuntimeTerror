@@ -15,3 +15,11 @@ body {
     max-width: 900px;
   }
 }
+
+#postInput{
+    cursor: pointer;
+}
+
+#postArea {
+    resize: none;
+}
