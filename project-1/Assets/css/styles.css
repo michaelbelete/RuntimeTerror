@@ -1,9 +1,7 @@
 body{
     font-family: 'Roboto', sans-serif;
 }
-.home-nav{
-    font-size: small;
-}
+
 .img-card{
     object-fit: cover;
     height: 30rem;
@@ -16,15 +14,12 @@ body{
     font-family: 'Great Vibes', cursive;
     font-size: 2rem;
 }
-.logo-font-small{
-    font-family: 'Roboto', sans-serif;
 
-}
 .link-font{
     text-decoration: none;
     color: black;
     font-size: large;
-    font-family: 'lato', sans-serif;
+    font-family: 'ubuntu', sans-serif;
 
 }
 a:hover{
