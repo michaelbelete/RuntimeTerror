@@ -25,3 +25,10 @@ body{
 a:hover{
     text-decoration:none;
 }
+
+.quote {
+    font-size: medium;
+    font-style: italic;
+    font-family: 'lato', sans-serif;
+    color: gray;
+}
