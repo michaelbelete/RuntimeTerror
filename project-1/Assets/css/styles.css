@@ -1,6 +1,32 @@
 body{
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
-#how{
-    
+.home-nav{
+    font-size: small;
+}
+.img-card{
+    object-fit: cover;
+    height: 30rem;
+    width: 40rem;
+}
+.lato {
+    font-family: 'Lato', sans-serif;
+}
+.logo-font{
+    font-family: 'Great Vibes', cursive;
+    font-size: 2rem;
+}
+.logo-font-small{
+    font-family: 'Roboto', sans-serif;
+
+}
+.link-font{
+    text-decoration: none;
+    color: black;
+    font-size: large;
+    font-family: 'lato', sans-serif;
+
+}
+a:hover{
+    text-decoration:none;
 }
