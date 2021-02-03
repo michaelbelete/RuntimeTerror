@@ -5,7 +5,9 @@ body {
 .bg-primary {
   background-color: #0d2f88 !important;
 }
-
+.text-primary {
+  color: #0d2f88 !important;
+}
 @media (min-width: 1200px) {
   .container,
   .container-lg,
