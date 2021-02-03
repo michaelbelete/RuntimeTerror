@@ -98,8 +98,8 @@
                     <h4>Post</h4>
                     <form action="#" method="POST">
                         <div class="form-group">
-                            <label for="books">Select Book</label>
-                            <select name="books" id="books" class="form-control">
+                            <label for="books">Select Book</label><br>
+                            <select name="books" id="books" class="form-control" style="width: 100%; padding: 10px;">
                                 <option value="">Select Book You read</option>
                                 <option value="">Book Title(Author)</option>
                                 <option value="">Book Title(Author)</option>
@@ -160,7 +160,10 @@
                 ratedFill: "#154cdb",
                 halfStar: true
             });
+        });
 
+        $(document).ready(function () {
+            $('#books').select2();
         });
 
     </script>

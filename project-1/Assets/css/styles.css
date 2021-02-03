@@ -19,7 +19,9 @@ body {
 #postInput{
     cursor: pointer;
 }
-
+#books{
+  width: 100%;
+}
 #postArea {
     resize: none;
 }
