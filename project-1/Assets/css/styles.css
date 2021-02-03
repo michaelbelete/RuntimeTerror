@@ -34,3 +34,46 @@ body{
     text-align: left;
 
 }
+
+
+
+/* Body Typography */
+.list-group h3 {
+    font-family: Arvo;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 44px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #666666;
+}
+
+.list-group h6 {
+    font-family: Arvo;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 27px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #0D2F88;
+    ;
+}
+
+.list-group p {
+    font-family: Arvo;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.list-group h6 i {
+    color: #595959;
+}
+
+.list-group span {
+    color: #595959;
+}
+
