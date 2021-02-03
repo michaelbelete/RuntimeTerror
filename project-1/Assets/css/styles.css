@@ -10,6 +10,10 @@ body{
 .lato {
     font-family: 'Lato', sans-serif;
 }
+.great-vibes {
+    font-family: 'Great Vibes', cursive;
+
+}
 .logo-font{
     font-family: 'Great Vibes', cursive;
     font-size: 2rem;
@@ -38,3 +42,19 @@ a:hover{
 .carousel-item-prev{
     display:block;
 }
+
+.img-card-2{
+    object-fit: cover;
+    height: 33rem;
+    width: 55rem;
+
+}
+.par-margin{
+    margin-right: 45rem;
+    margin-left: 3rem;
+}
+.foot{
+    margin-top: 10rem;
+    padding-bottom: 1em;
+}
+
