@@ -4,7 +4,7 @@ body{
 
 .img-card{
     object-fit: cover;
-    height: 30rem;
+    height: 35rem;
     width: 40rem;
 }
 .lato {
@@ -43,12 +43,6 @@ a:hover{
     display:block;
 }
 
-.img-card-2{
-    object-fit: cover;
-    height: 33rem;
-    width: 55rem;
-
-}
 .par-margin{
     margin-right: 45rem;
     margin-left: 3rem;
