@@ -10,6 +10,13 @@ body{
 .lato {
     font-family: 'Lato', sans-serif;
 }
+.ubuntu {
+    font-family: 'ubuntu', sans-serif;
+}
+.source_sans_pro{
+    font-family: 'Source sans pro', sans-serif;
+    font-size: 18px;
+}
 .great-vibes {
     font-family: 'Great Vibes', cursive;
 
@@ -50,5 +57,24 @@ a:hover{
 .foot{
     margin-top: 10rem;
     padding-bottom: 1em;
+}
+
+@media screen and (max-width: 480px){
+    .header_catalogue{
+        font-size: 2rem;
+        margin-top: 1rem;
+    }
+    .body_catalogue{
+        background-color: whitesmoke;
+        padding:20px;
+        border-radius: 10px;
+        opacity: 0.8;
+    }
+    .buttons{
+        opacity: 0.9;
+    }
+    .quoteSmall{
+        margin-top: 30px;
+    }
 }
 
