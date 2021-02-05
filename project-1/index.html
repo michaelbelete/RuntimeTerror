@@ -17,7 +17,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&family=Great+Vibes&family=Lato:ital@1&family=Roboto&family=Ubuntu&display=swap"
         rel="stylesheet">
-        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <link rel="icon" href="./Assets/images/books_icon.png">
     <link rel="stylesheet" href="./Assets/css/styles.css">
@@ -70,7 +70,8 @@
                     </div>
                     <div class="col-lg-5">
                         <h1 class="display-4 lato header_catalogue">Your Personal Book Catalogue</h1>
-                        <p class="mt-4 body_catalogue source_sans_pro"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
+                        <p class="mt-4 body_catalogue source_sans_pro"> Lorem ipsum dolor sit amet, consectetur
+                            adipiscing elit. Mauris
                             sed lobortis eros.
                             Suspendisse vel erat ut nulla euismod fringilla. Integer ornare ultricies lorem, cursus
                             tincidunt turpis malesuada
@@ -80,7 +81,9 @@
                         <div class="row mt-4">
                             <div class="col-md text-left" data-aos="zoom-up">
                                 <button type="button" class="btn btn-warning mr-2 ">Learn More</button>
-                                <button type="button" class="btn btn-dark ">Sign up</button>
+                                <button type="button" class="btn btn-dark" data-toggle="modal"
+                                    data-target="#exampleModalCenter">Sign up</button>
+                                
                             </div>
                         </div>
                     </div>
@@ -88,19 +91,65 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Sign up</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body p-4">
+                    <form action="">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="firstName"> First Name</label>
+                                    <input id="firstName" required placeholder="John"  class="form-control" type="text">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="lastName"> Last Name</label>
+                                    <input id="lastName" required placeholder="Doe"  class="form-control" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="userName"> Username</label>
+                            <input id="userName" required placeholder="@username"  class="form-control" type="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="email"> Email</label>
+                            <input id="email" required placeholder="Johndoe23@example.com"  class="form-control" type="email">
+                        </div>
+                       
+                        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Sign up</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <div class="container mt-5">
+    <div class=" container mt-5">
         <div class="row mx-0 source_sans_pro">
             <div class="col-md px-1 mt-2" style="border-right:1px solid #000;height:100px">
                 <p class="mt-1 px-4">
-                    Ever wished for a secure platform to exchange books recommendation and review? Well Bookaholics is
+                    Ever wished for a secure platform to exchange books recommendation and
+                    review? Well Bookaholics is
                     here
                     for you just create an account and you are set to go.
                 </p>
             </div>
-            <div class= "mt-4 quote ml-3 ">
+            <div class="mt-4 quote ml-3 ">
                 <p class="quoteSmall">
-                    “There is more treasure in books than in all the pirate’s loot on Treasure Island.”
+                    “There is more treasure in books than in all the pirate’s loot on
+                    Treasure Island.”
                 <p><small class="text-dark">-Walt Disney</small></p>
 
                 </p>
@@ -108,10 +157,10 @@
         </div>
     </div>
     <div class="text-center mt-5 lato">
-        
+
 
         <h1 class="mt-4" data-aos="fade-up">Services</h1>
-        
+
     </div>
 
     <div class="container mt-5 " data-aos="fade-up">
@@ -348,7 +397,7 @@
                 </svg>
                 <h3 class="mt-4 lato">Personal book wishlist.</h3>
                 <p><small>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     </small></p>
             </div>
             <div class="col-md text-center">
@@ -376,7 +425,8 @@
         <div id="carouselContent" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner" role="listbox">
                 <div class="carousel-item active text-center p-4">
-                    <p>“That’s the thing about books. They let you travel without moving your feet.”
+                    <p>“That’s the thing about books. They let you travel without moving your
+                        feet.”
                     </p>
                     <p><small>– Jhumpa Lahiri</small></p>
                 </div>
@@ -386,7 +436,8 @@
                     <p><small>– Bill Patterson</small></p>
                 </div>
                 <div class="carousel-item text-center p-4">
-                    <p>“A great book should leave you with many experiences, and slightly exhausted at the end. You live
+                    <p>“A great book should leave you with many experiences, and slightly
+                        exhausted at the end. You live
                         several lives while reading.”
                     </p>
                     <p><small>– William Styron</small></p>
@@ -405,21 +456,25 @@
 
     <div class="card pt-5" style="border: 0;">
         <div class="row mx-0">
-            <div class="col-md-4 para-Book">
+            <div class="col-md-4 para-Book" data-aos="fade-right">
                 <h1 class="display-4 great-vibes mt-5">Bookaholic</h1>
 
-                <p class="lato source_sans_pro">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime sint eos eligendi
-                    provident asperiores molestias praesentium facilis repudiandae officia, quos corrupti est ex nemo,
+                <p class="lato source_sans_pro">Lorem ipsum dolor sit amet consectetur
+                    adipisicing elit. Maxime sint eos eligendi
+                    provident asperiores molestias praesentium facilis repudiandae officia, quos
+                    corrupti est ex nemo,
                     adipisci, tempora consectetur odit deleniti minima.
 
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime sint eos eligendi provident
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime sint eos
+                    eligendi provident
                     asperiores
-                    molestias praesentium facilis repudiandae officia, quos corrupti est ex nemo, adipisci, tempora
+                    molestias praesentium facilis repudiandae officia, quos corrupti est ex
+                    nemo, adipisci, tempora
                     consectetur odit deleniti minima.</p>
             </div>
 
             <div class="col-md img-Book">
-                <img src="./Assets/images/people-reading.jpg" class=" px-0 img-fluid" data-aos="fade-right" alt="">
+                <img src="./Assets/images/people-reading.jpg" class=" px-0 img-fluid" data-aos="fade-left" alt="">
             </div>
         </div>
 
@@ -431,7 +486,8 @@
             <div class="row pt-4 px-4">
                 <div class="col-md">
                     <h3 class="lato">Bookaholics</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime sint eos eligendi provident
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime sint eos
+                        eligendi provident
                         asperiores molestias praesentium facilis repudiandae officia</p>
                 </div>
                 <div class="col-md">
@@ -444,9 +500,13 @@
                 </div>
                 <div class="col-md">
                     <h2 class="lato">Location</h2>
-                    
-                    <p> <span class="px-3"><i class="fas fa-map-marker-alt"></i></span>addis ababa, addis ababa adminstartion, ethiopia <br> <span class="px-3"><i class="fas fa-phone"></i></span>+251960021405 <br> <span class="px-3"><i class="fas fa-envelope"></i></span>mail@gmail.com</p>
-                    
+
+                    <p> <span class="px-3"><i class="fas fa-map-marker-alt"></i></span>addis
+                        ababa, addis ababa adminstartion, ethiopia <br> <span class="px-3"><i
+                                class="fas fa-phone"></i></span>+251960021405 <br> <span class="px-3"><i
+                                class="fas fa-envelope"></i></span>mail@gmail.com
+                    </p>
+
                 </div>
             </div>
         </div>
@@ -464,13 +524,13 @@
         integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
         crossorigin="anonymous"></script>
 
-        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-        <script>
-          AOS.init({
-              duration: 1200
-          });
-        </script>
+    <script>
+        AOS.init({
+            duration: 1200
+        });
+    </script>
 </body>
 
 </html>
