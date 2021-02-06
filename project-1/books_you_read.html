@@ -30,8 +30,8 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 
         <div class="navbar-nav flex-grow-1">
-          <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-          <a class="nav-link" href="#">My Books</a>
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link active" href="#">My Books</a>
           <a class="nav-link" href="#">Wish List</a>
 
         </div>
@@ -54,14 +54,14 @@
     <div class="row justify-content-between m-0">
       <div class="row m-0">
         <h3>Books You Read&nbsp;</h3>
-        <a href=""><i class="fas fa-plus-circle fa-2x"></i></a>
+        <i class="fas fa-plus-circle fa-2x"></i>
       </div>
       <form class="form-inline">
         <input class="form-control" type="search" placeholder="Search here..." aria-label="Search" size="40">
       </form>
     </div>
     <div class="mt-4 bg-white rounded w-100 p-4">
-      <ul class="list-group">
+      <ul class="list-group book-list"> <!-- .book-list will be used for IDB -->
         <li class="list-group-item d-flex p-0 border-0">
           <div class="col-6 p-0 d-flex">
             <div class="col-2 p-0">
@@ -93,7 +93,7 @@
           </div>
           <div class="col-3 p-0">
             <a href=""><i class="fas fa-edit text-secondary"></i></a>
-            <a href=""><i class="fas fa-trash text-danger"></i></a>
+            <i class="fas fa-trash text-danger remove-book"></i>
             <a href=""><i class="fas fa-ellipsis-h bg-dark border rounded-pill text-white"></i></a>
           </div>
         </li>
@@ -128,7 +128,7 @@
           </div>
           <div class="col-3 p-0">
             <a href=""><i class="fas fa-edit text-secondary"></i></a>
-            <a href=""><i class="fas fa-trash text-danger"></i></a>
+            <i class="fas fa-trash text-danger remove-book"></i>
             <a href=""><i class="fas fa-ellipsis-h bg-dark border rounded-pill text-white"></i></a>
           </div>
         </li>
@@ -163,7 +163,7 @@
           </div>
           <div class="col-3 p-0">
             <a href=""><i class="fas fa-edit text-secondary"></i></a>
-            <a href=""><i class="fas fa-trash text-danger"></i></a>
+            <i class="fas fa-trash text-danger remove-book"></i>
             <a href=""><i class="fas fa-ellipsis-h bg-dark border rounded-pill text-white"></i></a>
           </div>
         </li>
@@ -198,10 +198,11 @@
           </div>
           <div class="col-3 p-0">
             <a href=""><i class="fas fa-edit text-secondary"></i></a>
-            <a href=""><i class="fas fa-trash text-danger"></i></a>
+            <i class="fas fa-trash text-danger remove-book"></i>
             <a href=""><i class="fas fa-ellipsis-h bg-dark border rounded-pill text-white"></i></a>
           </div>
         </li>
+        
       </ul>
     </div>
 
