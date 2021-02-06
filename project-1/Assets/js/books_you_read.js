@@ -94,7 +94,7 @@ function displayMyBooks() {
         let cursor = e.target.result;
         if (cursor) {
             let li = document.createElement('li');
-            li.className = "list-group-item d-flex p-0 border-0";
+            li.className = "list-group-item d-flex p-0 border-0 mb-2";
             li.setAttribute('my-book-id', cursor.value.id); // will be useful for deleting [through .delete()]
 
             li.innerHTML = `<div class="col-6 p-0 d-flex">
@@ -137,3 +137,45 @@ function displayMyBooks() {
 
 
 
+removeBooks.addEventListener('click', removeAllBooks);
+
+function removeAllBooks() {
+    let myBooks = DB.transaction("myBooks", "readwrite").objectStore("myBooks");
+    myBooks.clear();
+    displayMyBooks();
+}
+
+
+
+removeBook.addEventListener('click', removeBook);
+
+function removeBook(e) {
+    if (e.target.classList.contains('remove-book')) {
+        if (confirm('Are You Sure about that ?')) {
+            let bookID = Number(e.target.parentElement.parentElement.getAttribute('my-book-id'));
+            let objectStore = DB.transaction('myBooks', 'readwrite').objectStore('myBooks');
+            objectStore.delete(bookID);
+            transaction.oncomplete = () => {
+                e.target.parentElement.parentElement.remove();
+            }
+        }
+    }
+}
+
+
+
+
+// if we delegated the event from the ul //will need the immediate parent of the fa-remove i to have .remove-book class
+// bookList.addEventListener('click', removeBook);
+// function removeBook(e) {
+//     if (e.target.parentElement.classList.contains('remove-book')) {
+//         if (confirm('Are You Sure about that ?')) {
+//             let bookID = Number(e.target.parentElement.parentElement.getAttribute('my-book-id'));
+//             let objectStore = DB.transaction('myBooks', 'readwrite').objectStore('myBooks');
+//             objectStore.delete(bookID);
+//             transaction.oncomplete = () => {
+//                 e.target.parentElement.parentElement.remove();
+//             }
+//         }
+//     }
+// }
