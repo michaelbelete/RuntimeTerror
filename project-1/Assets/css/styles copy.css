@@ -1,0 +1,109 @@
+            /* Will all be done with js or just the css refer change*/
+            /* Dark Mode: Darker Background, Lighter Foreground */
+
+body{
+    font-family: 'Open Sans', sans-serif;
+    
+    /* Body Background */
+    background: #000000; /* Darken Here*/
+}
+/* #how{
+    
+} */
+
+
+/* Navigation Background */
+.navbar {
+    background-color: #0D2F88 !important;
+}
+
+/* Navigation Typography */
+.navbar-brand {
+    font-family: Arvo;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 44px;
+    letter-spacing: 0em;
+    text-align: left;
+     /* Darken Here - the one Liyu Made*/
+}
+
+.nav-link {
+    font-family: Arvo;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: rgb(214, 211, 209) !important;
+     /* Darken Here*/
+
+}
+
+
+ /* Darken Here*/
+/* -------------------------- */
+/* Will be done with js */
+/*/ Will be removed when connection is back /*/
+.list-group-item, .bg-white{
+    background-color: #1a1919!important;
+}
+
+/* May wanna put this on footer or elsewhere */
+.navbar-nav label{
+    font-family: Arvo;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+    /* color: ; */  /* Darken Here*/
+    color: rgb(214, 211, 209) !important; /* Lighten Here*/
+}
+/* ------------------------ */
+
+/* Body Typography */
+h3 {
+    font-family: Arvo;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 44px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #d8cdcd; /* Lighten Here*/
+}
+
+.list-group h6 {
+    font-family: Arvo;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 27px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #4677f3; /* Lighten Here*/
+    ;
+}
+
+.text-muted {
+    font-family: Arvo;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    color: rgb(156, 156, 153) !important;
+     /* Lighten Here*/
+}
+
+i {
+    color: #f3f3f3; /* Lighten Here*/
+}
+
+span {
+    color: #bebbbb; /* Lighten Here*/
+}
+

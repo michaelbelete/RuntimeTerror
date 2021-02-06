@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/9e46569b36.js" crossorigin="anonymous"></script>
 
-  <link rel="stylesheet" href="./Assets/css/styles.css">
+  <link rel="stylesheet" href="./Assets/css/styles copy.css">
 
   <title>Books You Read</title>
 </head>
@@ -35,6 +35,12 @@
           <a class="nav-link" href="#">Wish List</a>
 
         </div>
+
+        <!-- May wanna put this on footer or elsewhere -->
+        <div class="navbar-nav custom-control custom-switch mr-3">
+          <input type="checkbox" class="custom-control-input" id="customSwitch1">
+          <label class="custom-control-label" for="customSwitch1">Dark Mode</label>
+        </div>
         <div class="navbar-nav dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-user-circle" aria-hidden="true"></i>
@@ -44,13 +50,13 @@
             <a class="dropdown-item" href="#">Profile</a>
             <a class="dropdown-item" href="#">Logout</a>
           </div>
-      </div>
+        </div>
     </div>
     
   </nav>
 
 
-  <div class="container w-50 mt-5">
+  <div class="container w-50 mt-5 bd-dark">
     <div class="row justify-content-between m-0">
       <div class="row m-0">
         <h3>Books You Read&nbsp;</h3>
@@ -61,7 +67,7 @@
       </form>
     </div>
     <div class="mt-4 bg-white rounded w-100 p-4">
-      <ul class="list-group">
+      <ul class="list-group bg-dark">
         <li class="list-group-item d-flex p-0 border-0">
           <div class="col-6 p-0 d-flex">
             <div class="col-2 p-0">
