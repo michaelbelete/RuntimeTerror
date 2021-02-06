@@ -1,12 +1,12 @@
 body {
   font-family: "Lato", sans-serif;
-  background-color: #e2e2e2;
+  background-color: #f2f2f2;
 }
 .bg-primary {
-  background-color: #0d2f88 !important;
+  background-color: #07a8e2 !important;
 }
 .text-primary {
-  color: #0d2f88 !important;
+  color: #7599f5 !important;
 }
 @media (min-width: 1200px) {
   .container,
@@ -33,4 +33,17 @@ body {
 }
 #postArea {
     resize: none;
+}
+.card {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  border-radius: .25rem;
 }
