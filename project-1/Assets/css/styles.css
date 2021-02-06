@@ -77,3 +77,9 @@ h3 {
     color: #595959;
 }
 
+.wd {
+    width: calc(100% + 30px + 3rem);
+}
+.ml {
+    margin-left: calc(-15px + -1.5rem);
+}
