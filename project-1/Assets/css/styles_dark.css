@@ -43,27 +43,6 @@ body{
 }
 
 
- /* Darken Here*/
-/* -------------------------- */
-/* Will be done with js */
-/*/ Will be removed when connection is back /*/
-.list-group-item, .bg-white{
-    background-color: #1a1919!important;
-}
-
-/* May wanna put this on footer or elsewhere */
-.navbar-nav label{
-    font-family: Arvo;
-    font-size: 1rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 30px;
-    letter-spacing: 0em;
-    text-align: left;
-    /* color: ; */  /* Darken Here*/
-    color: rgb(214, 211, 209) !important; /* Lighten Here*/
-}
-/* ------------------------ */
 
 /* Body Typography */
 h3 {
@@ -107,3 +86,40 @@ span {
     color: #bebbbb; /* Lighten Here*/
 }
 
+
+
+ /* Darken Here*/
+/* -------------------------- */
+/* Will be done with js */
+/*/ Will be removed when connection is back /*/
+.list-group-item, .bg-white{
+    background-color: #1a1919!important;
+}
+
+/* May wanna put this on footer or elsewhere */
+.navbar-nav label{
+    font-family: Arvo;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+    /* color: ; */  /* Darken Here*/
+    color: rgb(214, 211, 209) !important; /* Lighten Here*/
+}
+
+input[type="search"] {
+    background-color:  #1a1919;
+    color: blanchedalmond;
+}
+
+
+.dropdown-menu {
+    background-color: rgb(122, 122, 122);
+    color: white;
+}
+.dropdown-item {
+    color: white;
+}
+/* ------------------------ */
