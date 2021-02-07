@@ -41,7 +41,7 @@ myBookDB.onerror = function () {
 myBookDB.onsuccess = function () {
     // console.log('Database Ready');
     DB = myBookDB.result;
-    // displayMyBooks();
+    displayMyBooks();
 }
 
 myBookDB.onupgradeneeded = function (e) {
@@ -84,7 +84,7 @@ function addBookF(e) {
 
     request.onsuccess = () => {
         addBook.reset();
-        // will potentially do other things here
+        // will potentially do other things here like closing the pop-up and maybe some animation saying 'congragulations on you read' or sth along that line
     }
     transaction.oncomplete = () => {
         console.log('Book added.');
@@ -98,8 +98,11 @@ function addBookF(e) {
 
 
 function displayMyBooks() {
-    while (bookList.firstChild) { bookList.removeChild(bookList.firstChild); }
-
+    while (bookList.firstElementChild) {
+        bookList.removeChild(bookList.firstChild);
+    }
+    
+    
     let objectStore = DB.transaction('myBooks').objectStore('myBooks');
     objectStore.openCursor().onsuccess = function (e) {
         let cursor = e.target.result;
