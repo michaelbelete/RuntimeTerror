@@ -2,6 +2,8 @@
 
 const addBook = document.querySelector('#addBook')
 
+const searchFilter = document.querySelector('input[type="search"]');
+
 const titleInput = document.querySelector('#title');
 const editionInput = document.querySelector('#title');
 const authourInput = document.querySelector('#title');
@@ -11,6 +13,7 @@ const bookList = document.querySelector('.book-list');
 
 const removeBooks = document.querySelector('.remove-all') //possible under the more options (three dots)
 const removeBook = document.querySelector('.remove-all') //without delegation
+
 
 // --------------
 let DB;
@@ -179,3 +182,21 @@ function removeBook(e) {
 //         }
 //     }
 // }
+
+
+
+
+searchFilter.addEventListener('keyup', filterBooks);
+
+function filterBooks (){
+    document.querySelectorAll('.list-group-item').forEach(el => {
+        if (el.textContent.includes(searchFilter.value)){
+            el.style.display = "block";
+            return;
+        }
+        el.style.display = "none";
+    });
+
+
+
+}
