@@ -178,9 +178,6 @@ function removeBook(e) {
 //             }
 //         }
 //     }
-<<<<<<< Updated upstream
-// }
-=======
 // }
 
 
@@ -210,4 +207,3 @@ function filterBooks(){
     
 
 }
->>>>>>> Stashed changes
