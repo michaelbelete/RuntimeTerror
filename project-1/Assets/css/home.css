@@ -2,7 +2,7 @@ body {
   font-family: "Lato", sans-serif;
   background-color: #f2f2f2;
   min-height: 75rem;
-  padding-top: 4.5rem;
+  padding-top: 4.2rem;
 }
 .bg-primary {
   background-color: #07a8e2 !important;
@@ -240,4 +240,45 @@ body {
   .input-group {
     width: 100%;
   }
+}
+
+.pl-100 {
+  padding-left: 116px;
+}
+.pt-20 {
+  padding-top: 20px;
+}
+
+.row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  /* margin-right: -15px; */
+  /* margin-left: -15px; */
+}
+
+.section-banner {
+  min-height: 160px;
+  padding: 52px 60px 0 200px;
+  border-radius: 12px;
+  position: relative;
+  color: #fff;
+}
+
+.section-banner .section-banner-icon {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.section-banner .section-banner-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+}
+
+.section-banner .section-banner-text {
+  margin-top: 10px;
+  font-size: 1rem;
+  font-weight: 500;
 }

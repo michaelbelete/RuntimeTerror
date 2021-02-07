@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="./Assets/images/books_icon.png">
     <!-- Font Awesome -->
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
@@ -24,49 +26,67 @@
     <!-- my css  -->
     <link rel="stylesheet" href="./Assets/css/home.css">
 
-    <link rel="icon" href="./Assets/images/books_icon.png">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-xl fixed-top navbar-light bg-dark">
-        <a href="home.html" class="navbar-brand ubuntu"><i class="fa fa-book"></i><b>Book</b>aholics</a>
-        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <!-- Collection of nav links, forms, and other content for toggling -->
-        <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
-            <form class="navbar-form form-inline">
-                <div class="input-group search-box">
-                    <input type="text" id="search" class="form-control" placeholder="Search here...">
-                    <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+    <!-- header loads here start -->
+    <div id="header"></div>
+    <!-- header loads here end -->
+    <section class="p-4 mt-1">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-banner mb-4"
+                    style="background: url('Assets/images/banner-bg.png') center center / cover no-repeat;">
+                    <img class="section-banner-icon"
+                        src="Assets/images/newsfeed-icon.png"
+                        alt="section-icon">
+                    <p class="section-banner-title">Feeds</p>
+                    <p class="section-banner-text">Check what others user have been up to!</p>
                 </div>
-            </form>
-            <div class="navbar-nav ml-auto">
-                <a href="home.html" class="nav-item nav-link active"><i class="fa fa-home"></i><span>Home</span></a>
-                <a href="mybooks.html" class="nav-item nav-link"><i class="fa fa-book"></i><span>My Books</span></a>
-                <a href="wishlist.html" class="nav-item nav-link"><i
-                        class="fas fa-cash-register"></i><span>Wishlist</span></a>
-                <a href="#" class="nav-item nav-link">&nbsp;</a>
-                <a href="#" class="nav-item nav-link">&nbsp;</a>
-                <a href="#" class="nav-item nav-link">&nbsp;</a>
-                <a href="#" class="nav-item nav-link">&nbsp;</a>
-                <a href="#" class="nav-item nav-link">&nbsp;</a>
-                <div class="nav-item dropdown">
-                    <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action"><img
-                            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-                            class="avatar" alt="Avatar"> Michael Belete <b class="caret"></b></a>
-                    <div class="dropdown-menu">
-                        <a href="profile.html" class="dropdown-item"><i class="fa fa-user"></i> Profile</a>
-                        <div class="divider dropdown-divider"></div>
-                        <a href="logout.html" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-4">
+                    <h5 class="title pb-3">Recent Books You Read</h5>
+
+                    <div class="row">
+                        <div class="col-3 px-2">
+                            <img src="https://img.icons8.com/cute-clipart/64/000000/book.png" height="55" />
+                        </div>
+                        <div class="col-8">
+                            <p class="title font-wight-bold p-0 m-0">Book title</p>
+                            <small class="text-muted">Author</small>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 px-2">
+                            <img src="https://img.icons8.com/cute-clipart/64/000000/book.png" height="55" />
+                        </div>
+                        <div class="col-8">
+                            <p class="title font-wight-bold p-0 m-0">Book title</p>
+                            <small class="text-muted">Author</small>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 px-2">
+                            <img src="https://img.icons8.com/cute-clipart/64/000000/book.png" height="55" />
+                        </div>
+                        <div class="col-8">
+                            <p class="title font-wight-bold p-0 m-0">Book title</p>
+                            <small class="text-muted">Author</small>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 px-2">
+                            <img src="https://img.icons8.com/cute-clipart/64/000000/book.png" height="55" />
+                        </div>
+                        <div class="col-8">
+                            <p class="title font-wight-bold p-0 m-0">Book title</p>
+                            <small class="text-muted">Author</small>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </nav>
-    <section class="container mt-4">
-        <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="card card-body mb-4">
                     <div class="header p-3">
                         <div class="row">
@@ -165,7 +185,7 @@
 
 
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="card p-4">
                     <h5 class="title pb-3">Recent Books You Read</h5>
 
@@ -298,6 +318,7 @@
         });
 
         $(document).ready(function () {
+            $('#header').load('includes/header.html')
             $('#books').select2();
         });
     </script>
