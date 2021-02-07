@@ -2,103 +2,148 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/9e46569b36.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="./Assets/images/books_icon.png">
+    <!-- Font Awesome -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Ubuntu&display=swap" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- star rating  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+    <!-- select 2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <!-- material icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <title>Home</title>
+    <!-- custom scroll -->
+    <link rel="stylesheet" href="Assets/css/jquery.custom-scrollbar.css">
+    <!-- my css  -->
+    <link rel="stylesheet" href="./Assets/css/home.css">
 
-  <link rel="stylesheet" href="./Assets/css/styles.css">
-
-  <title>Books You Read</title>
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container mr-0">
-      <a class="navbar-brand flex-grow-1" href="#">
-        <i class="fa fa-book text-danger" aria-hidden="true"></i>
-        Bookaholics
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <!-- header loads here start -->
+    <div id="header"></div>
+    <!-- header loads here end -->
+    <section class="p-4 mt-1">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="card card-body mb-4 p-0">
+                    <div class="row p-3">
+                        <div class="col-2">
+                            <a href="profile.html"><img
+                                    src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                                    alt="profile" class="rounded-circle" width="70" height="70">
+                            </a>
+                        </div>
+                        <div class="col-10 p-2">
+                            <h5 class="text-primary pt-1 m-0">Michael Belete</h5>
+                            <small class="text-muted p-0">Tuesday, February 2, 2021</small>
+                        </div>
+                    </div>
+                    <div class="px-3 py-1">
+                        <h4 class="font-weight-light text-muted title">Book title</h4>
+                    </div>
+                    <div class="post-image">
+                        <a href="post.html?id=1"><img
+                                src="https://images.unsplash.com/photo-1549122728-f519709caa9c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=625&q=80"
+                                width="100%"></a>
+                    </div>
+                    <div class="px-3 text-justify w-100">
+                        <p class="text-muted border-bottom border-left border-right p-3">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero culpa esse sit eaque. Aperiam
+                            incidunt ullam repellendus est libero repudiandae beatae sint ex fuga dolore cupiditate,
+                            porro delectus, eligendi voluptate?
 
-        <div class="navbar-nav flex-grow-1">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          <a class="nav-link active" href="#">My Books</a>
-          <a class="nav-link" href="#">Wish List</a>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero culpa esse sit eaque. Aperiam
+                            incidunt ullam repellendus est libero repudiandae beatae sint ex fuga dolore cupiditate,
+                            porro delectus, eligendi voluptate?
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero culpa esse sit eaque. Aperiam
+                            incidunt ullam repellendus est libero repudiandae beatae sint ex fuga dolore cupiditate,
+                            porro delectus, eligendi voluptate?
+                        </p>
+                    </div>
 
-        </div>
-        <div class="navbar-nav dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-user-circle" aria-hidden="true"></i>
-            Username
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Profile</a>
-            <a class="dropdown-item" href="#">Logout</a>
-          </div>
-      </div>
-    </div>
-    
-  </nav>
-
-  <div class="container w-75 my-4 bg-light p-4">
-    <div class="container">
-        <div class="row w-25 mb-4">
-            <i class="fa-4x fa-user col-4"></i>
-            <div class="col-8">
-                <h6>Michael Belete</h6>
-                <p>.....</p>
-            </div>
-            
-        </div>
-        <div class="mb-5">
-            <img src="Assets/images/Web capture_6-2-2021_132338_www.figma.com.jpeg" alt="" class="wd mb-3 ml">
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa eaque deleniti labore maxime qui provident accusamus eum dolor tempora nisi error possimus, quasi assumenda voluptatibus blanditiis consequuntur eius iure facere doloremque ea nesciunt. Alias nam consectetur nihil architecto ab accusantium odio quasi iure omnis hic reprehenderit voluptatum, repudiandae tempore ipsa facere quis enim. Earum, sequi optio. Itaque dolor quidem aliquam neque, repellat nobis? Eveniet earum maiores distinctio qui repellat neque laudantium harum aliquam eius fugiat tenetur iure, autem accusamus ab ipsam dignissimos ratione? Ipsum adipisci voluptate sunt ad! Unde magnam optio officia? Deleniti explicabo nisi accusantium molestias, in ab distinctio!
-            </p>
-            Rating goes here.
-        </div>
-        <div>
-            <div class="row">
-                <i class="fa-4x fa-user col-2"></i>
-                <div class="col-10">
-                    <h6>Michael Belete</h6>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque quasi deleniti nesciunt, fuga adipisci, earum quibusdam placeat mollitia doloribus inventore velit excepturi voluptas eius minima sed voluptatum cupiditate ad. Aspernatur eos esse ipsum temporibus quam corrupti facilis qui debitis veritatis.
-                    </p>
+                    <div class="rating-comment px-4 pb-3">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div id="post-rate1"></div>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="post.html" class=" text-primary float-right"><i class="fa fa-comment"></i>
+                                    2 Comments</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                
-            </div>
-            <div class="row">
-                <i class="fa-4x fa-user col-2"></i>
-                <div class="col-10">
-                    <h6>Liyu Mesfin</h6>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque quasi deleniti nesciunt, fuga adipisci, earum quibusdam placeat mollitia doloribus inventore velit excepturi voluptas eius minima sed voluptatum cupiditate ad. Aspernatur eos esse ipsum temporibus quam corrupti facilis qui debitis veritatis.
-                    </p>
+
+                <div class="card card-body mb-4 p-0">
+                    <div class="row">
+                        <div class="col-12 pt-4 pl-4">
+                            <h5 class="title font-weight-bold pl-2 pt-2">Comments</h5>
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-sm-1 p-4">
+                            <a href="profile.html"><img
+                                    src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                                    alt="profile" class="rounded-circle" width="70" height="70">
+                            </a>
+                        </div>
+                        <div class="col-sm-10 p-4 ml-3">
+                            <h5 class="text-primary pt-1 m-0">Michael Belete <span class="text-muted"
+                                    style="font-size: 14px;"><i class="fa fa-angle-right"></i> Tuesday, February 2,
+                                    2021</span></h5>
+                            <small class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere
+                                incidunt impedit quis, deleniti sapiente explicabo corrupti quo provident, amet alias
+                                voluptates magni dolore non dolores saepe illum, perferendis aliquid iure?</small>
+                        </div>
+                    </div>
+
+                    <div class="row px-3">
+                        <div class="col-sm-1 p-4">
+                            <a href="profile.html"><img
+                                    src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                                    alt="profile" class="rounded-circle" width="70" height="70">
+                            </a>
+                        </div>
+                        <div class="col-sm-10 p-4 ml-3">
+                            <h5 class="text-primary pt-1 m-0">Michael Belete <span class="text-muted"
+                                    style="font-size: 14px;"><i class="fa fa-angle-right"></i> Tuesday, February 2,
+                                    2021</span></h5>
+                            <small class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere
+                                incidunt impedit quis, deleniti sapiente explicabo corrupti quo provident, amet alias
+                                voluptates magni dolore non dolores saepe illum, perferendis aliquid iure?</small>
+                        </div>
+                    </div>
                 </div>
-                
             </div>
         </div>
-    </div>
-  </div>
-  
-
-
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
-    crossorigin="anonymous"></script>
+    </section>
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- star rating plugin -->
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js">
+    </script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/25.0.0/classic/ckeditor.js"></script>
+    <script src="Assets/js/jquery.custom-scrollbar.js"></script>
+    <script src="Assets/js/home.js"></script>
 </body>
 
 </html>
