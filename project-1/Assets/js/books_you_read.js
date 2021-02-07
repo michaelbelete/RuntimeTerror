@@ -1,3 +1,7 @@
+$(document).ready(function () {
+    $('#header').load('includes/header.html')
+    $('#books').select2();
+});
 // book add form ... pending
 
 const addBook = document.querySelector('#addBook')
@@ -46,14 +50,29 @@ myBookDB.onsuccess = function () {
 
 myBookDB.onupgradeneeded = function (e) {
     let db = e.target.result;
-    let objectStore = db.createObjectStore('myBooks', { keyPath: 'id', autoIncrement: true });
-    objectStore.createIndex('bookTitle', 'bookTitle', { unique: false });
-    objectStore.createIndex('edition', 'edition', { unique: false }); //might need us to add it in the My Books page
+    let objectStore = db.createObjectStore('myBooks', {
+        keyPath: 'id',
+        autoIncrement: true
+    });
+    objectStore.createIndex('bookTitle', 'bookTitle', {
+        unique: false
+    });
+    objectStore.createIndex('edition', 'edition', {
+        unique: false
+    }); //might need us to add it in the My Books page
     // objectStore.createIndex('publicationDate', 'publicationDate', { unique: false }); //
-    objectStore.createIndex('author', 'author', { unique: false });
-    objectStore.createIndex('publisher', 'publisher', { unique: false });
-    objectStore.createIndex('dateAdded', 'dateAdded', { unique: true });
-    objectStore.createIndex('dateModified', 'dateModified', { unique: true });
+    objectStore.createIndex('author', 'author', {
+        unique: false
+    });
+    objectStore.createIndex('publisher', 'publisher', {
+        unique: false
+    });
+    objectStore.createIndex('dateAdded', 'dateAdded', {
+        unique: true
+    });
+    objectStore.createIndex('dateModified', 'dateModified', {
+        unique: true
+    });
     console.log('Database created.');
 }
 
@@ -90,15 +109,17 @@ function addNewBook(e) {
         console.log('Book added.');
         displayMyBooks();
     }
-    transaction.onerror = () => { 
-        console.log('There was an error, try again!'); 
+    transaction.onerror = () => {
+        console.log('There was an error, try again!');
     }
 
 }
 
 
 function displayMyBooks() {
-    while (bookList.firstChild) { bookList.removeChild(bookList.firstChild); }
+    while (bookList.firstChild) {
+        bookList.removeChild(bookList.firstChild);
+    }
 
     let objectStore = DB.transaction('myBooks').objectStore('myBooks');
     objectStore.openCursor().onsuccess = function (e) {
@@ -135,15 +156,15 @@ function displayMyBooks() {
             <i class="fas fa-trash text-danger remove-book"></i>
             <a href=""><i class="fas fa-ellipsis-h bg-dark border rounded-pill text-white"></i></a>
           </div>`
-            
-          
+
+
             bookList.appendChild(li);
-            
+
             cursor.continue();
         }
     }
 
-    
+
 }
 
 
@@ -196,24 +217,23 @@ function removeBookF(e) {
 
 
 
-function filterBooks(){
+function filterBooks() {
     var isNoResult = true;
     var noMatch = document.querySelector(".no-match");
     document.querySelectorAll('.list-group-item').forEach(el => {
-        if (el.textContent.includes(searchFilter.value)){ //will need improvement (to only check text that is relevant)
+        if (el.textContent.includes(searchFilter.value)) { //will need improvement (to only check text that is relevant)
             el.style.display = "block";
             isNoResult = false;
             return;
         }
         el.setAttribute("style", "display: none !important"); //had to do that to check the filtering on this html-made list
-        
+
     });
-    if (isNoResult){
+    if (isNoResult) {
         noMatch.setAttribute("style", "display: block !important");
-    }
-    else{
+    } else {
         noMatch.style.display = null;
     }
-    
+
 
 }
