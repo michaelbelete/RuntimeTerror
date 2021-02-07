@@ -61,7 +61,8 @@ body {
   padding: 5px 16px;
   border-radius: 0;
   border: none;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 4px rgb(0 0 0 / 10%);
+  border-bottom: 3px solid #6788de;
 }
 .navbar img {
   border-radius: 50%;
