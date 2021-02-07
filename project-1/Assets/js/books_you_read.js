@@ -197,13 +197,25 @@ function removeBookF(e) {
 
 
 function filterBooks(){
+    var isNoResult = true;
+    var noMatch = document.querySelector(".no-match");
     document.querySelectorAll('.list-group-item').forEach(el => {
-        if (el.textContent.includes(searchFilter.value)){
+        if (el.textContent.includes(searchFilter.value)){ //will need improvement (to only check text that is relevant)
             el.style.display = "block";
+            isNoResult = false;
             return;
         }
         el.setAttribute("style", "display: none !important"); //had to do that to check the filtering on this html-made list
+        
     });
+    
+    if (isNoResult){
+        noMatch.setAttribute("style", "display: block !important");
+    }
+    else{
+        noMatch.style.display = null;
+    }
+    
 
 
 
