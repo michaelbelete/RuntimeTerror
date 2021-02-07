@@ -2,7 +2,7 @@
 
 const addBook = document.querySelector('#addBook')
 
-const searchFilter = document.querySelector('input[type="search"]');
+const searchFilter = document.querySelector('.search-filter');
 
 const titleInput = document.querySelector('#title');
 const editionInput = document.querySelector('#title');
@@ -12,7 +12,15 @@ const publisherInput = document.querySelector('#title');
 const bookList = document.querySelector('.book-list');
 
 const removeBooks = document.querySelector('.remove-all') //possible under the more options (three dots)
-const removeBook = document.querySelector('.remove-all') //without delegation
+const removeBook = document.querySelector('.remove-book') //without delegation
+
+
+
+// Event Listeners
+// addBook.addEventListener('submit', addBook);
+// removeBooks.addEventListener('click', removeAllBooks);
+// removeBook.addEventListener('click', removeBookF);
+searchFilter.addEventListener('keyup', filterBooks);
 
 
 // --------------
@@ -33,7 +41,7 @@ myBookDB.onerror = function () {
 myBookDB.onsuccess = function () {
     // console.log('Database Ready');
     DB = myBookDB.result;
-    displayMyBooks();
+    // displayMyBooks();
 }
 
 myBookDB.onupgradeneeded = function (e) {
@@ -51,17 +59,17 @@ myBookDB.onupgradeneeded = function (e) {
 
 
 
-addBook.addEventListener('submit', addNewTask);
 
-function addNewTask(e) {
+
+function addNewBook(e) {
     e.preventDefault();
 
-    if (!taskInput.value) {
+    if (!bookTitle.value || !authourInput.value || !editionInput.value) {
         alert("nah"); //will change it
         return;
     }
 
-    let newTask = {
+    let newBook = {
         bookTitle: titleInput.value,
         edtion: editionInput.value,
         author: authourInput,
@@ -72,7 +80,7 @@ function addNewTask(e) {
 
     let objectStore = DB.transaction(['myBooks'], 'readwrite').objectStore('myBooks');
 
-    let request = objectStore.add(newTask);
+    let request = objectStore.add(newBook);
 
     request.onsuccess = () => {
         form.reset();
@@ -90,7 +98,7 @@ function addNewTask(e) {
 
 
 function displayMyBooks() {
-    while (bookList.firstChild) { bookList.removeChild(taskList.firstChild); }
+    while (bookList.firstChild) { bookList.removeChild(bookList.firstChild); }
 
     let objectStore = DB.transaction('myBooks').objectStore('myBooks');
     objectStore.openCursor().onsuccess = function (e) {
@@ -140,7 +148,7 @@ function displayMyBooks() {
 
 
 
-removeBooks.addEventListener('click', removeAllBooks);
+
 
 function removeAllBooks() {
     let myBooks = DB.transaction("myBooks", "readwrite").objectStore("myBooks");
@@ -150,9 +158,9 @@ function removeAllBooks() {
 
 
 
-removeBook.addEventListener('click', removeBook);
 
-function removeBook(e) {
+
+function removeBookF(e) {
     if (e.target.classList.contains('remove-book')) {
         if (confirm('Are You Sure about that ?')) {
             let bookID = Number(e.target.parentElement.parentElement.getAttribute('my-book-id'));
@@ -169,8 +177,8 @@ function removeBook(e) {
 
 
 // if we delegated the event from the ul //will need the immediate parent of the fa-remove i to have .remove-book class
-// bookList.addEventListener('click', removeBook);
-// function removeBook(e) {
+// bookList.addEventListener('click', removeBookF);
+// function removeBookF(e) {
 //     if (e.target.parentElement.classList.contains('remove-book')) {
 //         if (confirm('Are You Sure about that ?')) {
 //             let bookID = Number(e.target.parentElement.parentElement.getAttribute('my-book-id'));
@@ -186,15 +194,15 @@ function removeBook(e) {
 
 
 
-searchFilter.addEventListener('keyup', filterBooks);
 
-function filterBooks (){
+
+function filterBooks(){
     document.querySelectorAll('.list-group-item').forEach(el => {
         if (el.textContent.includes(searchFilter.value)){
             el.style.display = "block";
             return;
         }
-        el.style.display = "none";
+        el.setAttribute("style", "display: none !important"); //had to do that to check the filtering on this html-made list
     });
 
 
