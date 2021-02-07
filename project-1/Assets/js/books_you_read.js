@@ -208,7 +208,6 @@ function filterBooks(){
         el.setAttribute("style", "display: none !important"); //had to do that to check the filtering on this html-made list
         
     });
-    
     if (isNoResult){
         noMatch.setAttribute("style", "display: block !important");
     }
@@ -216,7 +215,5 @@ function filterBooks(){
         noMatch.style.display = null;
     }
     
-
-
 
 }
