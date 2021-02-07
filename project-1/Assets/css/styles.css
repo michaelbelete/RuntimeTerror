@@ -83,3 +83,16 @@ h3 {
     width: 30px;
     height: 50px;
 }
+
+
+@media (min-width: 1020px){
+    .content {
+        width: 50%;
+    }
+}
+
+@media (max-width: 1020px){
+    .content {
+        width: 75%;
+    }
+}

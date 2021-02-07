@@ -50,14 +50,14 @@
   </nav>
 
 
-  <div class="container w-50 mt-5">
+  <div class="container content mt-5">
     <div class="row justify-content-between m-0">
       <div class="row m-0">
         <h3>Books You Read&nbsp;</h3>
         <i class="fas fa-plus-circle fa-2x" id="postInput" data-toggle="modal" data-target="#postModal"></i>
       </div>
       <form class="form-inline">
-        <input class="form-control search-filter" type="search" placeholder="Search here..." aria-label="Search" size="40">
+        <input class="form-control search-filter" type="search" placeholder="Search here..." aria-label="Search">
       </form>
     </div>
     <div class="mt-4 bg-white rounded w-100 p-4">
@@ -229,25 +229,25 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <h4>Add Book</h4>
-                    <form action="#" method="POST">
+                    <form action="#" id="addBook">
                         <div class="form-group">
                             <label for="title">Book Title</label>
-                            <input class="form-control" type="text" placeholder="Title" name="title" required>
+                            <input class="form-control title" type="text" placeholder="Title" name="title" required>
                         </div>
                         <div class="form-group">
                             <label for="author">Book Author</label>
-                            <input class="form-control" type="text" placeholder="Author" name="author" required>
+                            <input class="form-control author" type="text" placeholder="Author" name="author" required>
                         </div>
                         <div class="form-group">
                             <label for="edition">Edition</label>
-                            <input class="form-control" type="text" placeholder="edition" name="edition" required>
+                            <input class="form-control edition" type="text" placeholder="edition" name="edition" required>
                         </div>
                         <div class="form-group">
                             <label for="publisher">Publisher</label>
-                            <input class="form-control" type="text" placeholder="Publisher" name="publisher" required>
+                            <input class="form-control publisher" type="text" placeholder="Publisher" name="publisher" required>
                         </div>
 
-                        <button class="btn btn-block btn-outline btn-danger">Add</button>
+                        <button type="submit" class="btn btn-block btn-outline btn-danger">Add</button>
                     </form>
                 </div>
             </div>

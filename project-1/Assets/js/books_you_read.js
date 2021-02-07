@@ -4,22 +4,22 @@ const addBook = document.querySelector('#addBook')
 
 const searchFilter = document.querySelector('.search-filter');
 
-const titleInput = document.querySelector('#title');
-const editionInput = document.querySelector('#title');
-const authourInput = document.querySelector('#title');
-const publisherInput = document.querySelector('#title');
+const titleInput = document.querySelector('.title');
+const editionInput = document.querySelector('.edition');
+const authourInput = document.querySelector('.author');
+const publisherInput = document.querySelector('.publisher');
 
 const bookList = document.querySelector('.book-list');
 
-const removeBooks = document.querySelector('.remove-all') //possible under the more options (three dots)
+// const removeBooks = document.querySelector('.remove-all') //possible under the more options (three dots)
 const removeBook = document.querySelector('.remove-book') //without delegation
 
 
 
 // Event Listeners
-// addBook.addEventListener('submit', addBook);
+addBook.addEventListener('submit', addBookF);
 // removeBooks.addEventListener('click', removeAllBooks);
-// removeBook.addEventListener('click', removeBookF);
+removeBook.addEventListener('click', removeBookF);
 searchFilter.addEventListener('keyup', filterBooks);
 
 
@@ -61,29 +61,29 @@ myBookDB.onupgradeneeded = function (e) {
 
 
 
-function addNewBook(e) {
+function addBookF(e) {
     e.preventDefault();
 
-    if (!bookTitle.value || !authourInput.value || !editionInput.value) {
+    if (!titleInput.value || !authourInput.value || !editionInput.value) {
         alert("nah"); //will change it
         return;
     }
 
     let newBook = {
         bookTitle: titleInput.value,
-        edtion: editionInput.value,
-        author: authourInput,
-        publisher: publisherInput,
+        edition: editionInput.value,
+        author: authourInput.value,
+        publisher: publisherInput.value,
         dateAdded: Date(),
         dateModified: Date()
     }
 
-    let objectStore = DB.transaction(['myBooks'], 'readwrite').objectStore('myBooks');
-
+    let transaction = DB.transaction(['myBooks'], 'readwrite');
+    let objectStore = transaction.objectStore('myBooks');
     let request = objectStore.add(newBook);
 
     request.onsuccess = () => {
-        form.reset();
+        addBook.reset();
         // will potentially do other things here
     }
     transaction.oncomplete = () => {
@@ -164,7 +164,8 @@ function removeBookF(e) {
     if (e.target.classList.contains('remove-book')) {
         if (confirm('Are You Sure about that ?')) {
             let bookID = Number(e.target.parentElement.parentElement.getAttribute('my-book-id'));
-            let objectStore = DB.transaction('myBooks', 'readwrite').objectStore('myBooks');
+            let transaction = DB.transaction('myBooks', readwrite);
+            let objectStore = transaction.objectStore('myBooks');
             objectStore.delete(bookID);
             transaction.oncomplete = () => {
                 e.target.parentElement.parentElement.remove();
@@ -182,7 +183,8 @@ function removeBookF(e) {
 //     if (e.target.parentElement.classList.contains('remove-book')) {
 //         if (confirm('Are You Sure about that ?')) {
 //             let bookID = Number(e.target.parentElement.parentElement.getAttribute('my-book-id'));
-//             let objectStore = DB.transaction('myBooks', 'readwrite').objectStore('myBooks');
+//             let transaction = DB.transaction('myBooks', 'readwrite');
+//             let objectStore = transaction.objectStore('myBooks');
 //             objectStore.delete(bookID);
 //             transaction.oncomplete = () => {
 //                 e.target.parentElement.parentElement.remove();
