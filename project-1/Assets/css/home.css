@@ -7,8 +7,13 @@ body {
 .bg-primary {
   background-color: #07a8e2 !important;
 }
+.btn-outline-primary {
+  border: 2px #6788de solid;
+  background-color: #fff;
+  cursor: pointer;
+}
 .text-primary {
-  color: #7599f5 !important;
+  color: #6788de !important;
 }
 @media (min-width: 1200px) {
   .container,
@@ -278,7 +283,7 @@ body {
 }
 
 .section-banner .section-banner-text {
-  margin-top: 10px;
+  margin-top: 5px;
   font-size: 1rem;
   font-weight: 500;
 }
