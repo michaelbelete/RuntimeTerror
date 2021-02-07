@@ -76,3 +76,10 @@ h3 {
 .list-group span {
     color: #595959;
 }
+
+
+/* Will remove it when connection is back */
+.fa-plus-circle {
+    width: 30px;
+    height: 50px;
+}
