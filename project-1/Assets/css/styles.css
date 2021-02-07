@@ -1,91 +1,85 @@
-body{
-    font-family: 'Roboto', sans-serif;
+body {
+  font-family: "Roboto", sans-serif;
 }
 
-.img-card{
-    object-fit: cover;
-    height: 35rem;
-    width: 40rem;
+.img-card {
+  object-fit: cover;
+  height: 35rem;
+  width: 40rem;
 }
 .lato {
-    font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
 }
 .ubuntu {
-    font-family: 'ubuntu', sans-serif;
+  font-family: "ubuntu", sans-serif;
 }
-.source_sans_pro{
-    font-family: 'Source sans pro', sans-serif;
-    font-size: 18px;
+.source_sans_pro {
+  font-family: "Source sans pro", sans-serif;
+  font-size: 18px;
 }
 .great-vibes {
-    font-family: 'Great Vibes', cursive;
-
+  font-family: "Great Vibes", cursive;
 }
-.logo-font{
-    font-family: 'Great Vibes', cursive;
-    font-size: 2rem;
+.logo-font {
+  font-family: "Great Vibes", cursive;
+  font-size: 2rem;
 }
 
-.link-font{
-    text-decoration: none;
-    color: black;
-    font-size: large;
-    font-family: 'ubuntu', sans-serif;
-
+.link-font {
+  text-decoration: none;
+  color: black;
+  font-size: large;
+  font-family: "ubuntu", sans-serif;
 }
-a:hover{
-    text-decoration:none;
+a:hover {
+  text-decoration: none;
 }
 
 .quote {
-    font-size: medium;
-    font-style: italic;
-    font-family: 'lato', sans-serif;
-    color: gray;
+  font-size: medium;
+  font-style: italic;
+  font-family: "lato", sans-serif;
+  color: gray;
 }
 
 .carousel-item.active,
 .carousel-item-next,
-.carousel-item-prev{
-    display:block;
+.carousel-item-prev {
+  display: block;
 }
 
-.par-margin{
-    margin-right: 45rem;
-    margin-left: 3rem;
+.par-margin {
+  margin-right: 45rem;
+  margin-left: 3rem;
 }
-.foot{
-    margin-top: 8rem;
-    padding-bottom: 1em;
+.foot {
+  margin-top: 8rem;
+  padding-bottom: 1em;
 }
 
-@media screen and (max-width: 480px){
-    .header_catalogue{
-        font-size: 2rem;
-        margin-top: 1rem;
-    }
-    .body_catalogue{
-        background-color: whitesmoke;
-        padding:20px;
-        border-radius: 10px;
-        opacity: 0.8;
-    }
-    .buttons{
-        opacity: 0.9;
-    }
-    .quoteSmall{
-        margin-top: 30px;
-    }
+@media screen and (max-width: 480px) {
+  .header_catalogue {
+    font-size: 2rem;
+    margin-top: 1rem;
+  }
+  .body_catalogue {
+    background-color: whitesmoke;
+    padding: 20px;
+    border-radius: 10px;
+    opacity: 0.8;
+  }
+  .buttons {
+    opacity: 0.9;
+  }
+  .quoteSmall {
+    margin-top: 30px;
+  }
 }
-@media screen and (min-width: 490px){
-    .para-Book{
-    
+@media screen and (min-width: 490px) {
+  .para-Book {
     margin-left: 14rem;
-}
-.img-Book{
+  }
+  .img-Book {
     margin-right: 10rem;
+  }
 }
-
-}
-
-

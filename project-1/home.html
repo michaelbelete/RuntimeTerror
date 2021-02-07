@@ -5,71 +5,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Font Awesome -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,300;1,400&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Ubuntu&display=swap" rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
     <!-- star rating  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+    <!-- select 2 -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
+    <!-- material icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <title>Home</title>
-
+    <!-- custom scroll -->
+    <link rel="stylesheet" href="Assets/css/jquery.custom-scrollbar.css">
+    <!-- my css  -->
     <link rel="stylesheet" href="./Assets/css/home.css">
+
+    <link rel="icon" href="./Assets/images/books_icon.png">
 </head>
 
 <body>
-    <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand"><i class="fa fa-book">Bookaholics</i></a>
-        <form class="form-inline">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-    </nav>
-    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container">
-            <a class="navbar-brand" href="#"><i class="fa fa-book text-danger mr-2"></i>Bookaholics</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar"
-                aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbar">
-                <div class="mr-auto">
-                   <form action="POST" method="post" class="form-inline" id="form-search">
-                       <div class="form-group">
-                           <input type="search" id="search" name="search" class="form-control">
-                       </div>
-                   </form>
+    <nav class="navbar navbar-expand-xl fixed-top navbar-light bg-dark">
+        <a href="home.html" class="navbar-brand ubuntu"><i class="fa fa-book"></i><b>Book</b>aholics</a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Collection of nav links, forms, and other content for toggling -->
+        <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+            <form class="navbar-form form-inline">
+                <div class="input-group search-box">
+                    <input type="text" id="search" class="form-control" placeholder="Search here...">
+                    <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
                 </div>
-                <ul class="navbar-nav mx-lg-2 my-md-0">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">My Books</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Wishlist</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav mx-lg-4">
-                    <li class="nav-item dropdown active">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdown07" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> Username</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown07">
-                            <a class="dropdown-item" href="#">Profile <i class="fa caret-right float-right"></i></a>
-                            <a class="dropdown-item" href="#">Logout</a>
-                        </div>
-                    </li>
-                </ul>
+            </form>
+            <div class="navbar-nav ml-auto">
+                <a href="home.html" class="nav-item nav-link active"><i class="fa fa-home"></i><span>Home</span></a>
+                <a href="mybooks.html" class="nav-item nav-link"><i class="fa fa-book"></i><span>My Books</span></a>
+                <a href="wishlist.html" class="nav-item nav-link"><i
+                        class="fas fa-cash-register"></i><span>Wishlist</span></a>
+                <a href="#" class="nav-item nav-link">&nbsp;</a>
+                <a href="#" class="nav-item nav-link">&nbsp;</a>
+                <a href="#" class="nav-item nav-link">&nbsp;</a>
+                <a href="#" class="nav-item nav-link">&nbsp;</a>
+                <a href="#" class="nav-item nav-link">&nbsp;</a>
+                <div class="nav-item dropdown">
+                    <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action"><img
+                            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                            class="avatar" alt="Avatar"> Michael Belete <b class="caret"></b></a>
+                    <div class="dropdown-menu">
+                        <a href="profile.html" class="dropdown-item"><i class="fa fa-user"></i> Profile</a>
+                        <div class="divider dropdown-divider"></div>
+                        <a href="logout.html" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a>
+                    </div>
+                </div>
             </div>
         </div>
-    </nav> -->
-
+    </nav>
     <section class="container mt-4">
         <div class="row">
             <div class="col-md-8">
@@ -270,6 +264,7 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/25.0.0/classic/ckeditor.js"></script>
+    <script src="Assets/js/jquery.custom-scrollbar.js"></script>
     <script>
         ClassicEditor
             .create(document.querySelector('#postArea'))
