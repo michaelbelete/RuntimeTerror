@@ -323,43 +323,7 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/25.0.0/classic/ckeditor.js"></script>
     <script src="Assets/js/jquery.custom-scrollbar.js"></script>
-    <script>
-        ClassicEditor
-            .create(document.querySelector('#postArea'))
-            .catch(error => {
-                console.error(error);
-            });
-
-        $(function () {
-
-            $("#rateYo").rateYo({
-                starWidth: "30px",
-                ratedFill: "#07a8e2",
-                halfStar: true
-            });
-
-            $("#post-rate1").rateYo({
-                rating: 4,
-                starWidth: "20px",
-                ratedFill: "#07a8e2",
-                halfStar: true,
-                readOnly: true,
-            })
-
-            $("#post-rate2").rateYo({
-                rating: 4,
-                starWidth: "20px",
-                ratedFill: "#07a8e2",
-                halfStar: true,
-                readOnly: true,
-            })
-        });
-
-        $(document).ready(function () {
-            $('#header').load('includes/header.html')
-            $('#books').select2();
-        });
-    </script>
+    <script src="Assets/js/home.js"></script>
 </body>
 
 </html>
