@@ -76,14 +76,3 @@ h3 {
 .list-group span {
     color: #595959;
 }
-
-.wd {
-    width: calc(100% + 30px + 3rem);
-}
-.ml {
-    margin-left: calc(-15px + -1.5rem);
-}
-
-body > .container {
-    box-shadow: 7px 7px 2px 1px rgba(212, 208, 208, 0.2);
-}
