@@ -5,7 +5,7 @@ body {
 .img-card {
   object-fit: cover;
   height: 35rem;
-  width: 40rem;
+  width: 45rem;
 }
 .lato {
   font-family: "Lato", sans-serif;
@@ -62,7 +62,7 @@ a:hover {
   transition: 0.7s ease;
 }
 .bg-white.scrolled {
-  background: white !important;
+  background: whitesmoke !important;
 }
 
 @media screen and (max-width: 480px) {
