@@ -59,7 +59,7 @@ a:hover {
 
 .bg-white {
   background: transparent !important;
-  transition: 0.75s ease;
+  transition: 0.7s ease;
 }
 .bg-white.scrolled {
   background: white !important;

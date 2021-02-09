@@ -10,17 +10,13 @@
 
     <script src="https://kit.fontawesome.com/9e46569b36.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&family=Great+Vibes&family=Lato:ital@1&family=Roboto&family=Ubuntu&display=swap"
         rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <link rel="icon" href="./Assets/images/books_icon.png">
-    <link rel="stylesheet" href="./Assets/css/styles.css">
+    <link rel="stylesheet" href="./Assets/css/index.css">
 
     <title>Home</title>
 
@@ -28,17 +24,14 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light p-0">
-        <a class="navbar-brand ml-2" href="./index.html">
-            <img src="./Assets/images/favpng_book-icon.png" class="mb-2" height="50px" width="50px" alt="">
-            <span class="ubuntu">Bookaholic</span>
-        </a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+        
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav mr-auto">
                 <li class="nav-item active ml-2">
                     <a class="nav-link link-font" href="#">Home </a>
                 </li>
@@ -53,8 +46,12 @@
                 </li>
             </ul>
         </div>
+        <a class="navbar-brand ml-2" href="./index.html">
+            <img src="./Assets/images/favpng_book-icon.png" class="mb-2" height="50px" width="50px" alt="">
+            <span class="ubuntu">Bookaholic</span>
+        </a>
     </nav>
-    <div class="card pb-5 ">
+    <div class="card pb-5" style="border: 0;">
         <img src="./Assets/images/students.jpg" class="img-card img-fluid mt-3" alt="">
         <div class="card-img-overlay p-0">
             <div class="container-fluid">
@@ -65,7 +62,7 @@
                     </div>
                 </div>
 
-                <div class="row mt-3 mx-0">
+                <div class="row mt-5 mx-0">
                     <div class="col-md-6">
                     </div>
                     <div class="col-lg-5">
@@ -82,8 +79,8 @@
                             <div class="col-md text-left" data-aos="zoom-up">
                                 <button type="button" class="btn btn-warning mr-2 ">Learn More</button>
                                 <button type="button" class="btn btn-dark" data-toggle="modal"
-                                    data-target="#exampleModalCenter">Sign up</button>
-                                
+                                    data-target="#signUp">Sign up</button>
+
                             </div>
                         </div>
                     </div>
@@ -91,8 +88,8 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-        aria-hidden="true">
+    <div class="modal fade modalSmall" id="signUp" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -107,30 +104,31 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="firstName"> First Name</label>
-                                    <input id="firstName" required placeholder="John"  class="form-control" type="text">
+                                    <input id="firstName" required placeholder="John" class="form-control" type="text">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
                                     <label for="lastName"> Last Name</label>
-                                    <input id="lastName" required placeholder="Doe"  class="form-control" type="text">
+                                    <input id="lastName" required placeholder="Doe" class="form-control" type="text">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="userName"> Username</label>
-                            <input id="userName" required placeholder="@username"  class="form-control" type="email">
+                            <input id="userName" required placeholder="@username" class="form-control" type="email">
                         </div>
                         <div class="form-group">
                             <label for="email"> Email</label>
-                            <input id="email" required placeholder="Johndoe23@example.com"  class="form-control" type="email">
+                            <input id="email" required placeholder="Johndoe23@example.com" class="form-control"
+                                type="email">
                         </div>
-                       
-                        
+
+
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Sign up</button>
+                    <button type="submit" class="btn btn-dark">Sign up</button>
                 </div>
             </div>
         </div>
@@ -474,7 +472,7 @@
             </div>
 
             <div class="col-md img-Book">
-                <img src="./Assets/images/people-reading.jpg" class=" px-0 img-fluid" data-aos="fade-left" alt="">
+                <img src="./Assets/images/people-reading.jpg" class=" px-0 img-fluid" data-aos="fade-up" alt="">
             </div>
         </div>
 
@@ -525,12 +523,17 @@
         crossorigin="anonymous"></script>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="./Assets/js/app.js"></script>
 
     <script>
         AOS.init({
-            duration: 1200
+            duration: 1000,
+        });
+        $(window).scroll(() => {
+            $('nav').toggleClass('scrolled', $(this).scrollTop() > 50);
         });
     </script>
+    
 </body>
 
 </html>
