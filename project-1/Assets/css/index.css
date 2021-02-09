@@ -28,7 +28,7 @@ body {
 .link-font {
   text-decoration: none;
   color: black;
-  font-size: larger;
+  font-size: large;
   font-family: "ubuntu", sans-serif;
 }
 a:hover {
