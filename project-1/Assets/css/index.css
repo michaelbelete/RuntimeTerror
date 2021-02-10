@@ -4,8 +4,8 @@ body {
 
 .img-card {
   object-fit: cover;
-  height: 35rem;
-  width: 45rem;
+  height: 30rem;
+  width: 40rem;
 }
 .lato {
   font-family: "Lato", sans-serif;
@@ -56,13 +56,22 @@ a:hover {
   margin-top: 8rem;
   padding-bottom: 1em;
 }
-
+.footer-height {
+  height: 300px;
+}
 .bg-white {
   background: transparent !important;
-  transition: 0.7s ease;
+  transition: 0.3s ease;
 }
 .bg-white.scrolled {
   background: whitesmoke !important;
+}
+.decoration-none {
+  text-decoration: none;
+  color: inherit;
+}
+.decoration-none:hover {
+  color: bisque;
 }
 
 @media screen and (max-width: 480px) {
@@ -92,5 +101,6 @@ a:hover {
   }
   .img-Book {
     margin-right: 10rem;
+    margin-bottom: 15rem;
   }
 }
