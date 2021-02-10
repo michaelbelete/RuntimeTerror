@@ -1,0 +1,46 @@
+body {
+  font-family: "Roboto", sans-serif;
+}
+.lato {
+  font-family: "Lato", sans-serif;
+}
+.ubuntu {
+  font-family: "ubuntu", sans-serif;
+}
+.source_sans_pro {
+  font-family: "Source sans pro", sans-serif;
+  font-size: 18px;
+}
+.roboto {
+  font-family: "Roboto", sans-serif;
+}
+.pt-sans {
+  font-family: "PT Sans", sans-serif;
+  font-size: 20px;
+}
+.great-vibes {
+  font-family: "Great Vibes", cursive;
+}
+.logo-font {
+  font-family: "Great Vibes", cursive;
+  font-size: 2rem;
+}
+.link-font {
+  text-decoration: none;
+  color: black;
+  font-size: large;
+  font-family: "ubuntu", sans-serif;
+}
+.bg-white {
+  background: transparent !important;
+  transition: 0.3s ease;
+}
+.bg-white.scrolled {
+  background: whitesmoke !important;
+}
+.fit-cover {
+  object-fit: cover;
+}
+#profile_p {
+  margin-top: -100px;
+}
