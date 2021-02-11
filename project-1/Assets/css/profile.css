@@ -41,6 +41,21 @@ body {
   padding-right: 100px;
   padding-left: 100px;
 }
+.rounded-small {
+  border-radius: 3%;
+}
+.transbox {
+  background-color: black;
+  opacity: 0.6;
+}
+.decoration-none {
+  text-decoration: none;
+  color: black;
+}
+.decoration-none:hover {
+  color: grey;
+}
+
 @media screen and (max-width: 480px) {
   .padding-whole-small {
     padding-right: 1rem !important;
@@ -53,7 +68,7 @@ body {
 @media screen and (min-width: 480px) {
   .bg-white {
     background: transparent !important;
-    transition: 0.2s ease;
+    transition: 0.5s ease;
   }
   .bg-white.scrolled {
     background: whitesmoke !important;
