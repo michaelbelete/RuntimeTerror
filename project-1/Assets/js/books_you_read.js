@@ -1,3 +1,4 @@
+// need to change the active status of nav to MyBooks
 $(document).ready(function () {
     $('#header').load('includes/header.html')
     $('#books').select2();
@@ -8,22 +9,21 @@ const addBook = document.querySelector('#addBook')
 
 const searchFilter = document.querySelector('.search-filter');
 
-const titleInput = document.querySelector('#title');
-const editionInput = document.querySelector('#title');
-const authourInput = document.querySelector('#title');
-const publisherInput = document.querySelector('#title');
+const titleInput = document.querySelector('.title');
+const editionInput = document.querySelector('.edition');
+const authorInput = document.querySelector('.author');
+const publisherInput = document.querySelector('.publisher');
 
 const bookList = document.querySelector('.book-list');
 
-const removeBooks = document.querySelector('.remove-all') //possible under the more options (three dots)
-const removeBook = document.querySelector('.remove-book') //without delegation
-
+// const removeBooks = document.querySelector('.remove-all') //possible under the more options (three dots)
+const removeBook = document.querySelector('.remove-book'); //without delegation
 
 
 // Event Listeners
-// addBook.addEventListener('submit', addBook);
+addBook.addEventListener('submit', addBook);
 // removeBooks.addEventListener('click', removeAllBooks);
-// removeBook.addEventListener('click', removeBookF);
+removeBook.addEventListener('click', removeBookF);
 searchFilter.addEventListener('keyup', filterBooks);
 
 
@@ -45,7 +45,7 @@ myBookDB.onerror = function () {
 myBookDB.onsuccess = function () {
     // console.log('Database Ready');
     DB = myBookDB.result;
-    // displayMyBooks();
+    displayMyBooks();
 }
 
 myBookDB.onupgradeneeded = function (e) {
@@ -90,20 +90,21 @@ function addNewBook(e) {
 
     let newBook = {
         bookTitle: titleInput.value,
-        edtion: editionInput.value,
-        author: authourInput,
-        publisher: publisherInput,
+        edition: editionInput.value,
+        author: authorInput.value,
+        publisher: publisherInput.value,
         dateAdded: Date(),
         dateModified: Date()
     }
 
-    let objectStore = DB.transaction(['myBooks'], 'readwrite').objectStore('myBooks');
+    transaction = DB.transaction(['myBooks'], 'readwrite');
+    let objectStore = transaction.objectStore('myBooks');
 
     let request = objectStore.add(newBook);
 
     request.onsuccess = () => {
         form.reset();
-        // will potentially do other things here
+        // will potentially do other things here like closing the pop-up and maybe some animation saying 'congragulations on you read' or sth along that line
     }
     transaction.oncomplete = () => {
         console.log('Book added.');
@@ -125,40 +126,38 @@ function displayMyBooks() {
     objectStore.openCursor().onsuccess = function (e) {
         let cursor = e.target.result;
         if (cursor) {
-            let li = document.createElement('li');
-            li.className = "list-group-item d-flex p-0 border-0 mb-2";
-            li.setAttribute('my-book-id', cursor.value.id); // will be useful for deleting [through .delete()]
+            let div = document.createElement('div');
+            div.className = "divst-group-item d-flex p-0 border-0 mb-2";
+            div.setAttribute('my-book-id', cursor.value.id); // will be useful for deleting [through .delete()]
 
-            li.innerHTML = `<div class="col-6 p-0 d-flex">
-            <div class="col-2 p-0">
-              <i class="fa fa-book fa-3x text-secondary"></i>
-            </div>
-            <div class="col-10 p-0">
-              <h6>${cursor.value.bookTitle} <i class="fa fa-caret-right" aria-hidden="true"></i><span> ${cursor.value.author}</span></h6>
-              <p class="text-muted">${cursor.value.publisher}</p>
-            </div>
-          </div>
-          <div class="col-3 p-0">
-            <div class="dropdown">
-              <button class="btn btn-light btn-outline-dark btn-sm dropdown-toggle" type="button" id="dropdownMenu"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Choose...
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-                <a class="dropdown-item" href="#">Private</a>
-                <a class="dropdown-item" href="#">Public</a>
+            div.innerHTML = `<div class="row py-2 px-4 w-100 book">
+            <div class="col-7 d-flex">
+              <div class="col-1 p-0 mr-3">
+                <i class="fa fa-book fa-3x text-secondary"></i>
+              </div>
+              <div class="col-10 p">
+                <h6 class="py-0"><b class="text-primary">${cursor.value.bookTitle} </b><i class="fa fa-caret-right"
+                    aria-hidden="true"></i><span> ${cursor.value.author}</span></h6>
+                <p class="text-muted py-0">${cursor.value.publisher}</p>
               </div>
             </div>
-
-          </div>
-          <div class="col-3 p-0">
-            <a href="modifyBook.html?id=${cursor.value.id}"><i class="fas fa-edit text-secondary"></i></a>
-            <i class="fas fa-trash text-danger remove-book"></i>
-            <a href=""><i class="fas fa-ellipsis-h bg-dark border rounded-pill text-white"></i></a>
+            <div class="col-2">
+              <select name="" id="" class="form-control">
+                <option value="">Private</option>
+                <option value="">Public</option>
+              </select>
+            </div>
+            <div class="col-3">
+              <h4 class="px-2 pt-2">
+                <a href="modifyBook.html?id=${cursor.value.id}"><i class="fas fa-edit text-secondary"></i></a>
+                <i class="fas fa-trash text-danger remove-book"></i>
+                <a href=""><i class="fas fa-ellipsis-h bg-dark border rounded-pill text-white"></i></a>
+              </h4>
+            </div>
           </div>`
 
 
-            bookList.appendChild(li);
+            bookList.appendChild(div); //may wanna prepend
 
             cursor.continue();
         }
@@ -182,13 +181,16 @@ function removeAllBooks() {
 
 
 function removeBookF(e) {
+    console.log('here')
     if (e.target.classList.contains('remove-book')) {
         if (confirm('Are You Sure about that ?')) {
-            let bookID = Number(e.target.parentElement.parentElement.getAttribute('my-book-id'));
-            let objectStore = DB.transaction('myBooks', 'readwrite').objectStore('myBooks');
+            let bookID = Number(e.target.parentElement.parentElement.parentElement.getAttribute('my-book-id'));
+            let transaction = DB.transaction('myBooks', 'readwrite');
+            let objectStore = transaction.objectStore('myBooks');
             objectStore.delete(bookID);
+            console.log(bookID)
             transaction.oncomplete = () => {
-                e.target.parentElement.parentElement.remove();
+                e.target.parentElement.parentElement.parentElement.remove();
             }
         }
     }
@@ -202,11 +204,12 @@ function removeBookF(e) {
 // function removeBookF(e) {
 //     if (e.target.parentElement.classList.contains('remove-book')) {
 //         if (confirm('Are You Sure about that ?')) {
-//             let bookID = Number(e.target.parentElement.parentElement.getAttribute('my-book-id'));
-//             let objectStore = DB.transaction('myBooks', 'readwrite').objectStore('myBooks');
+//             let bookID = Number(e.target.parentElement.parentElement.parentElement.getAttribute('my-book-id'));
+//             let transaction = DB.transaction('myBooks', 'readwrite');
+//             let objectStore = transaction.objectStore('myBooks');
 //             objectStore.delete(bookID);
 //             transaction.oncomplete = () => {
-//                 e.target.parentElement.parentElement.remove();
+//                 e.target.parentElement.parentElement.parentElement.remove();
 //             }
 //         }
 //     }
@@ -218,18 +221,18 @@ function removeBookF(e) {
 
 
 function filterBooks() {
-    var isNoResult = true;
+    var noResult = true;
     var noMatch = document.querySelector(".no-match");
-    document.querySelectorAll('.list-group-item').forEach(el => {
+    document.querySelectorAll('.book').forEach(el => {
         if (el.textContent.includes(searchFilter.value)) { //will need improvement (to only check text that is relevant)
-            el.style.display = "block";
-            isNoResult = false;
+            el.style.display = "flex";
+            noResult = false;
             return;
         }
         el.setAttribute("style", "display: none !important"); //had to do that to check the filtering on this html-made list
 
     });
-    if (isNoResult) {
+    if (noResult) {
         noMatch.setAttribute("style", "display: block !important");
     } else {
         noMatch.style.display = null;
