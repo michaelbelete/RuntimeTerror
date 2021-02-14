@@ -226,7 +226,7 @@ function filterBooks() {
     var noResult = true;
     var noMatch = document.querySelector(".no-match");
     document.querySelectorAll('.book').forEach(el => {
-        if (el.textContent.includes(searchFilter.value)) { //will need improvement (to only check text that is relevant)
+        if (el.textContent.toLocaleLowerCase().includes(searchFilter.value.toLocaleLowerCase())) { //will need improvement (to only check text that is relevant)
             el.style.display = "flex";
             noResult = false;
             return;
