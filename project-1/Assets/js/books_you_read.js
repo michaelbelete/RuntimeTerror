@@ -17,13 +17,14 @@ const publisherInput = document.querySelector('.publisher');
 const bookList = document.querySelector('.book-list');
 
 // const removeBooks = document.querySelector('.remove-all') //possible under the more options (three dots)
-const removeBook = document.querySelector('.remove-book'); //without delegation
+// const removeBook = document.querySelector('.remove-book'); //without delegation
 
 
 // Event Listeners
-addBook.addEventListener('submit', addBook);
+addBook.addEventListener('submit', addNewBook);
 // removeBooks.addEventListener('click', removeAllBooks);
-removeBook.addEventListener('click', removeBookF);
+// removeBook.addEventListener('click', removeBookF);
+bookList.addEventListener('click', removeBookF);
 searchFilter.addEventListener('keyup', filterBooks);
 
 
@@ -83,11 +84,12 @@ myBookDB.onupgradeneeded = function (e) {
 function addNewBook(e) {
     e.preventDefault();
 
-    if (!bookTitle.value || !authourInput.value || !editionInput.value) {
+    if (!titleInput.value || !authorInput.value || !editionInput.value) {
         alert("nah"); //will change it
         return;
     }
 
+    console.log("here");
     let newBook = {
         bookTitle: titleInput.value,
         edition: editionInput.value,
@@ -97,13 +99,14 @@ function addNewBook(e) {
         dateModified: Date()
     }
 
-    transaction = DB.transaction(['myBooks'], 'readwrite');
+    let transaction = DB.transaction(['myBooks'], 'readwrite');
     let objectStore = transaction.objectStore('myBooks');
-
+    
+    console.log(newBook)
     let request = objectStore.add(newBook);
 
     request.onsuccess = () => {
-        form.reset();
+        addBook.reset();
         // will potentially do other things here like closing the pop-up and maybe some animation saying 'congragulations on you read' or sth along that line
     }
     transaction.oncomplete = () => {
@@ -127,11 +130,10 @@ function displayMyBooks() {
         let cursor = e.target.result;
         if (cursor) {
             let div = document.createElement('div');
-            div.className = "divst-group-item d-flex p-0 border-0 mb-2";
+            div.className = "row py-2 px-4 w-100 book";
             div.setAttribute('my-book-id', cursor.value.id); // will be useful for deleting [through .delete()]
 
-            div.innerHTML = `<div class="row py-2 px-4 w-100 book">
-            <div class="col-7 d-flex">
+            div.innerHTML = `<div class="col-7 d-flex">
               <div class="col-1 p-0 mr-3">
                 <i class="fa fa-book fa-3x text-secondary"></i>
               </div>
@@ -153,11 +155,10 @@ function displayMyBooks() {
                 <i class="fas fa-trash text-danger remove-book"></i>
                 <a href=""><i class="fas fa-ellipsis-h bg-dark border rounded-pill text-white"></i></a>
               </h4>
-            </div>
-          </div>`
+            </div>`
 
 
-            bookList.appendChild(div); //may wanna prepend
+            bookList.prepend(div); //may wanna prepend
 
             cursor.continue();
         }
@@ -180,40 +181,41 @@ function removeAllBooks() {
 
 
 
-function removeBookF(e) {
-    console.log('here')
-    if (e.target.classList.contains('remove-book')) {
-        if (confirm('Are You Sure about that ?')) {
-            let bookID = Number(e.target.parentElement.parentElement.parentElement.getAttribute('my-book-id'));
-            let transaction = DB.transaction('myBooks', 'readwrite');
-            let objectStore = transaction.objectStore('myBooks');
-            objectStore.delete(bookID);
-            console.log(bookID)
-            transaction.oncomplete = () => {
-                e.target.parentElement.parentElement.parentElement.remove();
-            }
-        }
-    }
-}
-
-
-
-
-// if we delegated the event from the ul //will need the immediate parent of the fa-remove i to have .remove-book class
-// bookList.addEventListener('click', removeBookF);
 // function removeBookF(e) {
-//     if (e.target.parentElement.classList.contains('remove-book')) {
+//     console.log('here')
+//     if (e.target.classList.contains('remove-book')) {
 //         if (confirm('Are You Sure about that ?')) {
 //             let bookID = Number(e.target.parentElement.parentElement.parentElement.getAttribute('my-book-id'));
 //             let transaction = DB.transaction('myBooks', 'readwrite');
 //             let objectStore = transaction.objectStore('myBooks');
 //             objectStore.delete(bookID);
+//             console.log(bookID)
 //             transaction.oncomplete = () => {
 //                 e.target.parentElement.parentElement.parentElement.remove();
 //             }
 //         }
 //     }
 // }
+
+
+
+
+// if we delegated the event from the ul //will need the immediate parent of the fa-remove i to have .remove-book class
+// bookList.addEventListener('click', removeBookF);
+function removeBookF(e) {
+    if (e.target.classList.contains('remove-book')) {
+        if (confirm('Are You Sure about that ?')) {
+            let bookID = Number(e.target.parentElement.parentElement.parentElement.getAttribute('my-book-id'));
+            let transaction = DB.transaction('myBooks', 'readwrite');
+            let objectStore = transaction.objectStore('myBooks');
+            objectStore.delete(bookID);
+            // console.log(bookID)
+            transaction.oncomplete = () => {
+                e.target.parentElement.parentElement.parentElement.remove();
+            }
+        }
+    }
+}
 
 
 
