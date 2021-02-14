@@ -233,8 +233,10 @@ function filterBooks() {
 
     });
     if (noResult) {
+        bookList.appendChild(noMatch);
         noMatch.setAttribute("style", "display: block !important");
     } else {
+        document.querySelector('.container').appendChild(noMatch);
         noMatch.style.display = null;
     }
 
