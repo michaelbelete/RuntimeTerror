@@ -14,7 +14,7 @@
         href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&family=Great+Vibes&family=Lato:ital@1&family=Roboto&family=Ubuntu&display=swap"
         rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
+    <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
     <link rel="icon" href="./Assets/images/books_icon.png">
     <link rel="stylesheet" href="./Assets/css/index.css">
 
@@ -115,22 +115,41 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="userName"> Username</label>
-                            <input id="userName" required placeholder="@username" class="form-control" type="email">
+                        <label for="userName"> Username</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend2">@</span>
+                            </div>
+                            <input id="userName" required placeholder="username" class="form-control" type="text">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mt-3">
                             <label for="email"> Email</label>
                             <input id="email" required placeholder="Johndoe23@example.com" class="form-control"
                                 type="email">
                         </div>
-
-
+                        <div class="row mx-0 mt-2">
+                            <div class="col-md pl-0">
+                                <div class="form-group">
+                                    <label for="password"> Password</label>
+                                    <input id="password" required placeholder="" class="form-control"
+                                        type="password">
+                                </div>
+                            </div>
+                            <div class="col-md pr-0">
+                                <div class="form-group">
+                                    <label for="confirmPassword"> Confirm Password</label>
+                                    <input id="confirmPassword" required placeholder="" class="form-control"
+                                        type="password">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer mt-3">
+                            <button type="submit" class="btn btn-dark" id="signUpButton">Sign up</button>
+                        </div>
+                       
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-dark">Sign up</button>
-                </div>
+               
             </div>
         </div>
     </div>
@@ -584,15 +603,18 @@
         crossorigin="anonymous"></script>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="./Assets/js/app.js"></script>
+    <script src="./Assets/js/app.js" type="module"></script>
 
     <script>
         AOS.init({
             duration: 1000,
         });
+
         $(window).scroll(() => {
             $('nav').toggleClass('scrolled', $(this).scrollTop() > 5);
         });
+
+
     </script>
     
 </body>
