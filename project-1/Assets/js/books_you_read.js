@@ -37,7 +37,7 @@ let DB;
 // var isDateAsc = true;
 
 
-let myBookDB = indexedDB.open('Bookaholics', 1);
+let myBookDB = indexedDB.open('Bookaholics', 2);
 
 myBookDB.onerror = function () {
     console.log('There was an error');
@@ -121,8 +121,8 @@ function addNewBook(e) {
 
 
 function displayMyBooks() {
-    while (bookList.firstChild) {
-        bookList.removeChild(bookList.firstChild);
+    while (bookList.firstElementChild) {
+        bookList.removeChild(bookList.firstElementChild);
     }
 
     let objectStore = DB.transaction('myBooks').objectStore('myBooks');
@@ -162,7 +162,18 @@ function displayMyBooks() {
 
             cursor.continue();
         }
+        
+        // console.log(bookList.firstElementChild);
+        if (!bookList.firstElementChild){
+            let d = document.createElement('div');
+            let p = document.createElement('p');
+            p.textContent = "Seems like you have not added any books in your wishlist. Click the Add New Book button above to start adding.";
+            p.className = "text-center";
+            d.appendChild(p);
+            bookList.appendChild(d);
+        }
     }
+    
 
 
 }
