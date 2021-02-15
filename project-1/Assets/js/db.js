@@ -35,8 +35,8 @@ const book = {
     //     console.log("user created successfully")
     // }).catch((error) => console.log(error))
 
-db.books.put(book)
-    //creating a sample user
+// db.books.put(book)
+//creating a sample user
 function loggedInUser() {
     return 1
 }
