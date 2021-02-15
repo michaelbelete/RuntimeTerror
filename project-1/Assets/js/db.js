@@ -63,7 +63,7 @@ function loggedInUser() {
 }
 
 db.users.put(user).then((result) => {
-    console.log(result)
+    console.log("user is added")
 }).catch((error) => {
     console.log(error)
 })
