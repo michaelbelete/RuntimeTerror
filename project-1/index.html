@@ -16,7 +16,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <link rel="icon" href="./Assets/images/books_icon.png">
-    <link rel="stylesheet" href="./Assets/css/styles.css">
+    <link rel="stylesheet" href="./Assets/css/index.css">
 
     <title>Home</title>
 
@@ -24,17 +24,18 @@
 
 <body>
 
-    <nav class="navbar  navbar-light bg-light p-0">
-        <a class="navbar-brand ml-2" href="./index.html">
-            <img src="./Assets/images/favpng_book-icon.png" class="mb-2" height="50px" width="50px" alt="">
-            <span class="ubuntu">Bookaholic</span>
-        </a>
+    <nav class="navbar navbar-expand-md navbar-light bg-white sticky-top mb-3">
+        
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
+            <a class="navbar-brand ml-3" href="./index.html">
+                <img src="./Assets/images/favpng_book-icon.png" class="mb-3" height="70px" width="70px" alt="">
+                <span class="logo-font">Bookaholic</span>
+            </a>
+            <ul class="navbar-nav ml-auto mr-3">
                 <li class="nav-item active ml-2">
                     <a class="nav-link link-font" href="#">Home </a>
                 </li>
@@ -49,10 +50,11 @@
                 </li>
             </ul>
         </div>
+        
     </nav>
-    <div class="card pb-5 ">
+    <div class="card pb-5 mb-5" style="border: 0;">
         <img src="./Assets/images/students.jpg" class="img-card img-fluid mt-3" alt="">
-        <div class="card-img-overlay p-0">
+        <div class="card-img-overlay p-0 mb-5">
             <div class="container-fluid">
                 <div class="row mx-0">
                     <div class="col-md-6">
@@ -77,7 +79,9 @@
                         <div class="row mt-4">
                             <div class="col-md text-left" data-aos="zoom-up">
                                 <button type="button" class="btn btn-warning mr-2 ">Learn More</button>
-                                <button type="button" class="btn btn-dark ">Sign up</button>
+                                <button type="button" class="btn btn-dark" data-toggle="modal"
+                                    data-target="#signUp">Sign up</button>
+
                             </div>
                         </div>
                     </div>
@@ -85,33 +89,78 @@
             </div>
         </div>
     </div>
+    <div class="modal fade modalSmall" id="signUp" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Sign up</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body p-4">
+                    <form action="">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="firstName"> First Name</label>
+                                    <input id="firstName" required placeholder="John" class="form-control" type="text">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="lastName"> Last Name</label>
+                                    <input id="lastName" required placeholder="Doe" class="form-control" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="userName"> Username</label>
+                            <input id="userName" required placeholder="@username" class="form-control" type="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="email"> Email</label>
+                            <input id="email" required placeholder="Johndoe23@example.com" class="form-control"
+                                type="email">
+                        </div>
 
-    <div class="container mt-5">
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-dark">Sign up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class=" container mt-5">
         <div class="row mx-0 source_sans_pro">
             <div class="col-md px-1 mt-2" style="border-right:1px solid #000;height:100px">
                 <p class="mt-1 px-4">
-                    Ever wished for a secure platform to exchange books recommendation and review? Well Bookaholics is
+                    Ever wished for a secure platform to exchange books recommendation and
+                    review? Well Bookaholics is
                     here
                     for you just create an account and you are set to go.
                 </p>
             </div>
             <div class="mt-4 quote ml-3 ">
                 <p class="quoteSmall">
-                    “There is more treasure in books than in all the pirate’s loot on Treasure Island.”
+                    “There is more treasure in books than in all the pirate’s loot on
+                    Treasure Island.”
                 <p><small class="text-dark">-Walt Disney</small></p>
 
                 </p>
             </div>
         </div>
     </div>
+    
     <div class="text-center mt-5 lato">
-
-
         <h1 class="mt-4" data-aos="fade-up">Services</h1>
-
     </div>
 
-    <div class="container mt-5 " data-aos="fade-up">
+    <div class="container" data-aos="fade-up">
         <div class="row mx-0">
             <div class="col-md text-center">
                 <svg width="121" height="100" viewBox="0 0 121 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -373,7 +422,8 @@
         <div id="carouselContent" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner" role="listbox">
                 <div class="carousel-item active text-center p-4">
-                    <p>“That’s the thing about books. They let you travel without moving your feet.”
+                    <p>“That’s the thing about books. They let you travel without moving your
+                        feet.”
                     </p>
                     <p><small>– Jhumpa Lahiri</small></p>
                 </div>
@@ -383,7 +433,8 @@
                     <p><small>– Bill Patterson</small></p>
                 </div>
                 <div class="carousel-item text-center p-4">
-                    <p>“A great book should leave you with many experiences, and slightly exhausted at the end. You live
+                    <p>“A great book should leave you with many experiences, and slightly
+                        exhausted at the end. You live
                         several lives while reading.”
                     </p>
                     <p><small>– William Styron</small></p>
@@ -400,54 +451,121 @@
         </div>
     </div>
 
-    <div class="card pt-5" style="border: 0;">
+    <div class="card pt-5 mt-5" style="border: 0;">
         <div class="row mx-0">
             <div class="col-md-4 para-Book" data-aos="fade-right">
                 <h1 class="display-4 great-vibes mt-5">Bookaholic</h1>
 
-                <p class="lato source_sans_pro">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime sint eos
-                    eligendi
-                    provident asperiores molestias praesentium facilis repudiandae officia, quos corrupti est ex nemo,
+                <p class="lato source_sans_pro">Lorem ipsum dolor sit amet consectetur
+                    adipisicing elit. Maxime sint eos eligendi
+                    provident asperiores molestias praesentium facilis repudiandae officia, quos
+                    corrupti est ex nemo,
                     adipisci, tempora consectetur odit deleniti minima.
 
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime sint eos eligendi provident
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime sint eos
+                    eligendi provident
                     asperiores
-                    molestias praesentium facilis repudiandae officia, quos corrupti est ex nemo, adipisci, tempora
+                    molestias praesentium facilis repudiandae officia, quos corrupti est ex
+                    nemo, adipisci, tempora
                     consectetur odit deleniti minima.</p>
             </div>
 
             <div class="col-md img-Book">
-                <img src="./Assets/images/people-reading.jpg" class=" px-0 img-fluid" data-aos="fade-left" alt="">
+                <img src="./Assets/images/people-reading.jpg" class=" px-0 img-fluid" data-aos="fade-up" alt="">
             </div>
         </div>
 
 
     </div>
 
-    <footer class="bg-dark text-light foot footer_small">
-        <div class="container-fluid ">
-            <div class="row pt-4 px-4">
-                <div class="col-md">
-                    <h3 class="lato">Bookaholics</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime sint eos eligendi provident
-                        asperiores molestias praesentium facilis repudiandae officia</p>
+    <footer class="bg-dark text-light foot footer_small footer-height pb-5">
+        <div class="container">
+            <div class="row px-4">
+                <div class="col-md"></div>
+                <div class="col-md mt-2 text-center">
+                    <div class="row mt-3">
+                        <div class="col">
+                            <a href="https://facebook.com" target="_blank" class="decoration-none"><i class="fab fa-facebook fa-2x"></i></a>
+                            <a href="https://instagram.com" target="_blank" class="decoration-none"><i class="fab fa-instagram fa-2x ml-3"></i></a>
+                            <a href="https://twitter.com" target="_blank" class="decoration-none"><i class="fab fa-twitter fa-2x ml-3"></i></a>     
+                        </div>
+                    </div>
+                   
                 </div>
+                <div class="col-md"></div>
+                
+            </div>
+            <hr class="bg-light">
+        </div>
+        <div class="container-fluid">
+            <div class="row mt-5 mx-3">
                 <div class="col-md">
-                    <h2 class="ml-4 lato">Site map</h2>
-                    <ul>
-                        <li>lo me taia sopar romatkia</li>
-                        <li>how mari saputia mama</li>
-                        <li>mar ti foldia sefa maribo</li>
+                    <h4>Services</h4>
+                    <ul style="list-style-type: none;" class="pl-0">
+                        <li>
+                            Lorem ipsum dolor sit amet
+                        </li>
+                        <li>
+                            consectetur adipiscing elit.
+                        </li>
+                        <li>
+                            Pellentesque at imperdiet dolor
+                        </li>
+                        <li>
+                            Etiam mattis elit non elit interdum fringilla
+                        </li>
                     </ul>
                 </div>
                 <div class="col-md">
-                    <h2 class="lato">Location</h2>
-
-                    <p> <span class="px-3"><i class="fas fa-map-marker-alt"></i></span>addis ababa, addis ababa
-                        adminstartion, ethiopia <br> <span class="px-3"><i class="fas fa-phone"></i></span>+251960021405
-                        <br> <span class="px-3"><i class="fas fa-envelope"></i></span>mail@gmail.com
-                    </p>
-
+                    <h4>Projects</h4>
+                    <ul style="list-style-type: none;" class="pl-0">
+                        <li>
+                            Lorem ipsum dolor sit amet
+                        </li>
+                        <li>
+                            consectetur adipiscing elit.
+                        </li>
+                        <li>
+                            Pellentesque at imperdiet dolor
+                        </li>
+                        <li>
+                            Etiam mattis elit non elit interdum fringilla
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md">
+                    <h4>Location</h4>
+                    <ul style="list-style-type: none;" class="pl-0">
+                        <li>
+                            Lorem ipsum dolor sit amet
+                        </li>
+                        <li>
+                            consectetur adipiscing elit.
+                        </li>
+                        <li>
+                            Pellentesque at imperdiet dolor
+                        </li>
+                        <li>
+                            Etiam mattis elit non elit interdum fringilla
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md">
+                    <h4>Help</h4>
+                    <ul style="list-style-type: none;" class="pl-0">
+                        <li>
+                            Lorem ipsum dolor sit amet
+                        </li>
+                        <li>
+                            consectetur adipiscing elit.
+                        </li>
+                        <li>
+                            Pellentesque at imperdiet dolor
+                        </li>
+                        <li>
+                            Etiam mattis elit non elit interdum fringilla
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -466,12 +584,17 @@
         crossorigin="anonymous"></script>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="./Assets/js/app.js"></script>
 
     <script>
         AOS.init({
-            duration: 1200
+            duration: 1000,
+        });
+        $(window).scroll(() => {
+            $('nav').toggleClass('scrolled', $(this).scrollTop() > 5);
         });
     </script>
+    
 </body>
 
 </html>
