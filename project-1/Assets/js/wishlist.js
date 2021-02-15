@@ -133,7 +133,7 @@ function displayMyBooks() {
             div.className = "row py-2 px-4 w-100 book";
             div.setAttribute('my-book-id', cursor.value.id); // will be useful for deleting [through .delete()]
 
-            div.innerHTML = `<div class="col-7 d-flex">
+            div.innerHTML = `<div class="col-lg-7 d-flex">
               <div class="col-1 p-0 mr-3">
                 <i class="fa fa-book fa-3x text-secondary"></i>
               </div>
@@ -143,13 +143,13 @@ function displayMyBooks() {
                 <p class="text-muted py-0">${cursor.value.publisher}</p>
               </div>
             </div>
-            <div class="col-2">
+            <div class="col-lg-2">
               <select name="" id="" class="form-control">
                 <option value="">Private</option>
                 <option value="">Public</option>
               </select>
             </div>
-            <div class="col-3">
+            <div class="col-lg-3">
               <h4 class="px-2 pt-2">
                 <a href="modifyBook.html?id=${cursor.value.id}"><i class="fas fa-edit text-secondary"></i></a>
                 <i class="fas fa-trash text-danger remove-book"></i>
