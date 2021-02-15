@@ -18,17 +18,18 @@ const post = document.querySelector("#postArea")
 document.addEventListener('DOMContentLoaded', loadMyBooks)
 
 
-function loadMyBooks() {
-    db.users.get(loggedInUser(), function(user) {
-        const mybooks = user.books
-        mybooks.forEach(book => {
-            let option = document.createElement("option")
-            option.setAttribute("value", book.bookId)
-            option.textContent = book.title
-            selectBooks.appendChild(option)
-        });
-    })
+async function loadMyBooks() {
+    const mybooks = await db.books.where("userId").equals(loggedInUser()).toArray()
+
+    mybooks.forEach(book => {
+        let option = document.createElement("option")
+        option.setAttribute("value", book.bookId)
+        option.textContent = book.title
+        selectBooks.appendChild(option)
+    });
 }
+
+
 $(function() {
 
     var $rateYo = $("#rateYo").rateYo({
@@ -66,6 +67,11 @@ $(function() {
             updatedAt: ""
         }
 
+        db.posts.put(newPost).then(function() {
+            console.log("posted")
+        }).catch((error) => {
+            console.log(error)
+        })
     })
 });
 
