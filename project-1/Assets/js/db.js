@@ -1,6 +1,6 @@
 const db = new Dexie('Bookacholics');
 db.version(1).stores({
-    users: "++useId,firstName, lastName, email, &username, bio, hobbies, birthDate, currentCity, homeTown, education, regisetredAt, books, wishList, posts"
+    users: "++useId,firstName, lastName, email, username, bio, hobbies, birthDate, currentCity, homeTown, education, regisetredAt, books, wishList, posts"
 });
 
 //creating a sample user
@@ -57,9 +57,13 @@ const user = {
         "updatedAt": ""
     }]
 }
+
+function loggedInUser() {
+    return 1
+}
+
 db.users.put(user).then((result) => {
     console.log(result)
-    alert("Nice")
 }).catch((error) => {
     console.log(error)
 })
