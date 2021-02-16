@@ -41,7 +41,7 @@ bookList.addEventListener('click', removeBookF);
 searchFilter.addEventListener('keyup', filterBooks);
 bookList.addEventListener('click', displayMoreInfo);
 bookList.addEventListener('click', fillInForm);
-
+bookList.addEventListener('click', getId);
 
 
 
@@ -338,9 +338,9 @@ function displayMyBooks() {
               </div>
             </div>
             <div class="col-lg-2">
-              <select name="" id="" class="form-control">
-                <option value="">Private</option>
-                <option value="">Public</option>
+              <select name="" id="" class="form-control privacyStatus">
+                <option value="0" ${!Boolean(book.isPublic)? "selected":""}>Private</option>
+                <option value="1" ${Boolean(book.isPublic)? "selected":""}>Public</option>
               </select>
             </div>
             <div class="col-lg-3">
@@ -519,4 +519,51 @@ async function fillInForm(e){
         publisherMInput.value = bk.publisher;
         whyWishMInput.value = bk.whyWish;
     }
+}
+
+// let oneZero = 0;
+// function getIdEveryTwoClicks(e){
+//     console.log("oneZero",oneZero);
+//     if (oneZero) getId(e);
+//     oneZero = oneZero? 0:1;
+//     console.log("Onezero", oneZero);
+// }
+
+// let privacyBookId;
+
+function getId(e){
+    let sel = e.target;
+    // console.log("getID", e.target)
+    if (sel.classList.contains('privacyStatus')){
+    // if (sel.classList.contains('privacyStatus') && Boolean(parseInt(sel.getAttribute('oneZero'))) ){
+        // if (sel.parentElement.classList.contains('privacyStatus')){
+        // console.log(sel.value);
+        // console.log(sel.parentElement.value);
+        updatebookPrivacyStatus(Number(sel.parentElement.parentElement.getAttribute('my-book-id')), Boolean(parseInt(sel.value)));
+        // sel.setAttribute('oneZero','0');
+        return;
+    }
+    // sel.setAttribute('oneZero','1');
+    // updatebookPrivacyStatus(Number(sel.parentElement.parentElement.getAttribute('my-book-id')), sel);
+    
+    // updatebookPrivacyStatus(sel.parentElement.parentElement.getAttribute('my-book-id'));
+    // console.log("privacyBoodId",privacyBookId);
+}
+
+
+// function updatebookPrivacyStatus(){
+// function updatebookPrivacyStatus(privacyBookId){
+function updatebookPrivacyStatus(bookID, val){
+    // console.log(e.target);
+    // db.books.update(privacyBookId,{
+    db.wishlist.update(bookID,{
+        // isPublic: Boolean(targ.value)
+        isPublic: val
+    }).then( x => {
+        if (x) {
+            // console.log(x);
+            console.log('privacy status updated successfully');
+        } 
+        else console.log("modification failed: either key doesn't exist or no modification made.");
+    })
 }
