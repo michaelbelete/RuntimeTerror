@@ -313,9 +313,9 @@ function displayMyBooks() {
               </div>
             </div>
             <div class="col-lg-2">
-              <select name="" id="" class="form-control">
-                <option value="">Private</option>
-                <option value="">Public</option>
+              <select name="" id="" class="form-control" onchange="updatebookPrivacyStatus()">
+                <option value="false" ${!Boolean(book.isPublic)? "selected":""}>Private</option>
+                <option value="true" ${Boolean(book.isPublic)? "selected":""}>Public</option>
               </select>
             </div>
             <div class="col-lg-3">
@@ -463,4 +463,17 @@ async function fillInForm(e){
             publisherMInput.value = bk.publisher;
             shortDescMInput.value = bk.shortDesc;
         }
-    }
+}
+
+
+function updatebookPrivacyStatus(){
+    db.books.update(bookID,{
+        isPublic: Boolean(select.value)
+    }).then( x => {
+        if (x) {
+            // console.log(x);
+            console.log('privacy status updated successfully');
+        } 
+        else console.log("modification failed: either key doesn't exist or no modification made.");
+    })
+}
