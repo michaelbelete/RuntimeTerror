@@ -164,19 +164,32 @@ function wishListValidate(e){
                     return;
                 }
         }
-        ).then( () => {
-            // console.log(x);
-            if (!isNotRead) {
-            // addNewBook()
-            return;
-            // return false;
+        ).then( 
+            db.wishlist.each( book => {
+                // await db.books.each( book => {
+                if (    (titleInput.value == book.title )  &&   (authorInput.value == book.author)  && (  editionInput.value == book.edition)   ){
+                        alert("You've already wishlisted the book."); //will change it
+                        isNotRead = false;
+                        return;
+                    }
             }
-    
-            // return true;
-            // if(e.target.id = "addBook") addNewBook();
-            // else modifyBookF();
-            addNewBook();
-            }
+            ).then(
+                () => {
+                    // console.log(x);
+                    if (!isNotRead) {
+                        // addNewBook()
+                        return;
+                        // return false;
+                    }
+
+                    // return true;
+                    // if(e.target.id = "addBook") addNewBook();
+                    // else modifyBookF();
+                    addNewBook();
+                }
+            )
+            
+            
         )
 
     }
@@ -185,24 +198,38 @@ function wishListValidate(e){
         db.books.each( book => {
             // await db.books.each( book => {
             if (    (titleMInput.value == book.title )  &&   (authorMInput.value == book.author)  && (  editionMInput.value == book.edition)   ){
-                    alert("Can't wish for a book you've already read (added to the book read page). Sorry. You can delete this wishlist by click the red bin icon."); //will change it
+                    alert("Can't wish for a book you've already read (added to the book read page). Sorry. You can delete this wishlist by clicking the red bin icon."); //will change it
                     isNotRead = false;
                     return;
                 }
         }
-        ).then( () => {
-            // console.log(x);
-            if (!isNotRead) {
-            // addNewBook()
-            return;
-            // return false;
+        ).then( 
+            db.wishlist.each( book => {
+                // await db.books.each( book => {
+                if (    (titleMInput.value == book.title )  &&   (authorMInput.value == book.author)  && (  editionMInput.value == book.edition)   ){
+                        alert("You've already wishlisted the book. You can delete this wishlist by clicking the red bin icon."); //will change it
+                        isNotRead = false;
+                        return;
+                    }
             }
-    
-            // return true;
-            // if(e.target.id = "addBook") addNewBook();
-            // else modifyBookF();
-            modifyBookF(modifyBkId);
-            }
+            ).then(
+                () => {
+                    // console.log(x);
+                    if (!isNotRead) {
+                        // addNewBook()
+                        return;
+                        // return false;
+                    }
+
+                    // return true;
+                    // if(e.target.id = "addBook") addNewBook();
+                    // else modifyBookF();
+                    modifyBookF(modifyBkId);
+                }
+            )
+            
+            
+            
         )
     }
     

@@ -206,7 +206,7 @@ function bookValidate(e){
             db.books.each( book => {
                 // await db.books.each( book => {
                 if (    (titleMInput.value == book.title )  &&   (authorMInput.value == book.author)  && (  editionMInput.value == book.edition)   ){
-                        alert("You've already added the book. You can delete this book by click the red bin icon."); //will change it
+                        alert("You've already added the book. You can delete this book by clicking the red bin icon."); //will change it
                         isNotRead = false;
                         return;
                     }
