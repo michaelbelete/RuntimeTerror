@@ -162,13 +162,14 @@ async function loadPosts() {
             <div class="post-image">
                 <a href="post.html?id=${post.postId}"><img src="${ post.picture }" width="100%"></a>
             </div>
-            <div class="px-3 text-justify w-100">
-                <p class="text-muted">
-                    ${ postNoHtmlTag.length > 100 ? postNoHtmlTag.substring(0,100) : postNoHtmlTag }    
+            <div class="px-3 border-left border-bottom border-right text-justify w-100">
+                <p class="text-muted border-left border-right border-bottom p-3">
+                    ${ postNoHtmlTag.length > 100 ? postNoHtmlTag.substring(0,100) : postNoHtmlTag }   
+                    <a href="post.html?id=${post.postId}">...Read More</a>  
                 </p>
             </div>
     
-            <div class="rating-comment px-4 pb-3">
+            <div class="rating-comment px-4 py-2 pb-3">
                 <div class="row">
                     <div class="col-md-8">
                         <div id="post-rate${post.postId }">${ post.rating }</div>
