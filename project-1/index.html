@@ -14,7 +14,9 @@
         href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&family=Great+Vibes&family=Lato:ital@1&family=Roboto&family=Ubuntu&display=swap"
         rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+
     <link rel="icon" href="./Assets/images/books_icon.png">
     <link rel="stylesheet" href="./Assets/css/index.css">
 
@@ -100,7 +102,7 @@
                     </button>
                 </div>
                 <div class="modal-body p-4">
-                    <form action="">
+                    <form method="POST">
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
@@ -143,11 +145,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-footer mt-3">
-                            <button type="submit" class="btn btn-dark" id="signUpButton">Sign up</button>
-                        </div>
                        
+                        <div class="modal-footer mt-3">
+                        <button type="submit" class="btn btn-dark" id="signUpButton">Sign up</button>
+                    </div>
                     </form>
+
+                    
+                    
+                    
                 </div>
                
             </div>
@@ -603,7 +609,9 @@
         crossorigin="anonymous"></script>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="./Assets/js/db.js"></script>
     <script src="./Assets/js/app.js" type="module"></script>
+
 
     <script>
         AOS.init({
