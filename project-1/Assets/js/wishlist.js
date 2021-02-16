@@ -1,11 +1,8 @@
 // need to change the active status of nav to Wishlist
 $(document).ready(function () {
     $('#header').load('includes/header.html')
-    $('#books').select2();
+    $('#book').select2();
 });
-// book add form ... pending
-
-const addBook = document.querySelector('#addBook')
 
 const searchFilter = document.querySelector('.search-filter');
 
@@ -14,6 +11,8 @@ const editionInput = document.querySelector('.edition');
 const authorInput = document.querySelector('.author');
 const publisherInput = document.querySelector('.publisher');
 const whyWishInput = document.querySelector('.why-wish');
+
+const addBook = document.querySelector('#addBook')
 
 const bookList = document.querySelector('.book-list');
 
@@ -146,15 +145,19 @@ function wishListValidate(e){
             return;
         }
     }
-    )
-    if(!isNotRead){
+    ).then( () => {
+        // console.log(x);
+        if (!isNotRead) {
         // addNewBook()
         return;
         // return false;
-    }
+        }
 
-    // return true;
-    addNewBook()
+        // return true;
+        addNewBook()
+    }
+    )
+    
 
 }
 
@@ -240,7 +243,8 @@ function displayMyBooks() {
             </div>
             <div class="col-lg-3">
               <h4 class="px-2 pt-2">
-                <a href="modifyBook.html?id=${book.bookId}"><i class="fas fa-edit text-secondary"></i></a>
+                <i class="fas fa-edit text-secondary" data-toggle="modal"
+                data-target="#postModalModify"></i>
                 <i class="fas fa-trash text-danger remove-book"></i>
                 <i class="fas fa-ellipsis-h bg-dark border rounded-pill text-white more-info"></i>
               </h4>
@@ -263,9 +267,20 @@ function displayMyBooks() {
                 
             </div>`
 
+            // <a href="modifyBook.html?id=${book.bookId}"><i class="fas fa-edit text-secondary"></i></a>
+
 
         bookList.prepend(div); //may wanna prepend
         // console.log("not");
+    }).then(() => {
+        if (!bookList.firstElementChild) {
+            let d = document.createElement('div');
+            let p = document.createElement('p');
+            p.textContent = "Seems like you have not added any books in your wishlist. Click the Add New Book button above to start adding.";
+            p.className = "text-center";
+            d.appendChild(p);
+            bookList.appendChild(d);
+        }
     })
     // .then(console.log("HERE"))
     // .catch(console.log("there"))
@@ -321,6 +336,7 @@ function removeBookF(e) {
             db.wishlist.delete(bookID);
             // console.log(bookID)
             e.target.parentElement.parentElement.parentElement.remove();
+            displayMyBooks();
             
             
         }

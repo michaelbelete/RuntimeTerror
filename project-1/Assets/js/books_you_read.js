@@ -22,7 +22,8 @@ const bookList = document.querySelector('.book-list');
 
 
 // Event Listeners
-addBook.addEventListener('submit', addNewBook);
+// addBook.addEventListener('submit', addNewBook);
+addBook.addEventListener('submit', bookValidate);
 // // removeBooks.addEventListener('click', removeAllBooks);
 // removeBook.addEventListener('click', removeBookF);
 bookList.addEventListener('click', removeBookF);
@@ -125,17 +126,42 @@ let userID = sessionStorage.getItem('userId');
 
 
 
-
-
-function addNewBook(e) {
+function bookValidate(e){
     e.preventDefault();
+    let isNotRead = true;
+    db.books.each( book => {
+        if (    (titleInput.value == book.title )  &&   (authorInput.value == book.author)  && (  editionInput.value == book.edition)   ){
+            alert("You've already added the book."); //will change it
+            isNotRead = false;
+            return;
+        }
+    }
+    ).then( () => {
+        // console.log(x);
+        if (!isNotRead) {
+        // addNewBook()
+        return;
+        // return false;
+        }
+
+        // return true;
+        addNewBook()
+    }
+    )
+    
+
+}
+
+
+function addNewBook() {
+    // e.preventDefault();
 
     // if (!titleInput.value || !authorInput.value || !editionInput.value) {
     //     alert("nah"); //will change it
     //     return;
     // }
 
-    console.log("here");
+    // console.log("here");
     let newBook = {
         title: titleInput.value,
         author: authorInput.value,
@@ -212,18 +238,17 @@ function displayMyBooks() {
 
         bookList.prepend(div); //may wanna prepend
         // console.log("not");
+    }).then(() => {
+        if (!bookList.firstElementChild) {
+            let d = document.createElement('div');
+            let p = document.createElement('p');
+            p.textContent = "Seems like you have not added any books in your wishlist. Click the Add New Book button above to start adding.";
+            p.className = "text-center";
+            d.appendChild(p);
+            bookList.appendChild(d);
+        }
     })
-    // .then(console.log("HERE"))
-    // .catch(console.log("there"))
-    // // console.log(bookList.firstElementChild);
-    // if (!bookList.firstElementChild) {
-    //     let d = document.createElement('div');
-    //     let p = document.createElement('p');
-    //     p.textContent = "Seems like you have not added any books in your read-book list. Click the Add New Book button above to start adding.";
-    //     p.className = "text-center";
-    //     d.appendChild(p);
-    //     bookList.appendChild(d);
-    // }
+
 }
 
 
@@ -249,8 +274,9 @@ function removeBookF(e) {
         if (confirm('Are You Sure about that ?')) {
             let bookID = Number(e.target.parentElement.parentElement.parentElement.getAttribute('my-book-id'));
             db.books.delete(bookID);
-            console.log(bookID)
+            // console.log(bookID)
             e.target.parentElement.parentElement.parentElement.remove();
+            displayMyBooks();
             
             
         }
