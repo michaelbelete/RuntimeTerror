@@ -93,21 +93,27 @@ function loadSpecificPost() {
 }
 
 function addComment() {
-  var newComment;
+  var commentMessage, alert, newComment;
   return regeneratorRuntime.async(function addComment$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
+          commentMessage = document.querySelector('#commentMessage');
+
           if (!(comment.value === "")) {
-            _context2.next = 4;
+            _context2.next = 9;
             break;
           }
 
-          console.log("empty");
-          _context2.next = 7;
+          commentMessage.innerHTML = "";
+          alert = document.createElement("div");
+          alert.className = "alert alert-danger";
+          alert.textContent = "please fill the required form";
+          commentMessage.appendChild(alert);
+          _context2.next = 12;
           break;
 
-        case 4:
+        case 9:
           newComment = {
             userId: loggedInUser(),
             postId: id,
@@ -115,15 +121,22 @@ function addComment() {
             createdAt: new Date(),
             updatedAt: ""
           };
-          _context2.next = 7;
+          _context2.next = 12;
           return regeneratorRuntime.awrap(db.comments.add(newComment).then(function (result) {
-            console.log(result);
-            console.log("successful");
+            commentMessage.innerHTML = "";
+            var alert = document.createElement("div");
+            alert.className = "alert alert-success";
+            alert.textContent = "commented";
+            commentMessage.appendChild(alert);
           })["catch"](function (error) {
-            return console.log(error);
+            commentMessage.innerHTML = "";
+            var alert = document.createElement("div");
+            alert.className = "alert alert-danger";
+            alert.textContent = error;
+            commentMessage.appendChild(alert);
           }));
 
-        case 7:
+        case 12:
         case "end":
           return _context2.stop();
       }

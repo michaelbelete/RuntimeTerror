@@ -134,8 +134,13 @@ async function loadSpecificPost() {
 }
 
 async function addComment() {
+    const commentMessage = document.querySelector('#commentMessage')
     if (comment.value === "") {
-        console.log("empty")
+        commentMessage.innerHTML = ""
+        const alert = document.createElement("div")
+        alert.className = "alert alert-danger"
+        alert.textContent = "please fill the required form"
+        commentMessage.appendChild(alert)
     } else {
         const newComment = {
             userId: loggedInUser(),
@@ -146,8 +151,17 @@ async function addComment() {
         }
 
         await db.comments.add(newComment).then((result) => {
-            console.log(result)
-            console.log("successful")
-        }).catch((error) => console.log(error))
+            commentMessage.innerHTML = ""
+            const alert = document.createElement("div")
+            alert.className = "alert alert-success"
+            alert.textContent = "commented"
+            commentMessage.appendChild(alert)
+        }).catch((error) => {
+            commentMessage.innerHTML = ""
+            const alert = document.createElement("div")
+            alert.className = "alert alert-danger"
+            alert.textContent = error
+            commentMessage.appendChild(alert)
+        })
     }
 }
