@@ -146,14 +146,16 @@ let userID = sessionStorage.getItem('userId');
 //     let y = await addNewBook();
 // }
 
-
+let modifyBkId;
 
 function wishListValidate(e){
 // async function wishListValidate(e){
     e.preventDefault();
     // console.log(typeof(e.target.id));
     let isNotRead = true;
-    if (e.target.id = "addBook"){
+    // console.log('outside', e.target.id);
+    if (e.target.id == "addBook"){
+        // console.log('if',e.target.id);
         db.books.each( book => {
             // await db.books.each( book => {
             if (    (titleInput.value == book.title )  &&   (authorInput.value == book.author)  && (  editionInput.value == book.edition)   ){
@@ -179,6 +181,7 @@ function wishListValidate(e){
 
     }
     else{
+        // console.log('else', e.target.id);
         db.books.each( book => {
             // await db.books.each( book => {
             if (    (titleMInput.value == book.title )  &&   (authorMInput.value == book.author)  && (  editionMInput.value == book.edition)   ){
@@ -198,7 +201,7 @@ function wishListValidate(e){
             // return true;
             // if(e.target.id = "addBook") addNewBook();
             // else modifyBookF();
-            modifyBookF();
+            modifyBookF(modifyBkId);
             }
         )
     }
@@ -254,7 +257,7 @@ function addNewBook() {
     }
 
     db.wishlist.put(newBook).then(function() {
-        console.log("book created succesfully")
+        console.log("book created succesfully _ RUNTIME TeRROR")
         addBook.reset();
         displayMyBooks();
     }).catch((error) => console.log(error))
@@ -262,8 +265,26 @@ function addNewBook() {
 
 }
 
-function modifyBookF(){
+function modifyBookF(id){
     console.log('inside modifyBookF()');
+    let bookID = id;
+    db.wishlist.update(bookID, {
+        title: titleMInput.value,
+        author: authorMInput.value,
+        edition: editionMInput.value,
+        publisher: publisherMInput.value,
+        // dateAdded: new Date(),
+        whyWish: whyWishMInput.value,
+        // userId: userID
+        userId: 1
+    }).then( x => {
+        if (x) {
+            // console.log(x);
+            console.log('updated successfully');
+            displayMyBooks();
+        } 
+        else console.log("modification failed: either key doesn't exist or no modification made.");
+    })
 
 }
 
@@ -442,12 +463,12 @@ function displayMoreInfo(e){
         if (moreInfoDiv.style.display == "flex") {
             moreInfoDiv.setAttribute("style", `display: none !important`);
             moreInfoDiv.parentElement.style.backgroundColor = "initial";
-            moreInfoDiv.style.backgroundColor = "initial";
+            // moreInfoDiv.style.backgroundColor = "initial";
         }
         else {
             moreInfoDiv.setAttribute("style", `display: flex !important`);
             moreInfoDiv.parentElement.style.backgroundColor = "#f2f2f2";
-            moreInfoDiv.style.backgroundColor = "#f2f2f2";
+            // moreInfoDiv.style.backgroundColor = "#f2f2f2";
         }
         // console.log(isInvisbile);
         // if(isInvisbile) isInvisbile = false;
@@ -461,8 +482,8 @@ async function fillInForm(e){
 // async function fillInForm(){
     // console.log('here');
     if (e.target.classList.contains('edit')) {
-        let bookID = Number(e.target.parentElement.parentElement.parentElement.getAttribute('my-book-id'));
-        let bk = await db.wishlist.where('bookId').equals(bookID).toArray();
+        modifyBkId = Number(e.target.parentElement.parentElement.parentElement.getAttribute('my-book-id'));
+        let bk = await db.wishlist.where('bookId').equals(modifyBkId).toArray();
         bk = bk[0];
         // let bk = await db.wishlist.where('bookId').equals(bookID).toArray()[0];
         titleMInput.value = bk.title;
