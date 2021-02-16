@@ -20,6 +20,7 @@ async function SignUpUser(e) {
     .then((id) => {
       window.localStorage.setItem("userId", id);
       location.href = "profile.html";
+      history.replaceState({}, "", "home.html");
     });
 
   // e.preventDefault();
