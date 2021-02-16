@@ -7,6 +7,7 @@ const urlParams = new URLSearchParams(window.location.search)
 const id = parseInt(urlParams.get('id'))
 
 const specificPost = document.querySelector('#specificPost')
+const specificComment = document.querySelector('#specificComments')
 
 const comment = document.querySelector('#comment')
 const commentBtn = document.querySelector("#commentBtn")
@@ -128,9 +129,26 @@ async function loadSpecificPost() {
     specificPost.appendChild(htmlPost.body.firstChild)
     generateStar(post.postId, post.rating)
 
-    // comments.forEach(comment => {
+    comments.forEach(async comment => {
+        console.log(comment)
+        const user = await db.users.where("userId").equals(comment.userId).first()
+        let strComment = `
+            <div class="row px-4 pb-2">
+            <div class="col-sm-1 p-4">
+                <a href="profile.html?id=${comment.userId}"><img src="${user.profilePicture}" alt="profile" class="rounded-circle" width="70"
+                        height="70">
+                </a>
+            </div>
+            <div class="col-sm-10 p-4 ml-3">
+                <h5 class="text-primary pt-1 m-0">${ user.firstName } ${ user.lastName } <span class="text-muted" style="font-size: 14px;"><i class="fa fa-angle-right"></i> ${ comment.createdAt }</span></h5>
+                <small class="text-muted">${ comment.comment }</small>
+            </div>
+        </div>
+        `
 
-    // });
+        let htmlPost = new DOMParser().parseFromString(strComment, 'text/html')
+        specificComment.appendChild(htmlPost.body.firstChild)
+    });
 }
 
 async function addComment() {
