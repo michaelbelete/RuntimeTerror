@@ -1,4 +1,4 @@
-import { SignUpUser } from "./methods.js";
+import { SignUpUser, LogInUser } from "./methods.js";
 
 const fName = document.querySelector("#firstName");
 const lName = document.querySelector("#lastName");
@@ -7,5 +7,7 @@ const emailInput = document.querySelector("#email");
 const password = document.querySelector("#password");
 const confirmPassword = document.querySelector("#passwordConfirm");
 const signUp = document.querySelector("#signUpButton");
+const login = document.querySelector("#loginButton");
 
 signUp.addEventListener("click", SignUpUser);
+login.addEventListener("click", LogInUser);
