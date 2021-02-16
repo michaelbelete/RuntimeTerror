@@ -44,25 +44,23 @@ function loadMyBooks() {
   });
 }
 
+function generateStar(id, rating) {
+  $(function () {
+    $("#post-rate".concat(id)).rateYo({
+      rating: rating,
+      starWidth: "20px",
+      ratedFill: "#07a8e2",
+      halfStar: true,
+      readOnly: true
+    });
+  });
+}
+
 $(function () {
   var $rateYo = $("#rateYo").rateYo({
     starWidth: "30px",
     ratedFill: "#07a8e2",
     halfStar: true
-  });
-  $("#post-rate1").rateYo({
-    rating: 4,
-    starWidth: "20px",
-    ratedFill: "#07a8e2",
-    halfStar: true,
-    readOnly: true
-  });
-  $("#post-rate2").rateYo({
-    rating: 4,
-    starWidth: "20px",
-    ratedFill: "#07a8e2",
-    halfStar: true,
-    readOnly: true
   });
   $("#postBtn").click(function () {
     var rating = $rateYo.rateYo("rating");
@@ -146,8 +144,9 @@ function loadPosts() {
                     postLoader.style.display = "none";
                     console.log(postLoader);
                     feeds.appendChild(htmlPost.body.firstChild);
+                    generateStar(post.postId, post.rating);
 
-                  case 15:
+                  case 16:
                   case "end":
                     return _context2.stop();
                 }

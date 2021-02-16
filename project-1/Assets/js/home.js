@@ -17,12 +17,10 @@ const post = document.querySelector("#postArea")
 const postMessage = document.querySelector("#postMessage")
 const feeds = document.querySelector("#feeds")
 const postLoader = document.querySelector("#postLoader")
-
 document.addEventListener('DOMContentLoaded', function() {
     loadMyBooks()
     loadPosts()
 })
-
 
 async function loadMyBooks() {
     const mybooks = await db.books.where("userId").equals(loggedInUser()).toArray()
@@ -35,7 +33,17 @@ async function loadMyBooks() {
     });
 }
 
-
+function generateStar(id, rating) {
+    $(function() {
+        $(`#post-rate${id}`).rateYo({
+            rating: rating,
+            starWidth: "20px",
+            ratedFill: "#07a8e2",
+            halfStar: true,
+            readOnly: true,
+        })
+    })
+}
 $(function() {
 
     var $rateYo = $("#rateYo").rateYo({
@@ -43,22 +51,6 @@ $(function() {
         ratedFill: "#07a8e2",
         halfStar: true
     });
-
-    $("#post-rate1").rateYo({
-        rating: 4,
-        starWidth: "20px",
-        ratedFill: "#07a8e2",
-        halfStar: true,
-        readOnly: true,
-    })
-
-    $("#post-rate2").rateYo({
-        rating: 4,
-        starWidth: "20px",
-        ratedFill: "#07a8e2",
-        halfStar: true,
-        readOnly: true,
-    })
 
     $("#postBtn").click(function() {
         var rating = $rateYo.rateYo("rating");
@@ -103,7 +95,6 @@ async function loadPosts() {
 
     const posts = await db.table("posts").orderBy("postId").reverse().toArray()
     posts.forEach(async function(post) {
-
         let book = await db.books.where("bookId").equals(parseInt(post.bookId)).first()
         let user = await db.users.where("userId").equals(post.userId).first()
         let comments = await db.comments.where("postId").equals(post.postId).count()
@@ -189,8 +180,11 @@ async function loadPosts() {
         postLoader.style.display = "none"
         console.log(postLoader)
         feeds.appendChild(htmlPost.body.firstChild)
+        generateStar(post.postId, post.rating)
     })
 }
+
+
 $(document).ready(function() {
     $('#header').load('includes/header.html')
     $('#books').select2();
