@@ -13,6 +13,7 @@ var post = document.querySelector("#postArea");
 var postMessage = document.querySelector("#postMessage");
 var feeds = document.querySelector("#feeds");
 var postLoader = document.querySelector("#postLoader");
+var noPost = document.querySelector("#noPost");
 document.addEventListener('DOMContentLoaded', function () {
   loadMyBooks();
   loadPosts();
@@ -101,15 +102,32 @@ $(function () {
 });
 
 function loadPosts() {
-  var posts;
+  var postCount, posts;
   return regeneratorRuntime.async(function loadPosts$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
           _context3.next = 2;
-          return regeneratorRuntime.awrap(db.table("posts").orderBy("postId").reverse().toArray());
+          return regeneratorRuntime.awrap(db.posts.count());
 
         case 2:
+          postCount = _context3.sent;
+          console.log(postCount);
+
+          if (!(postCount == 0)) {
+            _context3.next = 8;
+            break;
+          }
+
+          noPost.style.display = "block";
+          _context3.next = 12;
+          break;
+
+        case 8:
+          _context3.next = 10;
+          return regeneratorRuntime.awrap(db.table("posts").orderBy("postId").reverse().toArray());
+
+        case 10:
           posts = _context3.sent;
           posts.forEach(function _callee(post) {
             var book, user, comments, postNoHtmlTag, strPost, htmlPost;
@@ -154,7 +172,7 @@ function loadPosts() {
             });
           });
 
-        case 4:
+        case 12:
         case "end":
           return _context3.stop();
       }

@@ -17,6 +17,8 @@ const post = document.querySelector("#postArea")
 const postMessage = document.querySelector("#postMessage")
 const feeds = document.querySelector("#feeds")
 const postLoader = document.querySelector("#postLoader")
+const noPost = document.querySelector("#noPost")
+
 document.addEventListener('DOMContentLoaded', function() {
     loadMyBooks()
     loadPosts()
@@ -93,16 +95,21 @@ $(function() {
 
 async function loadPosts() {
 
-    const posts = await db.table("posts").orderBy("postId").reverse().toArray()
-    posts.forEach(async function(post) {
-        let book = await db.books.where("bookId").equals(parseInt(post.bookId)).first()
-        let user = await db.users.where("userId").equals(post.userId).first()
-        let comments = await db.comments.where("postId").equals(post.postId).count()
+    const postCount = await db.posts.count()
+    console.log(postCount)
+    if (postCount == 0) {
+        noPost.style.display = "block"
+    } else {
+        const posts = await db.table("posts").orderBy("postId").reverse().toArray()
+        posts.forEach(async function(post) {
+            let book = await db.books.where("bookId").equals(parseInt(post.bookId)).first()
+            let user = await db.users.where("userId").equals(post.userId).first()
+            let comments = await db.comments.where("postId").equals(post.postId).count()
 
-        let postNoHtmlTag = post.post.replace(/(<([^>]+)>)/gi, "")
+            let postNoHtmlTag = post.post.replace(/(<([^>]+)>)/gi, "")
 
-        if (post.picture == "") {
-            var strPost = `
+            if (post.picture == "") {
+                var strPost = `
             <div class="card card-body mb-4 p-0">
             <div class="row p-3">
                 <div class="col-2">
@@ -137,8 +144,8 @@ async function loadPosts() {
             </div>
         </div>
         `
-        } else {
-            var strPost = `
+            } else {
+                var strPost = `
             <div class="card card-body mb-4 p-0">
             <div class="row p-3">
                 <div class="col-2">
@@ -174,14 +181,15 @@ async function loadPosts() {
             </div>
         </div>
         `
-        }
+            }
 
-        let htmlPost = new DOMParser().parseFromString(strPost, 'text/html')
-        postLoader.style.display = "none"
-        console.log(postLoader)
-        feeds.appendChild(htmlPost.body.firstChild)
-        generateStar(post.postId, post.rating)
-    })
+            let htmlPost = new DOMParser().parseFromString(strPost, 'text/html')
+            postLoader.style.display = "none"
+            console.log(postLoader)
+            feeds.appendChild(htmlPost.body.firstChild)
+            generateStar(post.postId, post.rating)
+        })
+    }
 }
 
 
