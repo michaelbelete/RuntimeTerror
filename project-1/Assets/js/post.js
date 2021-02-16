@@ -44,6 +44,7 @@ async function loadSpecificPost() {
     const post = await db.posts.where({
         postId: id
     }).first()
+
     const book = await db.books.where("bookId").equals(parseInt(post.bookId)).first()
     const user = await db.users.where("userId").equals(post.userId).first()
     const commentData = await db.comments.where("postId").equals(post.postId)
@@ -124,6 +125,8 @@ async function loadSpecificPost() {
 </div>
 `
     }
+    specificPost.innerHTML = ""
+    specificComment.innerHTML = ""
 
     let htmlPost = new DOMParser().parseFromString(strPost, 'text/html')
     specificPost.appendChild(htmlPost.body.firstChild)
@@ -181,5 +184,6 @@ async function addComment() {
             alert.textContent = error
             commentMessage.appendChild(alert)
         })
+        loadSpecificPost()
     }
 }

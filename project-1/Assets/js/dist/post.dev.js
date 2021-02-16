@@ -80,6 +80,8 @@ function loadSpecificPost() {
             strPost = "\n    <div class=\"card card-body mb-4 p-0\">\n    <div class=\"row p-3\">\n        <div class=\"col-2\">\n            <a href=\"profile.html?id=".concat(user.userId, "\"><img src=\"").concat(user.profilePicture, "\" alt=\"profile\" class=\"rounded-circle\" width=\"70\"\n                    height=\"70\">\n            </a>\n        </div>\n        <div class=\"col-10 p-2\">\n            <h5 class=\"text-primary pt-1 m-0\">").concat(user.firstName, " ").concat(user.lastName, " <small class=\"text-muted\"><i class=\"fa fa-angle-right\"></i> ").concat(post.postType == "recommendation" ? "Recommended" : "Reviewed", " ").concat(book.title, " By <b>").concat(book.author, "</b></small></h5>\n            <small class=\"text-muted p-0\">").concat(post.createdAt, "</small>\n        </div>\n    </div>\n\n    <div class=\"post-image\">\n        <a href=\"post.html?id=").concat(post.postId, "\"><img src=\"").concat(post.picture, "\" width=\"100%\"></a>\n    </div>\n    <div class=\"px-3 border-left border-bottom border-right text-justify w-100\">\n        <p class=\"text-muted border-left border-right border-bottom p-3\">\n            ").concat(post.post, "   \n        </p>\n    </div>\n\n    <div class=\"rating-comment px-4 py-2 pb-3\">\n        <div class=\"row\">\n            <div class=\"col-md-8\">\n                <div id=\"post-rate").concat(post.postId, "\">").concat(post.rating, "</div>\n            </div>\n            <div class=\"col-md-4\">\n                <a href=\"post.html\" class=\" text-primary  float-right\"><i class=\"fa fa-comment\"></i>\n                    ").concat(commentCount, " Comments</a>\n            </div>\n        </div>\n    </div>\n</div>\n");
           }
 
+          specificPost.innerHTML = "";
+          specificComment.innerHTML = "";
           htmlPost = new DOMParser().parseFromString(strPost, 'text/html');
           specificPost.appendChild(htmlPost.body.firstChild);
           generateStar(post.postId, post.rating);
@@ -107,7 +109,7 @@ function loadSpecificPost() {
             });
           });
 
-        case 23:
+        case 25:
         case "end":
           return _context2.stop();
       }
@@ -133,7 +135,7 @@ function addComment() {
           alert.className = "alert alert-danger";
           alert.textContent = "please fill the required form";
           commentMessage.appendChild(alert);
-          _context3.next = 12;
+          _context3.next = 13;
           break;
 
         case 9:
@@ -160,6 +162,9 @@ function addComment() {
           }));
 
         case 12:
+          loadSpecificPost();
+
+        case 13:
         case "end":
           return _context3.stop();
       }
