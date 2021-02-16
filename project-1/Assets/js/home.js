@@ -16,6 +16,7 @@ const postType = document.querySelector('#type')
 const post = document.querySelector("#postArea")
 const postMessage = document.querySelector("#postMessage")
 const feeds = document.querySelector("#feeds")
+const postLoader = document.querySelector("#postLoader")
 
 document.addEventListener('DOMContentLoaded', function() {
     loadMyBooks()
@@ -99,6 +100,7 @@ $(function() {
 
 
 async function loadPosts() {
+
     const posts = await db.table("posts").orderBy("postId").reverse().toArray()
     posts.forEach(async function(post) {
 
@@ -154,12 +156,9 @@ async function loadPosts() {
                     </a>
                 </div>
                 <div class="col-10 p-2">
-                    <h5 class="text-primary pt-1 m-0">${ user.firstName } ${user.lastName}</h5>
+                    <h5 class="text-primary pt-1 m-0">${ user.firstName } ${user.lastName} <small class="text-muted"><i class="fa fa-angle-right"></i> ${ post.postType == "recommendation" ? "Recommended": "Reviewed" } ${ book.title } By <b>${ book.author }</b></small></h5>
                     <small class="text-muted p-0">${ post.createdAt }</small>
                 </div>
-            </div>
-            <div class="px-3 py-1">
-                <h4 class="font-weight-light text-muted title">${ book.title }</h4>
             </div>
 
             <div class="post-image">
@@ -187,6 +186,8 @@ async function loadPosts() {
         }
 
         let htmlPost = new DOMParser().parseFromString(strPost, 'text/html')
+        postLoader.style.display = "none"
+        console.log(postLoader)
         feeds.appendChild(htmlPost.body.firstChild)
     })
 }
