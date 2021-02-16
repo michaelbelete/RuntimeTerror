@@ -141,7 +141,7 @@ function addNewBook(e) {
         author: authorInput.value,
         edition: editionInput.value,
         publisher: publisherInput.value,
-        dateAdded: Date(),
+        dateAdded: new Date(),
         shortDesc: shortDescInput.value,
         // userId: userID
         userId: 1
@@ -175,7 +175,7 @@ function displayMyBooks() {
               <div class="col-10 p">
                 <h6 class="py-0"><b class="text-primary">${book.title} </b><i class="fa fa-caret-right"
                     aria-hidden="true"></i><span> ${book.author}</span></h6>
-                <p class="text-muted py-0">${book.publisher}</p>
+                <p class="text-muted py-0">${book.edition}, ${book.publisher}</p>
               </div>
             </div>
             <div class="col-lg-2">
@@ -201,8 +201,10 @@ function displayMyBooks() {
                     </div>
                     
                 </div>
-                <div class="col-lg-5 invisible">
-                    "Hello"
+                <div class="col-lg-5 text-secondary">
+                    ${book.dateAdded.getDate()}/
+                    ${book.dateAdded.getMonth()}/
+                    ${book.dateAdded.getFullYear()}
                 </div>
                 
             </div>`
@@ -294,11 +296,12 @@ function displayMoreInfo(e){
     // console.log(isInvisbile);
     if (e.target.classList.contains('more-info')) {
         // console.log(isInvisbile);
-        e.target.parentElement.parentElement.nextElementSibling.setAttribute("style", `display:${isInvisbile ? "flex" : "none"} !important`);
-        // console.log(e.target.parentElement.parentElement.nextElementSibling);
+        let moreInfoDiv = e.target.parentElement.parentElement.nextElementSibling;
+        if (moreInfoDiv.style.display == "flex") moreInfoDiv.setAttribute("style", `display: none !important`);
+        else moreInfoDiv.setAttribute("style", `display: flex !important`);
         // console.log(isInvisbile);
-        if(isInvisbile) isInvisbile = false;
-        else isInvisbile = true;
+        // if(isInvisbile) isInvisbile = false;
+        // else isInvisbile = true;
         // console.log(isInvisbile);
     }
 }
