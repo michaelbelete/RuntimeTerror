@@ -3,19 +3,28 @@ $(document).ready(function () {
     $('#header').load('includes/header.html')
     // $('#books').select2();
 });
-// book add form ... pending
-
-const addBook = document.querySelector('#addBook');
 
 const searchFilter = document.querySelector('.search-filter');
 
+const bookList = document.querySelector('.book-list');
+
+// add book form
 const titleInput = document.querySelector('.title');
 const editionInput = document.querySelector('.edition');
 const authorInput = document.querySelector('.author');
 const publisherInput = document.querySelector('.publisher');
 const shortDescInput = document.querySelector('.short-desc');
 
-const bookList = document.querySelector('.book-list');
+const addBook = document.querySelector('#addBook');
+
+// modify book form
+const titleMInput = document.querySelector('.titleM');
+const editionMInput = document.querySelector('.editionM');
+const authorMInput = document.querySelector('.authorM');
+const publisherMInput = document.querySelector('.publisherM');
+const shortDescMInput = document.querySelector('.short-descM');
+
+const modifyBook = document.querySelector('#modifyBook');
 
 // const removeBooks = document.querySelector('.remove-all') //possible under the more options (three dots)
 // const removeBook = document.querySelector('.remove-book'); //without delegation
@@ -24,11 +33,13 @@ const bookList = document.querySelector('.book-list');
 // Event Listeners
 // addBook.addEventListener('submit', addNewBook);
 addBook.addEventListener('submit', bookValidate);
+modifyBook.addEventListener('submit', bookValidate);
 // // removeBooks.addEventListener('click', removeAllBooks);
 // removeBook.addEventListener('click', removeBookF);
 bookList.addEventListener('click', removeBookF);
 searchFilter.addEventListener('keyup', filterBooks);
 bookList.addEventListener('click', displayMoreInfo);
+bookList.addEventListener('click', fillInForm);
 
 
 
@@ -124,31 +135,64 @@ let userID = sessionStorage.getItem('userId');
 //     console.log('Database created.');
 // }
 
-
+let modifyBkId;
 
 function bookValidate(e){
     e.preventDefault();
+    // console.log(typeof(e.target.id));
     let isNotRead = true;
-    db.books.each( book => {
-        if (    (titleInput.value == book.title )  &&   (authorInput.value == book.author)  && (  editionInput.value == book.edition)   ){
-            alert("You've already added the book."); //will change it
-            isNotRead = false;
+    // console.log('outside', e.target.id);
+    if (e.target.id == "addBook"){
+        // console.log('if',e.target.id);
+        db.books.each( book => {
+            // await db.books.each( book => {
+            if (    (titleInput.value == book.title )  &&   (authorInput.value == book.author)  && (  editionInput.value == book.edition)   ){
+                    alert("You've already added the book."); //will change it
+                    isNotRead = false;
+                    return;
+                }
+        }
+        ).then( () => {
+            // console.log(x);
+            if (!isNotRead) {
+            // addNewBook()
             return;
-        }
-    }
-    ).then( () => {
-        // console.log(x);
-        if (!isNotRead) {
-        // addNewBook()
-        return;
-        // return false;
-        }
-
-        // return true;
-        addNewBook()
-    }
-    )
+            // return false;
+            }
     
+            // return true;
+            // if(e.target.id = "addBook") addNewBook();
+            // else modifyBookF();
+            addNewBook();
+            }
+        )
+
+    }
+    else{
+        // console.log('else', e.target.id);
+        db.books.each( book => {
+            // await db.books.each( book => {
+            if (    (titleMInput.value == book.title )  &&   (authorMInput.value == book.author)  && (  editionMInput.value == book.edition)   ){
+                    alert("You've already added the book."); //will change it
+                    isNotRead = false;
+                    return;
+                }
+        }
+        ).then( () => {
+            // console.log(x);
+            if (!isNotRead) {
+            // addNewBook()
+            return;
+            // return false;
+            }
+    
+            // return true;
+            // if(e.target.id = "addBook") addNewBook();
+            // else modifyBookF();
+            modifyBookF(modifyBkId);
+            }
+        )
+    }
 
 }
 
@@ -182,6 +226,29 @@ function addNewBook() {
 
 }
 
+function modifyBookF(id){
+    console.log('inside modifyBookF()');
+    let bookID = id;
+    db.books.update(bookID, {
+        title: titleMInput.value,
+        author: authorMInput.value,
+        edition: editionMInput.value,
+        publisher: publisherMInput.value,
+        // dateAdded: new Date(),
+        shortDesc: shortDescMInput.value,
+        // userId: userID
+        userId: 1
+    }).then( x => {
+        if (x) {
+            // console.log(x);
+            console.log('updated successfully');
+            displayMyBooks();
+        } 
+        else console.log("modification failed: either key doesn't exist or no modification made.");
+    })
+
+}
+
 
 function displayMyBooks() {
     while (bookList.firstElementChild) {
@@ -212,7 +279,8 @@ function displayMyBooks() {
             </div>
             <div class="col-lg-3">
               <h4 class="px-2 pt-2">
-                <a href="modifyBook.html?id=${book.bookId}"><i class="fas fa-edit text-secondary"></i></a>
+              <i class="fas fa-edit text-secondary edit" data-toggle="modal"
+              data-target="#postModalModify"></i>
                 <i class="fas fa-trash text-danger remove-book"></i>
                 <i class="fas fa-ellipsis-h bg-dark border rounded-pill text-white more-info"></i>
               </h4>
@@ -339,3 +407,19 @@ function displayMoreInfo(e){
         // console.log(isInvisbile);
     }
 }
+
+async function fillInForm(e){
+    // async function fillInForm(){
+        // console.log('here');
+        if (e.target.classList.contains('edit')) {
+            modifyBkId = Number(e.target.parentElement.parentElement.parentElement.getAttribute('my-book-id'));
+            let bk = await db.books.where('bookId').equals(modifyBkId).toArray();
+            bk = bk[0];
+            // let bk = await db.wishlist.where('bookId').equals(bookID).toArray()[0];
+            titleMInput.value = bk.title;
+            authorMInput.value = bk.author;
+            editionMInput.value = bk.edition;
+            publisherMInput.value = bk.publisher;
+            shortDescMInput.value = bk.shortDesc;
+        }
+    }
