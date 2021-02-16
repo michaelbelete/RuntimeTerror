@@ -170,21 +170,29 @@ function bookValidate(e){
     }
     else{
         // console.log('else', e.target.id);
-        db.books.each( book => {
+        // db.wishlist.each( book => {
+        // db.wishlist.toCollection().modify( book => {
+        db.wishlist.toArray( books => {
             // await db.books.each( book => {
+                console.log(books);
+                books.forEach(book => {
             if (    (titleMInput.value == book.title )  &&   (authorMInput.value == book.author)  && (  editionMInput.value == book.edition)   ){
-                    alert("You've already added the book."); //will change it
-                    isNotRead = false;
-                    return;
+                    // alert("You've already added the book."); //will change it
+                    // isNotRead = false;
+                    // return;
+                    alert("You finally read it! The book will to be removed from your wishlist.");
+                    console.log(book.bookId);
+                    db.wishlist.delete(book.bookId);
                 }
+            })
         }
         ).then( () => {
             // console.log(x);
-            if (!isNotRead) {
-            // addNewBook()
-            return;
-            // return false;
-            }
+            // if (!isNotRead) {
+            // // addNewBook()
+            // return;
+            // // return false;
+            // }
     
             // return true;
             // if(e.target.id = "addBook") addNewBook();

@@ -185,7 +185,7 @@ function wishListValidate(e){
         db.books.each( book => {
             // await db.books.each( book => {
             if (    (titleMInput.value == book.title )  &&   (authorMInput.value == book.author)  && (  editionMInput.value == book.edition)   ){
-                    alert("Can't wish for a book you've already read (added to the book read page). Sorry."); //will change it
+                    alert("Can't wish for a book you've already read (added to the book read page). Sorry. You can delete it by click the red bin icon."); //will change it
                     isNotRead = false;
                     return;
                 }
