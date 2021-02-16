@@ -202,19 +202,36 @@ function bookValidate(e){
                 }
             })
         }
-        ).then( () => {
-            // console.log(x);
-            // if (!isNotRead) {
-            // // addNewBook()
-            // return;
-            // // return false;
-            // }
-    
-            // return true;
-            // if(e.target.id = "addBook") addNewBook();
-            // else modifyBookF();
-            modifyBookF(modifyBkId);
+        ).then( 
+            db.books.each( book => {
+                // await db.books.each( book => {
+                if (    (titleMInput.value == book.title )  &&   (authorMInput.value == book.author)  && (  editionMInput.value == book.edition)   ){
+                        alert("You've already added the book. You can delete this book by click the red bin icon."); //will change it
+                        isNotRead = false;
+                        return;
+                    }
             }
+            ).then(
+                () => {
+                    // console.log(x);
+                    // if (!isNotRead) {
+                    // // addNewBook()
+                    // return;
+                    // // return false;
+                    // }
+
+                    // return true;
+                    // if(e.target.id = "addBook") addNewBook();
+                    // else modifyBookF();
+                    if (isNotRead){
+                        modifyBookF(modifyBkId);
+                    }
+                    
+                }
+            )
+            
+            
+            
         )
     }
 
