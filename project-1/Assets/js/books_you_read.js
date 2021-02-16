@@ -1,11 +1,11 @@
 // need to change the active status of nav to mybooks
 $(document).ready(function () {
     $('#header').load('includes/header.html')
-    $('#books').select2();
+    // $('#books').select2();
 });
 // book add form ... pending
 
-const addBook = document.querySelector('#addBook')
+const addBook = document.querySelector('#addBook');
 
 const searchFilter = document.querySelector('.search-filter');
 

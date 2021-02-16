@@ -1,20 +1,30 @@
 // need to change the active status of nav to Wishlist
 $(document).ready(function () {
     $('#header').load('includes/header.html')
-    $('#book').select2();
+    // $('#books').select2();
 });
 
 const searchFilter = document.querySelector('.search-filter');
 
+const bookList = document.querySelector('.book-list');
+
+// add book form
 const titleInput = document.querySelector('.title');
 const editionInput = document.querySelector('.edition');
 const authorInput = document.querySelector('.author');
 const publisherInput = document.querySelector('.publisher');
 const whyWishInput = document.querySelector('.why-wish');
 
-const addBook = document.querySelector('#addBook')
+const addBook = document.querySelector('#addBook');
 
-const bookList = document.querySelector('.book-list');
+// modify book form
+const titleMInput = document.querySelector('.titleM');
+const editionMInput = document.querySelector('.editionM');
+const authorMInput = document.querySelector('.authorM');
+const publisherMInput = document.querySelector('.publisherM');
+const whyWishMInput = document.querySelector('.why-wishM');
+
+const modifyBook = document.querySelector('#modifyBook');
 
 // const removeBooks = document.querySelector('.remove-all') //possible under the more options (three dots)
 // const removeBook = document.querySelector('.remove-book'); //without delegation
@@ -23,12 +33,14 @@ const bookList = document.querySelector('.book-list');
 // Event Listeners
 // addBook.addEventListener('submit', addNewBook);
 addBook.addEventListener('submit', wishListValidate);
+modifyBook.addEventListener('submit', wishListValidate);
 // addBook.addEventListener('submit', awt);
 // // removeBooks.addEventListener('click', removeAllBooks);
 // removeBook.addEventListener('click', removeBookF);
 bookList.addEventListener('click', removeBookF);
 searchFilter.addEventListener('keyup', filterBooks);
 bookList.addEventListener('click', displayMoreInfo);
+bookList.addEventListener('click', fillInForm);
 
 
 
@@ -135,31 +147,68 @@ let userID = sessionStorage.getItem('userId');
 // }
 
 
-function wishListValidate(e){
-    e.preventDefault();
-    let isNotRead = true;
-    db.books.each( book => {
-        if (    (titleInput.value == book.title )  &&   (authorInput.value == book.author)  && (  editionInput.value == book.edition)   ){
-            alert("Can't wish for a book you've already read (added to the book read page). Sorry."); //will change it
-            isNotRead = false;
-            return;
-        }
-    }
-    ).then( () => {
-        // console.log(x);
-        if (!isNotRead) {
-        // addNewBook()
-        return;
-        // return false;
-        }
 
-        // return true;
-        addNewBook()
+function wishListValidate(e){
+// async function wishListValidate(e){
+    e.preventDefault();
+    // console.log(typeof(e.target.id));
+    let isNotRead = true;
+    if (e.target.id = "addBook"){
+        db.books.each( book => {
+            // await db.books.each( book => {
+            if (    (titleInput.value == book.title )  &&   (authorInput.value == book.author)  && (  editionInput.value == book.edition)   ){
+                    alert("Can't wish for a book you've already read (added to the book read page). Sorry."); //will change it
+                    isNotRead = false;
+                    return;
+                }
+        }
+        ).then( () => {
+            // console.log(x);
+            if (!isNotRead) {
+            // addNewBook()
+            return;
+            // return false;
+            }
+    
+            // return true;
+            // if(e.target.id = "addBook") addNewBook();
+            // else modifyBookF();
+            addNewBook();
+            }
+        )
+
     }
-    )
+    else{
+        db.books.each( book => {
+            // await db.books.each( book => {
+            if (    (titleMInput.value == book.title )  &&   (authorMInput.value == book.author)  && (  editionMInput.value == book.edition)   ){
+                    alert("Can't wish for a book you've already read (added to the book read page). Sorry."); //will change it
+                    isNotRead = false;
+                    return;
+                }
+        }
+        ).then( () => {
+            // console.log(x);
+            if (!isNotRead) {
+            // addNewBook()
+            return;
+            // return false;
+            }
+    
+            // return true;
+            // if(e.target.id = "addBook") addNewBook();
+            // else modifyBookF();
+            modifyBookF();
+            }
+        )
+    }
+    
     
 
 }
+
+
+// comparison function
 
 
 
@@ -213,6 +262,11 @@ function addNewBook() {
 
 }
 
+function modifyBookF(){
+    console.log('inside modifyBookF()');
+    
+}
+
 
 function displayMyBooks() {
     while (bookList.firstElementChild) {
@@ -243,7 +297,7 @@ function displayMyBooks() {
             </div>
             <div class="col-lg-3">
               <h4 class="px-2 pt-2">
-                <i class="fas fa-edit text-secondary" data-toggle="modal"
+                <i class="fas fa-edit text-secondary edit" data-toggle="modal"
                 data-target="#postModalModify"></i>
                 <i class="fas fa-trash text-danger remove-book"></i>
                 <i class="fas fa-ellipsis-h bg-dark border rounded-pill text-white more-info"></i>
@@ -297,7 +351,7 @@ function displayMyBooks() {
 
 
 
-
+// will need to be used or removed
 function removeAllBooks() {
     db.wishlist.clear();
     displayMyBooks();
@@ -348,6 +402,7 @@ function removeBookF(e) {
 
 
 
+
 function filterBooks() {
     var noResult = true;
     var noMatch = document.querySelector(".no-match");
@@ -390,5 +445,22 @@ function displayMoreInfo(e){
         // if(isInvisbile) isInvisbile = false;
         // else isInvisbile = true;
         // console.log(isInvisbile);
+    }
+}
+
+
+async function fillInForm(e){
+// async function fillInForm(){
+    // console.log('here');
+    if (e.target.classList.contains('edit')) {
+        let bookID = Number(e.target.parentElement.parentElement.parentElement.getAttribute('my-book-id'));
+        let bk = await db.wishlist.where('bookId').equals(bookID).toArray();
+        bk = bk[0];
+        // let bk = await db.wishlist.where('bookId').equals(bookID).toArray()[0];
+        titleMInput.value = bk.title;
+        authorMInput.value = bk.author;
+        editionMInput.value = bk.edition;
+        publisherMInput.value = bk.publisher;
+        whyWishMInput.value = bk.whyWish;
     }
 }
