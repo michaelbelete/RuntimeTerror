@@ -27,6 +27,7 @@ addBook.addEventListener('submit', addNewBook);
 // removeBook.addEventListener('click', removeBookF);
 bookList.addEventListener('click', removeBookF);
 searchFilter.addEventListener('keyup', filterBooks);
+bookList.addEventListener('click', displayMoreInfo);
 
 
 
@@ -141,7 +142,7 @@ function addNewBook(e) {
         author: authorInput.value,
         edition: editionInput.value,
         publisher: publisherInput.value,
-        dateAdded: Date(),
+        dateAdded: new Date(),
         whyWish: whyWishInput.value,
         // userId: userID
         userId: 1
@@ -188,8 +189,25 @@ function displayMyBooks() {
               <h4 class="px-2 pt-2">
                 <a href="modifyBook.html?id=${book.bookId}"><i class="fas fa-edit text-secondary"></i></a>
                 <i class="fas fa-trash text-danger remove-book"></i>
-                <a href=""><i class="fas fa-ellipsis-h bg-dark border rounded-pill text-white"></i></a>
+                <i class="fas fa-ellipsis-h bg-dark border rounded-pill text-white more-info"></i>
               </h4>
+            </div>
+            <div class="d-none">
+                <div class="col-lg-7 d-flex">
+                    <div class="col-1 invisible mr-3">Hey</div>
+                    <div class="col-10">
+                        <p>
+                            ${book.whyWish}
+                        </p>
+                    </div>
+                    
+                </div>
+                <div class="col-lg-5 text-secondary">
+                    ${book.dateAdded.getDate()}/
+                    ${book.dateAdded.getMonth()}/
+                    ${book.dateAdded.getFullYear()}
+                </div>
+                
             </div>`
 
 
@@ -213,7 +231,7 @@ function displayMyBooks() {
 
 
 function removeAllBooks() {
-    db.wishlist.clear()
+    db.wishlist.clear();
     displayMyBooks();
 }
 
@@ -288,4 +306,20 @@ function filterBooks() {
     }
 
 
+}
+
+
+// let isInvisbile = true;
+function displayMoreInfo(e){
+    // console.log(isInvisbile);
+    if (e.target.classList.contains('more-info')) {
+        // console.log(isInvisbile);
+        let moreInfoDiv = e.target.parentElement.parentElement.nextElementSibling;
+        if (moreInfoDiv.style.display == "flex") moreInfoDiv.setAttribute("style", `display: none !important`);
+        else moreInfoDiv.setAttribute("style", `display: flex !important`);
+        // console.log(isInvisbile);
+        // if(isInvisbile) isInvisbile = false;
+        // else isInvisbile = true;
+        // console.log(isInvisbile);
+    }
 }

@@ -230,7 +230,7 @@ function displayMyBooks() {
 
 
 function removeAllBooks() {
-    db.books.clear()
+    db.books.clear();
     displayMyBooks();
 }
 
@@ -291,7 +291,7 @@ function filterBooks() {
 
 }
 
-let isInvisbile = true;
+// let isInvisbile = true;
 function displayMoreInfo(e){
     // console.log(isInvisbile);
     if (e.target.classList.contains('more-info')) {
