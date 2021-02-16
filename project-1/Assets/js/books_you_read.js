@@ -26,6 +26,9 @@ const shortDescMInput = document.querySelector('.short-descM');
 
 const modifyBook = document.querySelector('#modifyBook');
 
+// select /privacy status
+// const select = document.querySelector('select');
+
 // const removeBooks = document.querySelector('.remove-all') //possible under the more options (three dots)
 // const removeBook = document.querySelector('.remove-book'); //without delegation
 
@@ -40,7 +43,9 @@ bookList.addEventListener('click', removeBookF);
 searchFilter.addEventListener('keyup', filterBooks);
 bookList.addEventListener('click', displayMoreInfo);
 bookList.addEventListener('click', fillInForm);
-
+// select.addEventListener('click', getId);
+bookList.addEventListener('click', getId);
+// bookList.addEventListener('click', getIdEveryTwoClicks);
 
 
 const db = new Dexie('Bookacholics');
@@ -313,9 +318,9 @@ function displayMyBooks() {
               </div>
             </div>
             <div class="col-lg-2">
-              <select name="" id="" class="form-control" onchange="updatebookPrivacyStatus()">
-                <option value="false" ${!Boolean(book.isPublic)? "selected":""}>Private</option>
-                <option value="true" ${Boolean(book.isPublic)? "selected":""}>Public</option>
+              <select name="" id="" class="form-control privacyStatus">
+                <option value="0" ${!Boolean(book.isPublic)? "selected":""}>Private</option>
+                <option value="1" ${Boolean(book.isPublic)? "selected":""}>Public</option>
               </select>
             </div>
             <div class="col-lg-3">
@@ -343,6 +348,8 @@ function displayMyBooks() {
                 </div>
                 
             </div>`
+
+            // <select name="" id="" class="form-control" onchange="updatebookPrivacyStatus()">
 
 
         bookList.prepend(div); //may wanna prepend
@@ -466,9 +473,46 @@ async function fillInForm(e){
 }
 
 
-function updatebookPrivacyStatus(){
+
+
+// let oneZero = 0;
+// function getIdEveryTwoClicks(e){
+//     console.log("oneZero",oneZero);
+//     if (oneZero) getId(e);
+//     oneZero = oneZero? 0:1;
+//     console.log("Onezero", oneZero);
+// }
+
+// let privacyBookId;
+
+function getId(e){
+    let sel = e.target;
+    // console.log("getID", e.target)
+    if (sel.classList.contains('privacyStatus')){
+    // if (sel.classList.contains('privacyStatus') && Boolean(parseInt(sel.getAttribute('oneZero'))) ){
+        // if (sel.parentElement.classList.contains('privacyStatus')){
+        // console.log(sel.value);
+        // console.log(sel.parentElement.value);
+        updatebookPrivacyStatus(Number(sel.parentElement.parentElement.getAttribute('my-book-id')), Boolean(parseInt(sel.value)));
+        // sel.setAttribute('oneZero','0');
+        return;
+    }
+    // sel.setAttribute('oneZero','1');
+    // updatebookPrivacyStatus(Number(sel.parentElement.parentElement.getAttribute('my-book-id')), sel);
+    
+    // updatebookPrivacyStatus(sel.parentElement.parentElement.getAttribute('my-book-id'));
+    // console.log("privacyBoodId",privacyBookId);
+}
+
+
+// function updatebookPrivacyStatus(){
+// function updatebookPrivacyStatus(privacyBookId){
+function updatebookPrivacyStatus(bookID, val){
+    // console.log(e.target);
+    // db.books.update(privacyBookId,{
     db.books.update(bookID,{
-        isPublic: Boolean(select.value)
+        // isPublic: Boolean(targ.value)
+        isPublic: val
     }).then( x => {
         if (x) {
             // console.log(x);
