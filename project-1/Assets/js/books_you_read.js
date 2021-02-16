@@ -152,19 +152,35 @@ function bookValidate(e){
                     return;
                 }
         }
-        ).then( () => {
-            // console.log(x);
-            if (!isNotRead) {
-            // addNewBook()
-            return;
-            // return false;
+        ).then(
+            db.wishlist.toArray( books => {
+                // await db.books.each( book => {
+                    console.log(books);
+                    books.forEach(book => {
+                if (    (titleInput.value == book.title )  &&   (authorInput.value == book.author)  && (  editionInput.value == book.edition)   ){
+                        // alert("You've already added the book."); //will change it
+                        // isNotRead = false;
+                        // return;
+                        alert("You finally read it! The book will to be removed from your wishlist.");
+                        console.log(book.bookId);
+                        db.wishlist.delete(book.bookId);
+                    }
+                })
             }
-    
-            // return true;
-            // if(e.target.id = "addBook") addNewBook();
-            // else modifyBookF();
-            addNewBook();
-            }
+            ).then(() => {
+                // console.log(x);
+                if (!isNotRead) {
+                // addNewBook()
+                return;
+                // return false;
+                }
+        
+                // return true;
+                // if(e.target.id = "addBook") addNewBook();
+                // else modifyBookF();
+                addNewBook();
+                }
+            )
         )
 
     }
