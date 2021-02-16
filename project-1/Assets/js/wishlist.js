@@ -264,7 +264,7 @@ function addNewBook() {
 
 function modifyBookF(){
     console.log('inside modifyBookF()');
-    
+
 }
 
 
@@ -439,8 +439,16 @@ function displayMoreInfo(e){
     if (e.target.classList.contains('more-info')) {
         // console.log(isInvisbile);
         let moreInfoDiv = e.target.parentElement.parentElement.nextElementSibling;
-        if (moreInfoDiv.style.display == "flex") moreInfoDiv.setAttribute("style", `display: none !important`);
-        else moreInfoDiv.setAttribute("style", `display: flex !important`);
+        if (moreInfoDiv.style.display == "flex") {
+            moreInfoDiv.setAttribute("style", `display: none !important`);
+            moreInfoDiv.parentElement.style.backgroundColor = "initial";
+            moreInfoDiv.style.backgroundColor = "initial";
+        }
+        else {
+            moreInfoDiv.setAttribute("style", `display: flex !important`);
+            moreInfoDiv.parentElement.style.backgroundColor = "#f2f2f2";
+            moreInfoDiv.style.backgroundColor = "#f2f2f2";
+        }
         // console.log(isInvisbile);
         // if(isInvisbile) isInvisbile = false;
         // else isInvisbile = true;
