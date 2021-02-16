@@ -1,3 +1,6 @@
 .remove-book:hover {
     cursor: pointer;
 }
+.more-info:hover {
+    cursor: pointer;
+}
