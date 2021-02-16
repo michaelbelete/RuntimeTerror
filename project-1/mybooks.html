@@ -44,9 +44,9 @@
             <input class="form-control search-filter" type="search" placeholder="Search here..." aria-label="Search">
           </div>
         </div>
-        <div class="card card-body w-100 mt-4 ">
+        <div class="card card-body w-100 mt-4 book-list">
           <!-- .book-list will be used for IDB -->
-          <div class="row py-2 px-4">
+          <div class="row py-2 px-4 w-100 book">
             <div class="col-7 d-flex">
               <div class="col-1 p-0">
                 <i class="fa fa-book fa-3x text-secondary"></i>
@@ -72,7 +72,7 @@
             </div>
           </div>
 
-          <div class="row py-2 px-4">
+          <div class="row py-2 px-4 w-100 book">
             <div class="col-7 d-flex">
               <div class="col-1 p-0">
                 <i class="fa fa-book fa-3x text-secondary"></i>
@@ -98,7 +98,7 @@
             </div>
           </div>
 
-          <div class="row py-2 px-4">
+          <div class="row py-2 px-4 w-100 book">
             <div class="col-7 d-flex">
               <div class="col-1 p-0">
                 <i class="fa fa-book fa-3x text-secondary"></i>
@@ -123,10 +123,10 @@
               </h4>
             </div>
           </div>
-          <p class="d-none no-match">
-            Oops. No match was found. Try changing your search phrase.
-          </p>
         </div>
+        <p class="d-none no-match text-center h5">
+          Oops. No match was found. Try changing your search phrase.
+        </p>
 
       </div>
     </div>
@@ -139,8 +139,67 @@
     <div class="modal-dialog modal-dialog-centered " role="document">
       <div class="modal-content">
         <div class="modal-body">
-          <h2>HELLO</h2>
-        </div>
+          <h4>Add Book</h4>
+          <form action="#" id="addBook">
+              <div class="form-group">
+                  <label for="title">Book Title</label>
+                  <input class="form-control title" type="text" placeholder="Title" name="title" required>
+              </div>
+              <div class="form-group">
+                  <label for="author">Book Author</label>
+                  <input class="form-control author" type="text" placeholder="Author" name="author" required>
+              </div>
+              <div class="form-group">
+                  <label for="edition">Edition</label>
+                  <input class="form-control edition" type="text" placeholder="edition" name="edition" required>
+              </div>
+              <div class="form-group">
+                  <label for="publisher">Publisher</label>
+                  <input class="form-control publisher" type="text" placeholder="Publisher" name="publisher" required>
+              </div>
+              <div class="form-group">
+                  <label for="publisher">Short Description</label>
+                  <input class="form-control short-desc" type="text" placeholder="This book ..." name="publisher" required>
+              </div>
+
+              <button type="submit" class="btn btn-block btn-outline btn-outline-primary">Add</button>
+          </form>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal modal-md fade" id="postModalModify" tabindex="-1" role="dialog" aria-labelledby="postModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered " role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h4>Modify Book</h4>
+          <form action="#" id="modifyBook">
+              <div class="form-group">
+                  <label for="title">Book Title</label>
+                  <input class="form-control titleM" type="text" placeholder="Title" name="title" required>
+              </div>
+              <div class="form-group">
+                  <label for="author">Book Author</label>
+                  <input class="form-control authorM" type="text" placeholder="Author" name="author" required>
+              </div>
+              <div class="form-group">
+                  <label for="edition">Edition</label>
+                  <input class="form-control editionM" type="text" placeholder="edition" name="edition" required>
+              </div>
+              <div class="form-group">
+                  <label for="publisher">Publisher</label>
+                  <input class="form-control publisherM" type="text" placeholder="Publisher" name="publisher" required>
+              </div>
+              <div class="form-group">
+                <label for="publisher">Why Wish</label>
+                <input class="form-control short-descM" type="text" placeholder="This book..." name="publisher" required>
+              </div>
+
+              <button type="submit" class="btn btn-block btn-outline btn-outline-primary">Modify</button>
+          </form>
+      </div>
       </div>
     </div>
   </div>
@@ -161,6 +220,8 @@
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <script src="https://cdn.ckeditor.com/ckeditor5/25.0.0/classic/ckeditor.js"></script>
   <script src="Assets/js/jquery.custom-scrollbar.js"></script>
+  <!-- dexie.js -->
+  <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
   <!-- our js -->
   <script src="./Assets/js/books_you_read.js"></script>
 </body>

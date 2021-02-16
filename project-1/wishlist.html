@@ -1,168 +1,229 @@
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-    <link rel="icon" href="./Assets/images/books_icon.png">
-    <!-- Font Awesome -->
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Ubuntu&display=swap" rel="stylesheet">
-    <!-- Bootstrap core CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
-    <!-- star rating  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
-    <!-- select 2 -->
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <!-- material icons -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <title>Home</title>
-    <!-- custom scroll -->
-    <link rel="stylesheet" href="Assets/css/jquery.custom-scrollbar.css">
-    <!-- my css  -->
-    <link rel="stylesheet" href="./Assets/css/home.css">
-    <link rel="stylesheet" href="./Assets/css/mybook.css">
-  
-  </head>
-  
-  <body>
-    <div id="header"></div>
-    <div class="row">
-      <div class="col-md-2">&nbsp;</div>
-      <div class="col-md-8">
-        <div class="container mt-5">
-          <div class="row justify-content-between m-0">
-            <div class="col-md-8">
-              <h3 class="font-weight-bold pr-2">Wish List
-                <button class="btn btn-outline-primary ml-4" id="postInput" data-toggle="modal"
-                  data-target="#postModal">Add
-                  New Book</button>
-              </h3>
-            </div>
-            <div class="col-4">
-              <input class="form-control search-filter" type="search" placeholder="Search here..." aria-label="Search">
-            </div>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" href="./Assets/images/books_icon.png">
+  <!-- Font Awesome -->
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Ubuntu&display=swap" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+  <!-- star rating  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+  <!-- select 2 -->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <!-- material icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <title>Home</title>
+  <!-- custom scroll -->
+  <link rel="stylesheet" href="Assets/css/jquery.custom-scrollbar.css">
+  <!-- my css  -->
+  <link rel="stylesheet" href="./Assets/css/home.css">
+  <link rel="stylesheet" href="./Assets/css/mybook.css">
+
+</head>
+
+<body>
+  <div id="header"></div>
+  <div class="row">
+    <div class="col-md-2">&nbsp;</div>
+    <div class="col-md-8">
+      <div class="container mt-5">
+        <div class="row justify-content-between m-0">
+          <div class="col-md-8">
+            <h3 class="font-weight-bold pr-2">Wishlist
+              <button class="btn btn-outline-primary ml-4" id="postInput" data-toggle="modal"
+                data-target="#postModal">Add
+                New Book</button>
+            </h3>
           </div>
-          <div class="card card-body w-100 mt-4 ">
-            <!-- .book-list will be used for IDB -->
-            <div class="row py-2 px-4">
-              <div class="col-7 d-flex">
-                <div class="col-1 p-0">
-                  <i class="fa fa-book fa-3x text-secondary"></i>
-                </div>
-                <div class="col-10 p">
-                  <h6 class="py-0"><b class="text-primary">Book Title </b><i class="fa fa-caret-right"
-                      aria-hidden="true"></i><span> Author</span></h6>
-                  <p class="text-muted py-0">Publisher</p>
-                </div>
-              </div>
-              <div class="col-2">
-                <select name="" id="" class="form-control">
-                  <option value="">Private</option>
-                  <option value="">Public</option>
-                </select>
-              </div>
-              <div class="col-2">
-                <h4 class="px-2 pt-1">
-                  <a href=""><i class="fas fa-edit text-secondary"></i></a>
-                  <i class="fas fa-trash text-danger remove-book"></i>
-                  <a href=""><i class="fas fa-ellipsis-h bg-dark border rounded-pill text-white"></i></a>
-                </h4>
-              </div>
-            </div>
-  
-            <div class="row py-2 px-4">
-              <div class="col-7 d-flex">
-                <div class="col-1 p-0">
-                  <i class="fa fa-book fa-3x text-secondary"></i>
-                </div>
-                <div class="col-10 p">
-                  <h6 class="py-0"><b class="text-primary">Book Title </b><i class="fa fa-caret-right"
-                      aria-hidden="true"></i><span> Author</span></h6>
-                  <p class="text-muted py-0">Publisher</p>
-                </div>
-              </div>
-              <div class="col-2">
-                <select name="" id="" class="form-control">
-                  <option value="">Private</option>
-                  <option value="">Public</option>
-                </select>
-              </div>
-              <div class="col-2">
-                <h4 class="px-2 pt-2">
-                  <a href=""><i class="fas fa-edit text-secondary"></i></a>
-                  <i class="fas fa-trash text-danger remove-book"></i>
-                  <a href=""><i class="fas fa-ellipsis-h bg-dark border rounded-pill text-white"></i></a>
-                </h4>
-              </div>
-            </div>
-  
-            <div class="row py-2 px-4">
-              <div class="col-7 d-flex">
-                <div class="col-1 p-0">
-                  <i class="fa fa-book fa-3x text-secondary"></i>
-                </div>
-                <div class="col-10 p">
-                  <h6 class="py-0"><b class="text-primary">Book Title </b><i class="fa fa-caret-right"
-                      aria-hidden="true"></i><span> Author</span></h6>
-                  <p class="text-muted py-0">Publisher</p>
-                </div>
-              </div>
-              <div class="col-2">
-                <select name="" id="" class="form-control">
-                  <option value="">Private</option>
-                  <option value="">Public</option>
-                </select>
-              </div>
-              <div class="col-2">
-                <h4 class="px-2 pt-2">
-                  <a href=""><i class="fas fa-edit text-secondary"></i></a>
-                  <i class="fas fa-trash text-danger remove-book"></i>
-                  <a href=""><i class="fas fa-ellipsis-h bg-dark border rounded-pill text-white"></i></a>
-                </h4>
-              </div>
-            </div>
-            <p class="d-none no-match">
-              Oops. No match was found. Try changing your search phrase.
-            </p>
-          </div>
-  
-        </div>
-      </div>
-      <div class="col-md-3">&nbsp;</div>
-    </div>
-  
-  
-    <div class="modal modal-md fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="postModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered " role="document">
-        <div class="modal-content">
-          <div class="modal-body">
-            <h2>HELLO</h2>
+          <div class="col-4">
+            <input class="form-control search-filter" type="search" placeholder="Search here..." aria-label="Search">
           </div>
         </div>
+        <div class="card card-body w-100 mt-4 book-list">
+          <!-- .book-list will be used for IDB -->
+          <div class="row py-2 px-4 w-100 book">
+            <div class="col-7 d-flex">
+              <div class="col-1 p-0">
+                <i class="fa fa-book fa-3x text-secondary"></i>
+              </div>
+              <div class="col-10 p">
+                <h6 class="py-0"><b class="text-primary">Book Title </b><i class="fa fa-caret-right"
+                    aria-hidden="true"></i><span> Author</span></h6>
+                <p class="text-muted py-0">Publisher</p>
+              </div>
+            </div>
+            <div class="col-2">
+              <select name="" id="" class="form-control">
+                <option value="">Private</option>
+                <option value="">Public</option>
+              </select>
+            </div>
+            <div class="col-2">
+              <h4 class="px-2 pt-1">
+                <a href=""><i class="fas fa-edit text-secondary"></i></a>
+                <i class="fas fa-trash text-danger remove-book"></i>
+                <a href=""><i class="fas fa-ellipsis-h bg-dark border rounded-pill text-white"></i></a>
+              </h4>
+            </div>
+          </div>
+
+          <div class="row py-2 px-4 w-100 book">
+            <div class="col-7 d-flex">
+              <div class="col-1 p-0">
+                <i class="fa fa-book fa-3x text-secondary"></i>
+              </div>
+              <div class="col-10 p">
+                <h6 class="py-0"><b class="text-primary">Book Title </b><i class="fa fa-caret-right"
+                    aria-hidden="true"></i><span> Author</span></h6>
+                <p class="text-muted py-0">Publisher</p>
+              </div>
+            </div>
+            <div class="col-2">
+              <select name="" id="" class="form-control">
+                <option value="">Private</option>
+                <option value="">Public</option>
+              </select>
+            </div>
+            <div class="col-2">
+              <h4 class="px-2 pt-2">
+                <a href=""><i class="fas fa-edit text-secondary"></i></a>
+                <i class="fas fa-trash text-danger remove-book"></i>
+                <a href=""><i class="fas fa-ellipsis-h bg-dark border rounded-pill text-white"></i></a>
+              </h4>
+            </div>
+          </div>
+
+          <div class="row py-2 px-4 w-100 book">
+            <div class="col-7 d-flex">
+              <div class="col-1 p-0">
+                <i class="fa fa-book fa-3x text-secondary"></i>
+              </div>
+              <div class="col-10 p">
+                <h6 class="py-0"><b class="text-primary">Book Title </b><i class="fa fa-caret-right"
+                    aria-hidden="true"></i><span> Author</span></h6>
+                <p class="text-muted py-0">Publisher</p>
+              </div>
+            </div>
+            <div class="col-2">
+              <select name="" id="" class="form-control">
+                <option value="">Private</option>
+                <option value="">Public</option>
+              </select>
+            </div>
+            <div class="col-2">
+              <h4 class="px-2 pt-2">
+                <a href=""><i class="fas fa-edit text-secondary"></i></a>
+                <i class="fas fa-trash text-danger remove-book"></i>
+                <a href=""><i class="fas fa-ellipsis-h bg-dark border rounded-pill text-white"></i></a>
+              </h4>
+            </div>
+          </div>
+        </div>
+        <p class="d-none no-match text-center h5">
+          Oops. No match was found. Try changing your search phrase.
+        </p>
+
       </div>
     </div>
-  
-  
-    <!-- JQuery -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- star rating plugin -->
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
-    <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js">
-    </script>
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/25.0.0/classic/ckeditor.js"></script>
-    <script src="Assets/js/jquery.custom-scrollbar.js"></script>
-    <!-- our js -->
-    <script src="./Assets/js/books_you_read.js"></script>
-  </body>
-  
-  </html>
+    <div class="col-md-3">&nbsp;</div>
+  </div>
+
+
+  <div class="modal modal-md fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="postModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered " role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h4>Add Book</h4>
+          <form action="#" id="addBook">
+              <div class="form-group">
+                  <label for="title">Book Title</label>
+                  <input class="form-control title" type="text" placeholder="Title" name="title" required>
+              </div>
+              <div class="form-group">
+                  <label for="author">Book Author</label>
+                  <input class="form-control author" type="text" placeholder="Author" name="author" required>
+              </div>
+              <div class="form-group">
+                  <label for="edition">Edition</label>
+                  <input class="form-control edition" type="text" placeholder="edition" name="edition" required>
+              </div>
+              <div class="form-group">
+                  <label for="publisher">Publisher</label>
+                  <input class="form-control publisher" type="text" placeholder="Publisher" name="publisher" required>
+              </div>
+              <div class="form-group">
+                <label for="publisher">Why Wish</label>
+                <input class="form-control why-wish" type="text" placeholder="This book..." name="publisher" required>
+              </div>
+
+              <button type="submit" class="btn btn-block btn-outline btn-outline-primary">Add</button>
+          </form>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal modal-md fade" id="postModalModify" tabindex="-1" role="dialog" aria-labelledby="postModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered " role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h4>Modify Book</h4>
+          <form action="#" id="modifyBook">
+              <div class="form-group">
+                  <label for="title">Book Title</label>
+                  <input class="form-control titleM" type="text" placeholder="Title" name="title" required>
+              </div>
+              <div class="form-group">
+                  <label for="author">Book Author</label>
+                  <input class="form-control authorM" type="text" placeholder="Author" name="author" required>
+              </div>
+              <div class="form-group">
+                  <label for="edition">Edition</label>
+                  <input class="form-control editionM" type="text" placeholder="edition" name="edition" required>
+              </div>
+              <div class="form-group">
+                  <label for="publisher">Publisher</label>
+                  <input class="form-control publisherM" type="text" placeholder="Publisher" name="publisher" required>
+              </div>
+              <div class="form-group">
+                <label for="publisher">Why Wish</label>
+                <input class="form-control why-wishM" type="text" placeholder="This book..." name="publisher" required>
+              </div>
+
+              <button type="submit" class="btn btn-block btn-outline btn-outline-primary">Modify</button>
+          </form>
+      </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- JQuery -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- star rating plugin -->
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js">
+  </script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script src="https://cdn.ckeditor.com/ckeditor5/25.0.0/classic/ckeditor.js"></script>
+  <script src="Assets/js/jquery.custom-scrollbar.js"></script>
+  <!-- dexie.js -->
+  <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+  <!-- our js -->
+  <script src="./Assets/js/wishlist.js"></script>
+</body>
+
+</html>
