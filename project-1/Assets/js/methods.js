@@ -5,9 +5,12 @@ const userNameInput = document.querySelector("#userName");
 const password = document.querySelector("#password");
 const confirmPassword = document.querySelector("#passwordConfirm");
 const birthDate = document.querySelector("#birthDate");
-
-async function SignUpUser(e) {
+const male = document.querySelector("#customRadioInline1");
+const female = document.querySelector("#customRadioInline2");
+let sex = "";
+function SignUpUser(e) {
   e.preventDefault();
+  sexChecker();
   return db.users
     .add({
       firstName: fName.value,
@@ -16,6 +19,7 @@ async function SignUpUser(e) {
       email: emailInput.value,
       password: password.value,
       birthDate: birthDate.value,
+      sex: sex,
     })
     .then((id) => {
       window.localStorage.setItem("userId", id);
@@ -26,4 +30,15 @@ async function SignUpUser(e) {
   // e.preventDefault();
 }
 
+function sexChecker() {
+  if (male.checked) {
+    sex = "Male";
+  } else if (female.checked) {
+    sex = "Female";
+  }
+}
+
+function logInUser(e) {
+  e.preventDefault();
+}
 export { SignUpUser };

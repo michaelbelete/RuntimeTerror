@@ -45,15 +45,49 @@
                     <a class="nav-link link-font" href="#">Features</a>
                 </li>
                 <li class="nav-item ml-2">
-                    <a class="nav-link link-font" href="#">Login</a>
+                    <a class="nav-link link-font" data-toggle="modal" data-target="#logIn" href="">Login</a>
                 </li>
-                <li class="nav-item ml-2">
+                <!-- <li class="nav-item ml-2">
                     <a class="nav-link link-font" href="#">Create Account</a>
-                </li>
+                </li> -->
             </ul>
         </div>
         
     </nav>
+    <div class="modal fade modalSmall " id="logIn" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+    
+                <div class="modal-body p-3">
+                    <div class="text-center mr-5">
+                        <img src="./Assets/images/favpng_book-icon.png" class="mb-3" height="70px" width="70px" alt="">
+                        <span class="logo-font">Bookaholics</span>
+                    </div>
+                    <form method="POST" class="p-3">
+                        <div class="input-group mb-3">
+                            <input class="form-control" placeholder="Username" type="text">
+                        </div>
+                        <div class="input-group mb-3">
+                            <input class="form-control" placeholder="Password" type="password">
+                        </div>
+                        <div class="input-group mb-3">
+                            <button type="submit" class="btn btn-success btn-block">Login</button>
+                        </div>
+                        <div class="text-right"><p>Looking to <a href=""data-toggle="modal" 
+                            data-dismiss="modal" data-target="#signUp">Create account?</a></p></div>
+                </div>
+                </form>
+            </div>
+        </div>
+        </div>
+    </div>
     <div class="card pb-5 mb-5" style="border: 0;">
         <img src="./Assets/images/students.jpg" class="img-card img-fluid mt-3" alt="">
         <div class="card-img-overlay p-0 mb-5">
@@ -91,6 +125,7 @@
             </div>
         </div>
     </div>
+
     <div class="modal fade modalSmall" id="signUp" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -101,6 +136,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+
                 <div class="modal-body p-4">
                     <form method="POST">
                         <div class="row">
@@ -129,9 +165,22 @@
                             <input id="email" required placeholder="Johndoe23@example.com" class="form-control"
                                 type="email">
                         </div>
+                        <label class="mb-0">Sex</label>
+                            <hr class="mt-1">
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" required id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadioInline1">Male</label>
+                              </div>
+                              <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" required id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadioInline2">Female</label>
+                              </div>
+                            <hr>
+                            
+                     
                         <div class="form-group mt-3">
-                            <label for="dirthDate"> Email</label>
-                            <input id="birthDate" required placeholder="Johndoe23@example.com" class="form-control"
+                            <label for="dirthDate"> Birth date</label>
+                            <input id="birthDate" required placeholder="1999-01-01" class="form-control"
                                 type="date">
                         </div>
                         <div class="row mx-0 mt-2">

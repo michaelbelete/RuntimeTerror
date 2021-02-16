@@ -1,8 +1,8 @@
 const db = new Dexie("Bookacholics");
 
-db.version(3).stores({
+db.version(4).stores({
   users:
-    "++useId, firstName, lastName, email, username, bio, hobbies, birthDate, currentCity, homeTown, education, registeredAt",
+    "++useId, firstName, sex, lastName, email, username, bio, hobbies, birthDate, currentCity, homeTown, education, registeredAt",
   books:
     "++bookId, title, author, edition, publisher, dateAdded, shortDesc, userId",
   wishlist:
