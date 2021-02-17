@@ -3,8 +3,8 @@ const fName = document.querySelector("#firstName");
 const lName = document.querySelector("#lastName");
 const emailInput = document.querySelector("#email");
 const userNameInput = document.querySelector("#userName");
-const password = document.querySelector("#password");
-const confirmPassword = document.querySelector("#confirmPassword");
+const password = document.querySelector("#passwordSignUp");
+const confirmPassword = document.querySelector("#confirmPasswordSignUp");
 const birthDate = document.querySelector("#birthDate");
 const sexContainer = document.querySelector("#sexContainer");
 const male = document.querySelector("#customRadioInline1");
@@ -15,8 +15,6 @@ const passwordLoginError = document.querySelector("#passwordLoginError");
 const userNameLoginError = document.querySelector("#userNameLoginError");
 
 let sex = "";
-const passwordEncrypted = crypt.encrypt(password.value);
-const confirmPasswordEncrypted = crypt.encrypt(confirmPassword.value);
 
 // function for the sign up
 
@@ -40,6 +38,8 @@ function SignUpUser(e) {
   } else if (confirmPassword.value == "") {
     confirmPassword.style.border = "2px solid red";
   } else {
+    const passwordEncrypted = crypt.encrypt(password.value);
+    const confirmPasswordEncrypted = crypt.encrypt(confirmPassword.value);
     if (
       confirmPasswordInputs(
         crypt.decrypt(passwordEncrypted),
@@ -75,6 +75,8 @@ function SignUpUser(e) {
 //Login user
 function LogInUser(e) {
   e.preventDefault();
+  var found = false;
+
   if (userNameLogin.value == "") {
     userNameLoginError.innerHTML = "Enter your username.";
     userNameLogin.style.border = "2px solid red";
@@ -83,23 +85,27 @@ function LogInUser(e) {
     passwordLogin.style.border = "2px solid red";
   } else if (userNameLogin != "" && passwordLogin != "") {
     db.transaction("r", db.users, () => {
-      let userNameExists = db
-        .table("users")
+      db.table("users")
         .toArray()
         .then((users) => {
           users.forEach((user) => {
-            //why is it not workinggg
             if (user.username == userNameLogin.value) {
-              if (passwordLogin.value == crypt.decrypt(user.password)) {
+              found = true;
+              var passUser = crypt.decrypt(user.password);
+              if (passUser == passwordLogin.value) {
                 window.localStorage.setItem("userId", user.userId);
                 location.href = "profile.html";
               } else {
-                console.log("password not correct");
+                passwordLoginError.innerHTML = "Password not matched.";
+                passwordLogin.style.border = "2px solid red";
+                console.log("password not matched.");
               }
-            } else {
-              console.log("username not found");
             }
           });
+          if (found == false) {
+            userNameLoginError.innerHTML = "Username not found.";
+            userNameLogin.style.border = "2px solid red";
+          }
         });
     });
   }
