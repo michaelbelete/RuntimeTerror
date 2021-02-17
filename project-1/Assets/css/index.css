@@ -61,10 +61,10 @@ a:hover {
 }
 .bg-white {
   background: transparent !important;
-  transition: 0.3s ease;
+  transition: 0.5s ease;
 }
 .bg-white.scrolled {
-  background: whitesmoke !important;
+  background: white !important;
 }
 .decoration-none {
   text-decoration: none;

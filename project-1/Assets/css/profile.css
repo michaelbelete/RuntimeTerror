@@ -1,0 +1,78 @@
+body {
+  font-family: "Roboto", sans-serif;
+}
+.lato {
+  font-family: "Lato", sans-serif;
+}
+.ubuntu {
+  font-family: "ubuntu", sans-serif;
+}
+.source_sans_pro {
+  font-family: "Source sans pro", sans-serif;
+  font-size: 18px;
+}
+.roboto {
+  font-family: "Roboto", sans-serif;
+}
+.pt-sans {
+  font-family: "PT Sans", sans-serif;
+}
+.great-vibes {
+  font-family: "Great Vibes", cursive;
+}
+.logo-font {
+  font-family: "Great Vibes", cursive;
+  font-size: 2rem;
+}
+.link-font {
+  text-decoration: none;
+  color: black;
+  font-size: large;
+  font-family: "ubuntu", sans-serif;
+}
+
+.fit-cover {
+  object-fit: cover;
+}
+#profile_p {
+  margin-top: -100px;
+  border-radius: 50%;
+  background-color: white;
+}
+.padding-whole {
+  padding-right: 100px;
+  padding-left: 100px;
+}
+.rounded-small {
+  border-radius: 3%;
+}
+.transbox {
+  background-color: black;
+  opacity: 0.6;
+}
+.decoration-none {
+  text-decoration: none;
+  color: black;
+}
+.decoration-none:hover {
+  color: grey;
+}
+
+@media screen and (max-width: 480px) {
+  .padding-whole-small {
+    padding-right: 1rem !important;
+    padding-left: 1rem !important;
+  }
+  .logo-small {
+    display: none;
+  }
+}
+@media screen and (min-width: 480px) {
+  .bg-white {
+    background: transparent !important;
+    transition: 0.5s ease;
+  }
+  .bg-white.scrolled {
+    background: lightgrey !important;
+  }
+}
