@@ -22,6 +22,7 @@ const noPost = document.querySelector("#noPost")
 document.addEventListener('DOMContentLoaded', function() {
     loadMyBooks()
     loadPosts()
+    loadRecentBooks();
 })
 
 async function loadMyBooks() {
@@ -192,6 +193,26 @@ async function loadPosts() {
         })
     }
 }
+
+
+
+async function loadRecentBooks(){
+    let bookList = document.querySelector('section > div > div:last-child > div');
+    let books = await db.books.orderBy('bookId').reverse().limit(5).toArray();
+    books.forEach(book =>{
+        let div = document.createElement('div');
+        div.className = "row mb-4";
+        div.innerHTML += `<div class="col-3 px-2">
+            <img src="https://img.icons8.com/cute-clipart/64/000000/book.png" height="55" />
+        </div>
+        <div class="col-8">
+            <p class="title font-wight-bold p-0 m-0">${book.title}</p>
+            <small class="text-muted">${book.author}</small>
+        </div>`;
+        bookList.insertBefore(div, bookList.lastElementChild);
+    })
+}
+
 
 
 $(document).ready(function() {
