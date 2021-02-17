@@ -12,6 +12,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&family=Great+Vibes&family=Lato:ital@1&family=Roboto&family=Ubuntu&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
+    <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+
     <link rel="icon" href="./Assets/images/books_icon.png">
     <link rel="stylesheet" href="./Assets/css/index.css">
 
@@ -20,9 +24,11 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-md navbar-light bg-white sticky-top mb-3">
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand-md navbar-light bg-white sticky-top mb-3 py-0">
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -38,15 +44,53 @@
                     <a class="nav-link link-font" href="#">Features</a>
                 </li>
                 <li class="nav-item ml-2">
-                    <a class="nav-link link-font" href="#">Login</a>
+                    <a class="nav-link link-font" data-toggle="modal" data-target="#logIn" href="">Login</a>
                 </li>
-                <li class="nav-item ml-2">
+                <!-- <li class="nav-item ml-2">
                     <a class="nav-link link-font" href="#">Create Account</a>
-                </li>
+                </li> -->
             </ul>
         </div>
 
     </nav>
+    <div class="modal fade modalSmall " id="logIn" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+    
+                <div class="modal-body p-3">
+                    <div class="text-center mr-5">
+                        <img src="./Assets/images/favpng_book-icon.png" class="mb-3" height="70px" width="70px" alt="">
+                        <span class="logo-font">Bookaholics</span>
+                    </div>
+                    <form method="post" class="p-3">
+                        <div class=" mb-3">
+                            <input class="form-control" placeholder="Username" id="userNameLogin" type="text">
+                            <p class="text-danger"><small id="userNameLoginError"></small></p>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <input class="form-control" placeholder="Password" id="passwordLogin" type="password">
+                            <p class="text-danger"><small id="passwordLoginError"></small></p>
+
+                        </div>
+                        <div class="input-group mb-3">
+                            <button type="submit" class="btn btn-success btn-block" id="loginButton">Login</button>
+                        </div>
+                        <div class="text-right"><p>Looking to <a href=""data-toggle="modal" 
+                            data-dismiss="modal" data-target="#signUp">Create account?</a></p></div>
+                </div>
+                </form>
+            </div>
+        </div>
+        </div>
+    </div>
     <div class="card pb-5 mb-5" style="border: 0;">
         <img src="./Assets/images/students.jpg" class="img-card img-fluid mt-3" alt="">
         <div class="card-img-overlay p-0 mb-5">
@@ -66,7 +110,7 @@
                         <p class="mt-4 body_catalogue source_sans_pro"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed lobortis eros. Suspendisse vel erat ut nulla euismod fringilla. Integer ornare ultricies lorem, cursus tincidunt turpis malesuada ut. Ut vitae nisi aliquet, molestie
                             tortor et, ornare nisl. Donec imperdiet finibus est, eget ultrices velit consectetur vitae. Proin accumsan orci eu auctor vestibulum. </p>
                         <div class="row mt-4">
-                            <div class="col-md text-left" data-aos="zoom-up">
+                            <div class="col-md text-left">
                                 <button type="button" class="btn btn-warning mr-2 ">Learn More</button>
                                 <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#signUp">Sign up</button>
 
@@ -77,7 +121,9 @@
             </div>
         </div>
     </div>
-    <div class="modal fade modalSmall" id="signUp" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+    <div class="modal fade modalSmall" id="signUp" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -86,8 +132,9 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+
                 <div class="modal-body p-4">
-                    <form action="">
+                    <form method="POST">
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
@@ -102,21 +149,64 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="userName"> Username</label>
-                            <input id="userName" required placeholder="@username" class="form-control" type="email">
+                        <label for="userName"> Username</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend2">@</span>
+                            </div>
+                            <input id="userName" required placeholder="username" class="form-control" type="text">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mt-3">
                             <label for="email"> Email</label>
                             <input id="email" required placeholder="Johndoe23@example.com" class="form-control" type="email">
                         </div>
-
-
+                        <label class="mb-0">Sex</label>
+                            <hr class="mt-1">
+                            <div id="sexContainer">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" required id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioInline1">Male</label>
+                                  </div>
+                                  <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" required id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioInline2">Female</label>
+                                  </div>
+                            </div>
+                            <hr>
+                            
+                     
+                        <div class="form-group mt-3">
+                            <label for="birthDate"> Birth date</label>
+                            <input id="birthDate" required placeholder="1999-01-01" class="form-control"
+                                type="date">
+                        </div>
+                        <div class="row mx-0 mt-2">
+                            <div class="col-md pl-0">
+                                <div class="form-group">
+                                    <label for="password"> Password</label>
+                                    <input id="passwordSignUp" required placeholder="" class="form-control"
+                                        type="password">
+                                </div>
+                            </div>
+                            <div class="col-md pr-0">
+                                <div class="form-group">
+                                    <label for="confirmPasswordSignUp"> Confirm Password</label>
+                                    <input id="confirmPasswordSignUp" required placeholder="" class="form-control"
+                                        type="password">
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <div class="modal-footer mt-3">
+                        <button type="submit" class="btn btn-dark" id="signUpButton">Sign up</button>
+                    </div>
                     </form>
+
+                    
+                    
+                    
                 </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-dark">Sign up</button>
-                </div>
+               
             </div>
         </div>
     </div>
@@ -137,7 +227,7 @@
             </div>
         </div>
     </div>
-
+    
     <div class="text-center mt-5 lato">
         <h1 class="mt-4" data-aos="fade-up">Services</h1>
     </div>
@@ -435,8 +525,18 @@
             <div class="col-md-4 para-Book" data-aos="fade-right">
                 <h1 class="display-4 great-vibes mt-5">Bookaholic</h1>
 
-                <p class="lato source_sans_pro">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime sint eos eligendi provident asperiores molestias praesentium facilis repudiandae officia, quos corrupti est ex nemo, adipisci, tempora consectetur odit deleniti minima. Lorem
-                    ipsum dolor sit amet consectetur adipisicing elit. Maxime sint eos eligendi provident asperiores molestias praesentium facilis repudiandae officia, quos corrupti est ex nemo, adipisci, tempora consectetur odit deleniti minima.</p>
+                <p class="lato source_sans_pro">Lorem ipsum dolor sit amet consectetur
+                    adipisicing elit. Maxime sint eos eligendi
+                    provident asperiores molestias praesentium facilis repudiandae officia, quos
+                    corrupti est ex nemo,
+                    adipisci, tempora consectetur odit deleniti minima.
+
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime sint eos
+                    eligendi provident
+                    asperiores
+                    molestias praesentium facilis repudiandae officia, quos corrupti est ex
+                    nemo, adipisci, tempora
+                    consectetur odit deleniti minima.</p>
             </div>
 
             <div class="col-md img-Book">
@@ -549,17 +649,22 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="./Assets/js/app.js"></script>
+    <script src="./Assets/js/db.js"></script>
+    <script src="./Assets/js/app.js" type="module"></script>
+
 
     <script>
         AOS.init({
             duration: 1000,
         });
-        $(window).scroll(() => {
-            $('nav').toggleClass('scrolled', $(this).scrollTop() > 5);
-        });
-    </script>
 
+        $(window).scroll(() => {
+            $('nav').toggleClass('scrolled', $(this).scrollTop() > 20);
+        });
+
+
+    </script>
+    
 </body>
 
 </html>
