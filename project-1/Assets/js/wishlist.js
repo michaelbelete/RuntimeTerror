@@ -41,7 +41,7 @@ bookList.addEventListener('click', removeBookF);
 searchFilter.addEventListener('keyup', filterBooks);
 bookList.addEventListener('click', displayMoreInfo);
 bookList.addEventListener('click', fillInForm);
-bookList.addEventListener('click', getId);
+// bookList.addEventListener('click', getId);
 
 
 
@@ -566,4 +566,21 @@ function updatebookPrivacyStatus(bookID, val){
         } 
         else console.log("modification failed: either key doesn't exist or no modification made.");
     })
+}
+
+
+bookList.addEventListener('change', updateBookPrivacyStatus);
+function updateBookPrivacyStatus(e){
+    if(e.target.classList.contains('privacyStatus')){
+        db.books.update(Number(e.target.parentElement.parentElement.getAttribute('my-book-id')),{
+            // isPublic: Boolean(targ.value)
+            isPublic: Boolean(parseInt(e.target.value))
+        }).then( x => {
+            if (x) {
+                // console.log(x);
+                console.log('privacy status updated successfully');
+            } 
+            else console.log("modification failed: either key doesn't exist or no modification made.");
+        })
+    }
 }
