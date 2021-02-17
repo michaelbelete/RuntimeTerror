@@ -17,6 +17,7 @@ const userNameLoginError = document.querySelector("#userNameLoginError");
 let sex = "";
 const passwordEncrypted = crypt.encrypt(password.value);
 const confirmPasswordEncrypted = crypt.encrypt(confirmPassword.value);
+
 // function for the sign up
 
 function SignUpUser(e) {
@@ -80,19 +81,27 @@ function LogInUser(e) {
   } else if (passwordLogin.value == "") {
     passwordLoginError.innerHTML = "Enter your password.";
     passwordLogin.style.border = "2px solid red";
-    console.log(passwordLogin.value);
   } else if (userNameLogin != "" && passwordLogin != "") {
-    db.table("users")
-      .toArray()
-      .then((users) => {
-        for (const user of users) {
-          if (
-            user.username == userNameLogin.value &&
-            passwordLogin == crypt.decrypt(passwordEncrypted)
-          ) {
-          }
-        }
-      });
+    db.transaction("r", db.users, () => {
+      let userNameExists = db
+        .table("users")
+        .toArray()
+        .then((users) => {
+          users.forEach((user) => {
+            //why is it not workinggg
+            if (user.username == userNameLogin.value) {
+              if (passwordLogin.value == crypt.decrypt(user.password)) {
+                window.localStorage.setItem("userId", user.userId);
+                location.href = "profile.html";
+              } else {
+                console.log("password not correct");
+              }
+            } else {
+              console.log("username not found");
+            }
+          });
+        });
+    });
   }
 }
 
@@ -118,4 +127,13 @@ function confirmPasswordInputs(password, confirmPassword) {
   }
 }
 
+// Check if user exists
+function userChecker(username, usersArray) {
+  for (let index = 0; index < usersArray.length; index++) {
+    if (usersArray[index].username == username) {
+      return usersArray.userId;
+    }
+  }
+  return null;
+}
 export { SignUpUser, LogInUser };

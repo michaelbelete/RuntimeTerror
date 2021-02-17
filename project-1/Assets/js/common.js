@@ -1,6 +1,6 @@
 // Password ENCRYPTION AND DECRYPTION
 var crypt = {
-  secret: "JFDIofdsjaio",
+  secret: "CIPHERKEY",
 
   encrypt: function (clear) {
     var cipher = CryptoJS.AES.encrypt(clear, crypt.secret);
