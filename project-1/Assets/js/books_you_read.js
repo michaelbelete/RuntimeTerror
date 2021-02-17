@@ -521,3 +521,16 @@ function updatebookPrivacyStatus(bookID, val){
         else console.log("modification failed: either key doesn't exist or no modification made.");
     })
 }
+
+
+function alert2(){
+    $('#alert2').modal({
+        keyboard: false
+    })
+}
+
+function confirm2(){
+    $('#confirm2').modal({
+        keyboard: false
+    })
+}
