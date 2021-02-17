@@ -44,7 +44,7 @@ searchFilter.addEventListener('keyup', filterBooks);
 bookList.addEventListener('click', displayMoreInfo);
 bookList.addEventListener('click', fillInForm);
 // select.addEventListener('click', getId);
-bookList.addEventListener('click', getId);
+// bookList.addEventListener('click', getId);
 // bookList.addEventListener('click', getIdEveryTwoClicks);
 
 
@@ -523,14 +523,59 @@ function updatebookPrivacyStatus(bookID, val){
 }
 
 
-function alert2(){
+bookList.addEventListener('change', updateBookPrivacyStatus);
+function updateBookPrivacyStatus(e){
+    if(e.target.classList.contains('privacyStatus')){
+        db.books.update(Number(e.target.parentElement.parentElement.getAttribute('my-book-id')),{
+            // isPublic: Boolean(targ.value)
+            isPublic: Boolean(parseInt(e.target.value))
+        }).then( x => {
+            if (x) {
+                // console.log(x);
+                console.log('privacy status updated successfully');
+            } 
+            else console.log("modification failed: either key doesn't exist or no modification made.");
+        })
+    }
+}
+
+
+
+
+
+function alert2ui(){
     $('#alert2').modal({
         keyboard: false
     })
 }
 
-function confirm2(){
+function confirm2ui(){
     $('#confirm2').modal({
         keyboard: false
     })
+}
+
+let confirmQ = null;
+
+function confirm2(message){
+    "document.querySelector('..').innerHTML += message;"
+    let ok_btn = "document.querySelector(...)";
+    // let no_btn = "...";
+    ok_btn.addEventListener('click', compare);
+    //???
+    while(confirmQ == null){
+    setTimeout(() => {if (confirmQ != null) return confrimQ}, 500);
+    }
+    console.log(confirmQ);
+    return confirmQ;
+}
+
+function compare(e){
+    if(e.target == ok_btn){
+        console.log(confirmQ);
+        confrimQ = true;
+    }
+    else {
+        confirmQ = false;
+    }
 }
