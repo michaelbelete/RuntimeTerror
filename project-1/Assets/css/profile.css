@@ -73,6 +73,6 @@ body {
     transition: 0.5s ease;
   }
   .bg-white.scrolled {
-    background: lightgrey !important;
+    background: whitesmoke !important;
   }
 }

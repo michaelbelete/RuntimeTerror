@@ -8,6 +8,15 @@ const password = document.querySelector("#password");
 const confirmPassword = document.querySelector("#passwordConfirm");
 const signUp = document.querySelector("#signUpButton");
 const login = document.querySelector("#loginButton");
+const services = document.querySelector("#services");
+const learnMore = document.querySelector("#learnMore");
 
 signUp.addEventListener("click", SignUpUser);
 login.addEventListener("click", LogInUser);
+learnMore.addEventListener("click", () => {
+  services.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+    inline: "nearest",
+  });
+});
