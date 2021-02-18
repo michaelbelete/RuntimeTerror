@@ -5,7 +5,7 @@ const bDate = document.querySelector("#b_date");
 const sex = document.querySelector("#sex");
 const pp_container = document.querySelector("#pp_container");
 
-const id = window.localStorage.getItem("userId");
+const id = window.sessionStorage.getItem("userId");
 
 db.users.get(parseInt(id)).then((user) => {
   fullName.innerHTML = user.firstName + " " + user.lastName;

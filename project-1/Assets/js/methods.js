@@ -59,7 +59,7 @@ function SignUpUser(e) {
           registeredAt: new Date(),
         })
         .then((id) => {
-          window.localStorage.setItem("userId", id);
+          window.sessionStorage.setItem("userId", id);
           location.href = "profile.html";
           history.replaceState({}, "", "home.html");
         });
