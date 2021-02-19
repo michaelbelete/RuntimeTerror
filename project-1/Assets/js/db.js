@@ -1,17 +1,16 @@
 const db = new Dexie("Bookacholics");
 
-db.version(7).stores({
-  users:
-    "++userId, firstName, sex, lastName, email, username, bio, hobbies, birthDate, currentCity, homeTown, education, registeredAt",
-  books:
-    "++bookId, title, author, edition, publisher, dateAdded, shortDesc, userId",
-  wishlist:
-    "++bookId, title, author, edition, publisher, dateAdded, shortDesc, whyWish, userId",
-  posts:
-    "++postId, bookId, postType, rating, comments, createdAt, updatedAt, userId",
-  comments: "++commentId, comment, userId, createdAt, updatedAt",
+db.version(8).stores({
+    users: "++userId, firstName, sex, lastName, email, username, bio, hobbies, birthDate, currentCity, homeTown, education, profilePicture, registeredAt",
+    books: "++bookId, title, author, edition, publisher, dateAdded, shortDesc, userId",
+    wishlist: "++bookId, title, author, edition, publisher, dateAdded, whyWish, userId",
+    posts: "++postId, bookId, postType, rating, comments, createdAt, updatedAt, userId",
+    comments: "++commentId, comment,postId, userId, createdAt, updatedAt",
 });
 
+function loggedInUser() {
+    return 1
+}
 //creating a sample user
 // const user = {
 //     "userId": 1,
