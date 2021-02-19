@@ -12,6 +12,9 @@ db.version(3).stores({
   comments: "++commentId, postId, comment, userId, createdAt, updatedAt",
 });
 
+function loggedInUser() {
+  return 1;
+}
 //creating a sample user
 // const user = {
 //     "userId": 1,
