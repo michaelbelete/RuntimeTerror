@@ -379,7 +379,7 @@ function displayMyBooks() {
             let d = document.createElement('div');
             let p = document.createElement('p');
             p.textContent = "Seems like you have not added any books in your wishlist. Click the Add New Book button above to start adding.";
-            p.className = "text-center";
+            p.className = "text-center h5";
             d.appendChild(p);
             bookList.appendChild(d);
         }
