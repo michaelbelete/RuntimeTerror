@@ -17,6 +17,7 @@ var noPost = document.querySelector("#noPost");
 document.addEventListener('DOMContentLoaded', function () {
   loadMyBooks();
   loadPosts();
+  loadRecentBooks();
 });
 
 function loadMyBooks() {
@@ -82,6 +83,7 @@ $(function () {
         createdAt: new Date(),
         updatedAt: ""
       };
+      console.log(newPost);
       db.posts.add(newPost).then(function () {
         // postMessage.classList.remove("alert-danger")
         postMessage.classList.add("alert-success");
@@ -150,6 +152,7 @@ function loadPosts() {
 
                   case 8:
                     comments = _context2.sent;
+                    console.log(user);
                     postNoHtmlTag = post.post.replace(/(<([^>]+)>)/gi, "");
 
                     if (post.picture == "") {
@@ -164,7 +167,7 @@ function loadPosts() {
                     feeds.appendChild(htmlPost.body.firstChild);
                     generateStar(post.postId, post.rating);
 
-                  case 16:
+                  case 17:
                   case "end":
                     return _context2.stop();
                 }
@@ -175,6 +178,33 @@ function loadPosts() {
         case 12:
         case "end":
           return _context3.stop();
+      }
+    }
+  });
+}
+
+function loadRecentBooks() {
+  var bookList, books;
+  return regeneratorRuntime.async(function loadRecentBooks$(_context4) {
+    while (1) {
+      switch (_context4.prev = _context4.next) {
+        case 0:
+          bookList = document.querySelector('section > div > div:last-child > div');
+          _context4.next = 3;
+          return regeneratorRuntime.awrap(db.books.orderBy('bookId').reverse().limit(5).toArray());
+
+        case 3:
+          books = _context4.sent;
+          books.forEach(function (book) {
+            var div = document.createElement('div');
+            div.className = "row mb-4";
+            div.innerHTML += "<div class=\"col-3 px-2\">\n            <img src=\"https://img.icons8.com/cute-clipart/64/000000/book.png\" height=\"55\" />\n        </div>\n        <div class=\"col-8\">\n            <p class=\"title font-wight-bold p-0 m-0\">".concat(book.title, "</p>\n            <small class=\"text-muted\">").concat(book.author, "</small>\n        </div>");
+            bookList.insertBefore(div, bookList.lastElementChild);
+          });
+
+        case 5:
+        case "end":
+          return _context4.stop();
       }
     }
   });
