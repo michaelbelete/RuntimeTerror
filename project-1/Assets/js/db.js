@@ -24,6 +24,12 @@ const newUser = {
     registeredAt: new Date(),
 }
 
+
+db.users.put(newUser).then(function() {
+    console.log("user created succesfully")
+}).catch((error) => console.log(error))
+
+
 // const book = {
 //         title: "some wwww",
 //         author: "me",
