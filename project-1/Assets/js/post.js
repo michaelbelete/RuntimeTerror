@@ -1,5 +1,12 @@
 $(document).ready(function() {
     $('#header').load('includes/header.html')
+    $('#starRating').rateYo({
+        rating: 4.5,
+        starWidth: "35px",
+        ratedFill: "#07a8e2",
+        halfStar: true,
+        readOnly: true,
+    })
 });
 
 const urlParams = new URLSearchParams(window.location.search)
