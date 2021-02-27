@@ -45,35 +45,35 @@ bookList.addEventListener('click', fillInForm);
 
 
 
-const db = new Dexie('Bookacholics');
+// const db = new Dexie('Bookacholics');
 
-db.version(3).stores({
-    users: "++useId, firstName, lastName, email, &username, bio, hobbies, birthDate, currentCity, homeTown, education, registeredAt",
-    books: "++bookId, title, author, edition, publisher, dateAdded, shortDesc, userId",
-    wishlist: "++bookId, title, author, edition, publisher, dateAdded, whyWish, userId",
-    posts: "++postId, bookId, postType, rating, comments, createdAt, updatedAt, userId",
-    comments: "++commentId, comment, userId, createdAt, updatedAt"
-});
+// db.version(3).stores({
+//     users: "++useId, firstName, lastName, email, &username, bio, hobbies, birthDate, currentCity, homeTown, education, registeredAt",
+//     books: "++bookId, title, author, edition, publisher, dateAdded, shortDesc, userId",
+//     wishlist: "++bookId, title, author, edition, publisher, dateAdded, whyWish, userId",
+//     posts: "++postId, bookId, postType, rating, comments, createdAt, updatedAt, userId",
+//     comments: "++commentId, comment, userId, createdAt, updatedAt"
+// });
 
-db.open().then(displayMyBooks());
+// db.open().then(displayMyBooks());
+displayMyBooks();
+// const newUser = {
+//     firstName: "michael",
+//     lastName: "belete",
+//     email: "it.michael.belete@gmail.com",
+//     username: "@abc",
+//     bio: "some bio...",
+//     hobbies: "programming",
+//     birthDate: Date(),
+//     currentCity: "Addis Ababa",
+//     homeTown: "Bahir Dar",
+//     education: "BSC",
+//     registeredAt: Date(),
+// }
 
-const newUser = {
-    firstName: "michael",
-    lastName: "belete",
-    email: "it.michael.belete@gmail.com",
-    username: "@abc",
-    bio: "some bio...",
-    hobbies: "programming",
-    birthDate: Date(),
-    currentCity: "Addis Ababa",
-    homeTown: "Bahir Dar",
-    education: "BSC",
-    registeredAt: Date(),
-}
-
-db.users.put(newUser).then(function() {
-    console.log("user created succesfully")
-}).catch((error) => console.log(error))
+// db.users.put(newUser).then(function() {
+//     console.log("user created succesfully")
+// }).catch((error) => console.log(error))
 
 
 
@@ -379,7 +379,7 @@ function displayMyBooks() {
             let d = document.createElement('div');
             let p = document.createElement('p');
             p.textContent = "Seems like you have not added any books in your wishlist. Click the Add New Book button above to start adding.";
-            p.className = "text-center";
+            p.className = "text-center h5";
             d.appendChild(p);
             bookList.appendChild(d);
         }
