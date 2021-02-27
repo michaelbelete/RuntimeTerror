@@ -109,7 +109,6 @@ async function loadPosts() {
             let comments = await db.comments.where("postId").equals(post.postId).count()
             console.log(user)
             let postNoHtmlTag = post.post.replace(/(<([^>]+)>)/gi, "")
-            debugger
             if (post.picture == "") {
                 var strPost = `
             <div class="card card-body mb-4 p-0">

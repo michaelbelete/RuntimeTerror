@@ -154,7 +154,6 @@ function loadPosts() {
                     comments = _context2.sent;
                     console.log(user);
                     postNoHtmlTag = post.post.replace(/(<([^>]+)>)/gi, "");
-                    debugger;
 
                     if (post.picture == "") {
                       strPost = "\n            <div class=\"card card-body mb-4 p-0\">\n            <div class=\"row p-3\">\n                <div class=\"col-2\">\n                    <a href=\"profile.html\"><img src=\"".concat(user.profilePicture, "\" alt=\"profile\" class=\"rounded-circle\" width=\"70\"\n                            height=\"70\">\n                    </a>\n                </div>\n                <div class=\"col-10 p-2\">\n                    <h5 class=\"text-primary pt-1 m-0\">").concat(user.firstName, " ").concat(user.lastName, "</h5>\n                    <small class=\"text-muted p-0\">").concat(post.createdAt, "</small>\n                </div>\n            </div>\n            <div class=\"px-3 py-1\">\n                <h4 class=\"font-weight-light text-muted title\">").concat(book.title, "</h4>\n            </div>\n            <div class=\"px-3 text-justify w-100\">\n                <p class=\"text-muted\">\n                    ").concat(postNoHtmlTag.length > 100 ? postNoHtmlTag.substring(0, 100) : postNoHtmlTag, "    \n                </p>\n            </div>\n    \n            <div class=\"rating-comment px-4 pb-3\">\n                <div class=\"row\">\n                    <div class=\"col-md-8\">\n                        <div id=\"post-rate").concat(post.postId, "\">").concat(post.rating, "</div>\n                    </div>\n                    <div class=\"col-md-4\">\n                        <a href=\"post.html\" class=\" text-primary  float-right\"><i class=\"fa fa-comment\"></i>\n                            ").concat(comments, " Comments</a>\n                    </div>\n                </div>\n            </div>\n        </div>\n        ");
@@ -168,7 +167,7 @@ function loadPosts() {
                     feeds.appendChild(htmlPost.body.firstChild);
                     generateStar(post.postId, post.rating);
 
-                  case 18:
+                  case 17:
                   case "end":
                     return _context2.stop();
                 }
