@@ -1,4 +1,4 @@
-const db = new Dexie('Bookacholics');
+const db = new Dexie('Bookaholics');
 
 db.version(6).stores({
     users: "++userId, firstName, lastName, sex, email, &username, bio, hobbies, birthDate, currentCity, homeTown, education, registeredAt",
@@ -39,9 +39,9 @@ db.users.put(newUser).then(function() {
 //         shortDesc: "slorem aiusbasbjhbasjdbjasbbs",
 //         userId: 1,
 //     }
-    // db.users.put(newUser).then(function() {
-    //     console.log("user created successfully")
-    // }).catch((error) => console.log(error))
+// db.users.put(newUser).then(function() {
+//     console.log("user created successfully")
+// }).catch((error) => console.log(error))
 
 // db.books.put(book)
 //creating a sample user

@@ -74,6 +74,7 @@ $(function() {
                 updatedAt: ""
             }
 
+            console.log(newPost)
             db.posts.add(newPost).then(function() {
                 // postMessage.classList.remove("alert-danger")
                 postMessage.classList.add("alert-success")
@@ -106,9 +107,8 @@ async function loadPosts() {
             let book = await db.books.where("bookId").equals(parseInt(post.bookId)).first()
             let user = await db.users.where("userId").equals(post.userId).first()
             let comments = await db.comments.where("postId").equals(post.postId).count()
-
+            console.log(user)
             let postNoHtmlTag = post.post.replace(/(<([^>]+)>)/gi, "")
-
             if (post.picture == "") {
                 var strPost = `
             <div class="card card-body mb-4 p-0">
@@ -196,10 +196,10 @@ async function loadPosts() {
 
 
 
-async function loadRecentBooks(){
+async function loadRecentBooks() {
     let bookList = document.querySelector('section > div > div:last-child > div');
     let books = await db.books.orderBy('bookId').reverse().limit(5).toArray();
-    books.forEach(book =>{
+    books.forEach(book => {
         let div = document.createElement('div');
         div.className = "row mb-4";
         div.innerHTML += `<div class="col-3 px-2">
