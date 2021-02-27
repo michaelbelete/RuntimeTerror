@@ -9,6 +9,7 @@ var specificPost = document.querySelector('#specificPost');
 var specificComment = document.querySelector('#specificComments');
 var comment = document.querySelector('#comment');
 var commentBtn = document.querySelector("#commentBtn");
+var loader = document.querySelector('#specificPostLoader');
 document.addEventListener('DOMContentLoaded', function () {
   checkPostId();
   loadSpecificPost();
@@ -16,8 +17,8 @@ document.addEventListener('DOMContentLoaded', function () {
 commentBtn.addEventListener("click", addComment);
 
 function checkPostId() {
-  if (id) {
-    return;
+  if (id || id === undefined || id === null) {
+    var post = db.posts.where;
   } else {
     window.location.href = "home.html";
   }
@@ -41,37 +42,38 @@ function loadSpecificPost() {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          _context2.next = 2;
+          loader.style.display = "block";
+          _context2.next = 3;
           return regeneratorRuntime.awrap(db.posts.where({
             postId: id
           }).first());
 
-        case 2:
+        case 3:
           post = _context2.sent;
-          _context2.next = 5;
+          _context2.next = 6;
           return regeneratorRuntime.awrap(db.books.where("bookId").equals(parseInt(post.bookId)).first());
 
-        case 5:
+        case 6:
           book = _context2.sent;
-          _context2.next = 8;
+          _context2.next = 9;
           return regeneratorRuntime.awrap(db.users.where("userId").equals(post.userId).first());
 
-        case 8:
+        case 9:
           user = _context2.sent;
-          _context2.next = 11;
+          _context2.next = 12;
           return regeneratorRuntime.awrap(db.comments.where("postId").equals(post.postId));
 
-        case 11:
+        case 12:
           commentData = _context2.sent;
-          _context2.next = 14;
+          _context2.next = 15;
           return regeneratorRuntime.awrap(commentData.count());
 
-        case 14:
+        case 15:
           commentCount = _context2.sent;
-          _context2.next = 17;
+          _context2.next = 18;
           return regeneratorRuntime.awrap(commentData.toArray());
 
-        case 17:
+        case 18:
           comments = _context2.sent;
 
           if (post.picture == "") {
@@ -97,7 +99,7 @@ function loadSpecificPost() {
 
                   case 3:
                     user = _context.sent;
-                    strComment = "\n            <div class=\"row px-4 pb-2\">\n            <div class=\"col-sm-1 p-4\">\n                <a href=\"profile.html?id=".concat(comment.userId, "\"><img src=\"").concat(user.profilePicture, "\" alt=\"profile\" class=\"rounded-circle\" width=\"70\"\n                        height=\"70\">\n                </a>\n            </div>\n            <div class=\"col-sm-10 p-4 ml-3\">\n                <h5 class=\"text-primary pt-1 m-0\">").concat(user.firstName, " ").concat(user.lastName, " <span class=\"text-muted\" style=\"font-size: 14px;\"><i class=\"fa fa-angle-right\"></i> ").concat(comment.createdAt, "</span></h5>\n                <small class=\"text-muted\">").concat(comment.comment, "</small>\n            </div>\n        </div>\n        ");
+                    strComment = "\n            <div class=\"row px-4 pb-2\" id=\"comments\">\n            <div class=\"col-sm-1 p-4\">\n                <a href=\"profile.html?id=".concat(comment.userId, "\"><img src=\"").concat(user.profilePicture, "\" alt=\"profile\" class=\"rounded-circle\" width=\"70\"\n                        height=\"70\">\n                </a>\n            </div>\n            <div class=\"col-sm-10 p-4 ml-3\">\n                <h5 class=\"text-primary pt-1 m-0\">").concat(user.firstName, " ").concat(user.lastName, " <span class=\"text-muted\" style=\"font-size: 14px;\"><i class=\"fa fa-angle-right\"></i> ").concat(comment.createdAt, "</span></h5>\n                <small class=\"text-muted\">").concat(comment.comment, "</small>\n            </div>\n        </div>\n        ");
                     htmlPost = new DOMParser().parseFromString(strComment, 'text/html');
                     specificComment.appendChild(htmlPost.body.firstChild);
 
@@ -108,8 +110,9 @@ function loadSpecificPost() {
               }
             });
           });
+          loader.style.display = "none";
 
-        case 25:
+        case 27:
         case "end":
           return _context2.stop();
       }

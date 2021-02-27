@@ -138,7 +138,7 @@ async function loadPosts() {
                         <div id="post-rate${post.postId}">${ post.rating }</div>
                     </div>
                     <div class="col-md-4">
-                        <a href="post.html" class=" text-primary  float-right"><i class="fa fa-comment"></i>
+                        <a href="post.html?id=${post.postId}" class=" text-primary  float-right"><i class="fa fa-comment"></i>
                             ${ comments } Comments</a>
                     </div>
                 </div>
@@ -176,7 +176,7 @@ async function loadPosts() {
                         <div id="post-rate${post.postId }">${ post.rating }</div>
                     </div>
                     <div class="col-md-4">
-                        <a href="post.html" class=" text-primary  float-right"><i class="fa fa-comment"></i>
+                        <a href="post.html?id=${post.postId}" class=" text-primary  float-right"><i class="fa fa-comment"></i>
                             ${ comments } Comments</a>
                     </div>
                 </div>

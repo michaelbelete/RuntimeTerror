@@ -12,6 +12,7 @@ const specificComment = document.querySelector('#specificComments')
 const comment = document.querySelector('#comment')
 const commentBtn = document.querySelector("#commentBtn")
 
+const loader = document.querySelector('#specificPostLoader')
 
 document.addEventListener('DOMContentLoaded', function() {
     checkPostId()
@@ -22,8 +23,8 @@ commentBtn.addEventListener("click", addComment)
 
 
 function checkPostId() {
-    if (id) {
-        return
+    if (id || id === undefined || id === null) {
+        const post = db.posts.where
     } else {
         window.location.href = "home.html"
     }
@@ -41,10 +42,11 @@ function generateStar(id, rating) {
     })
 }
 async function loadSpecificPost() {
-    const post = await db.posts.where({
+
+    loader.style.display = "block"
+    let post = await db.posts.where({
         postId: id
     }).first()
-
     const book = await db.books.where("bookId").equals(parseInt(post.bookId)).first()
     const user = await db.users.where("userId").equals(post.userId).first()
     const commentData = await db.comments.where("postId").equals(post.postId)
@@ -136,7 +138,7 @@ async function loadSpecificPost() {
         console.log(comment)
         const user = await db.users.where("userId").equals(comment.userId).first()
         let strComment = `
-            <div class="row px-4 pb-2">
+            <div class="row px-4 pb-2" id="comments">
             <div class="col-sm-1 p-4">
                 <a href="profile.html?id=${comment.userId}"><img src="${user.profilePicture}" alt="profile" class="rounded-circle" width="70"
                         height="70">
@@ -152,6 +154,8 @@ async function loadSpecificPost() {
         let htmlPost = new DOMParser().parseFromString(strComment, 'text/html')
         specificComment.appendChild(htmlPost.body.firstChild)
     });
+
+    loader.style.display = "none"
 }
 
 async function addComment() {
