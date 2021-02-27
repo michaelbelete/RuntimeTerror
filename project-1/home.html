@@ -21,8 +21,6 @@
     <!-- material icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <title>Home</title>
-    <!-- custom scroll -->
-    <link rel="stylesheet" href="Assets/css/jquery.custom-scrollbar.css">
     <!-- my css  -->
     <link rel="stylesheet" href="./Assets/css/home.css">
 
@@ -223,6 +221,10 @@
                             </select>
                     </div>
                     <div class="form-group">
+                        <label for="picture">Book Picture</label>
+                        <input type="url" name="picture" id="picture" placeholder="Book Picture url" class="form-control">
+                    </div>
+                    <div class="form-group">
                         <label>Rating</label>
                         <div id="rateYo" class="mb-2"></div>
                     </div>
@@ -253,7 +255,6 @@
     <script src="./Assets/js/dexie.js"></script>
     <!-- <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script> -->
     <script src="Assets/js/db.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="Assets/js/home.js"></script>
     <script src="Assets/js/app.js"></script>
 </body>

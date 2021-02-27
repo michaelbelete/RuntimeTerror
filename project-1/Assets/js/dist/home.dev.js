@@ -11,6 +11,7 @@ var selectBooks = document.querySelector("#selectBooks");
 var postType = document.querySelector('#type');
 var post = document.querySelector("#postArea");
 var postMessage = document.querySelector("#postMessage");
+var pictureUrl = document.querySelector('#picture');
 var feeds = document.querySelector("#feeds");
 var postLoader = document.querySelector("#postLoader");
 var noPost = document.querySelector("#noPost");
@@ -79,11 +80,10 @@ $(function () {
         //rec, rev
         rating: rating,
         post: editor.getData(),
-        picture: "https://images.unsplash.com/photo-1549122728-f519709caa9c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=625&q=80",
+        picture: pictureUrl.value,
         createdAt: new Date(),
         updatedAt: ""
       };
-      console.log(newPost);
       db.posts.add(newPost).then(function () {
         // postMessage.classList.remove("alert-danger")
         postMessage.classList.add("alert-success");
@@ -109,27 +109,29 @@ function loadPosts() {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
-          _context3.next = 2;
+          //clearing the data before staring
+          feeds.innerHTML = "";
+          _context3.next = 3;
           return regeneratorRuntime.awrap(db.posts.count());
 
-        case 2:
+        case 3:
           postCount = _context3.sent;
           console.log(postCount);
 
           if (!(postCount == 0)) {
-            _context3.next = 8;
+            _context3.next = 9;
             break;
           }
 
           noPost.style.display = "block";
-          _context3.next = 12;
+          _context3.next = 13;
           break;
 
-        case 8:
-          _context3.next = 10;
+        case 9:
+          _context3.next = 11;
           return regeneratorRuntime.awrap(db.table("posts").orderBy("postId").reverse().toArray());
 
-        case 10:
+        case 11:
           posts = _context3.sent;
           posts.forEach(function _callee(post) {
             var book, user, comments, postNoHtmlTag, strPost, htmlPost;
@@ -175,7 +177,7 @@ function loadPosts() {
             });
           });
 
-        case 12:
+        case 13:
         case "end":
           return _context3.stop();
       }
@@ -205,6 +207,46 @@ function loadRecentBooks() {
         case 5:
         case "end":
           return _context4.stop();
+      }
+    }
+  });
+}
+
+function averageRatingOfBook(bookID) {
+  var bookPosts, avgRating, sum, numberOfBookPosts;
+  return regeneratorRuntime.async(function averageRatingOfBook$(_context5) {
+    while (1) {
+      switch (_context5.prev = _context5.next) {
+        case 0:
+          _context5.next = 2;
+          return regeneratorRuntime.awrap(db.posts.where("bookId").equals(bookID).toArray());
+
+        case 2:
+          bookPosts = _context5.sent;
+          avgRating = 0;
+          sum = 0;
+          numberOfBookPosts = bookPosts.length;
+
+          if (!numberOfBookPosts) {
+            _context5.next = 10;
+            break;
+          }
+
+          bookPosts.forEach(function (bookPost) {
+            sum += bookPost.rating;
+          });
+          avgRating = sum / numberOfBookPosts;
+          return _context5.abrupt("return", {
+            rating: avgRating,
+            rateNumber: numberOfBookPosts
+          });
+
+        case 10:
+          return _context5.abrupt("return", -1);
+
+        case 11:
+        case "end":
+          return _context5.stop();
       }
     }
   });

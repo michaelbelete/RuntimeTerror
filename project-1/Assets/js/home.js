@@ -15,6 +15,7 @@ const selectBooks = document.querySelector("#selectBooks")
 const postType = document.querySelector('#type')
 const post = document.querySelector("#postArea")
 const postMessage = document.querySelector("#postMessage")
+const pictureUrl = document.querySelector('#picture')
 const feeds = document.querySelector("#feeds")
 const postLoader = document.querySelector("#postLoader")
 const noPost = document.querySelector("#noPost")
@@ -69,12 +70,11 @@ $(function() {
                 postType: postType.value, //rec, rev
                 rating: rating,
                 post: editor.getData(),
-                picture: "https://images.unsplash.com/photo-1549122728-f519709caa9c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=625&q=80",
+                picture: pictureUrl.value,
                 createdAt: new Date(),
                 updatedAt: ""
             }
 
-            console.log(newPost)
             db.posts.add(newPost).then(function() {
                 // postMessage.classList.remove("alert-danger")
                 postMessage.classList.add("alert-success")
@@ -96,6 +96,9 @@ $(function() {
 
 
 async function loadPosts() {
+    //clearing the data before staring
+
+    feeds.innerHTML = ""
 
     const postCount = await db.posts.count()
     console.log(postCount)
@@ -213,19 +216,18 @@ async function loadRecentBooks() {
     })
 }
 
-async function averageRatingOfBook(bookID){
+async function averageRatingOfBook(bookID) {
     let bookPosts = await db.posts.where("bookId").equals(bookID).toArray()
     let avgRating = 0;
     let sum = 0;
     let numberOfBookPosts = bookPosts.length;
     if (numberOfBookPosts) {
-        bookPosts.forEach(bookPost =>{
+        bookPosts.forEach(bookPost => {
             sum += bookPost.rating
-        }
-        )
-        avgRating = sum/numberOfBookPosts;
-    
-        return { rating: avgRating, rateNumber: numberOfBookPosts};
+        })
+        avgRating = sum / numberOfBookPosts;
+
+        return { rating: avgRating, rateNumber: numberOfBookPosts };
     }
 
     return -1
