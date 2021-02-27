@@ -213,6 +213,24 @@ async function loadRecentBooks() {
     })
 }
 
+async function averageRatingOfBook(bookID){
+    let bookPosts = await db.posts.where("bookId").equals(bookID).toArray()
+    let avgRating = 0;
+    let sum = 0;
+    let numberOfBookPosts = bookPosts.length;
+    if (numberOfBookPosts) {
+        bookPosts.forEach(bookPost =>{
+            sum += bookPost.rating
+        }
+        )
+        avgRating = sum/numberOfBookPosts;
+    
+        return { rating: avgRating, rateNumber: numberOfBookPosts};
+    }
+
+    return -1
+}
+
 
 
 $(document).ready(function() {
