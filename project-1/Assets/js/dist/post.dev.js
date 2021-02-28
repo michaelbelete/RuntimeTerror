@@ -77,18 +77,21 @@ function loadReviews(title, postId) {
           reviewTitle.forEach(function (result) {
             resultPost.push(result);
           });
+          resultPost = resultPost.reverse(function (a, b) {
+            return a - b;
+          });
 
           if (!(resultPost.length >= 5)) {
-            _context.next = 17;
+            _context.next = 18;
             break;
           }
 
           return _context.abrupt("return", resultPost.slice(0, 5));
 
-        case 17:
+        case 18:
           return _context.abrupt("return", resultPost);
 
-        case 18:
+        case 19:
         case "end":
           return _context.stop();
       }
@@ -170,7 +173,7 @@ function loadSpecificPost() {
           specificPost.innerHTML = "";
           specificComment.innerHTML = "";
           bookRating.innerHTML = "";
-          strBookRating = "\n    <div class=\"col-md-5 pl-3 pt-2 pr-4 text-center\">\n    <img src=\"".concat(post.picture, "\" width=\"100%\" height=\"120px\">\n    <h2 class=\"display-4 pt-3 mt-4 font-weight-bold text-warning\">").concat(post.rating, "</h2>\n    <p>Average Rating</p>\n</div>\n<div class=\"col-md-6 pl-0 pt-3\">\n    <h4 class=\"pl-3 font-weight-bold\">").concat(book.title, "</h4>\n    <p class=\"font-weight-lighter text-muted pt-2 pl-3 mb-1\">Author: ").concat(book.author, "</p>\n    <small class=\"font-weight-lighter text-muted pl-3 p-0\">Publisher: ").concat(book.publisher, "</small>\n    <div id=\"starRating\" class=\"pt-5\"></div>\n</div>\n    ");
+          strBookRating = "\n    <div class=\"col-md-5 pl-3 pt-2 pr-4 text-center\">\n    <img src=\"".concat(post.picture, "\" width=\"100%\" height=\"120px\">\n    <h2 class=\"display-4 pt-3 font-weight-bold text-warning\">").concat(post.rating, "</h2>\n    <p>Average Rating</p>\n</div>\n<div class=\"col-md-6 pl-0 pt-3\">\n    <h4 class=\"pl-3 font-weight-bold\">").concat(book.title, "</h4>\n    <p class=\"font-weight-lighter text-muted pt-2 pl-3 mb-1\">Author: ").concat(book.author, "</p>\n    <small class=\"font-weight-lighter text-muted pl-3 p-0\">Publisher: ").concat(book.publisher, "</small>\n    <div id=\"starRating\" class=\"pt-5\"></div>\n</div>\n    ");
           htmlPost = new DOMParser().parseFromString(strPost, 'text/html');
           specificPost.appendChild(htmlPost.body.firstChild);
           generateStar(post.postId, post.rating);

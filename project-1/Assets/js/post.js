@@ -55,7 +55,7 @@ function generateStar(id, rating) {
 
 async function loadReviews(title, postId) {
     console.log(title)
-    const resultPost = []
+    let resultPost = []
         // console.log("mike")
         // const reviewWithTitle = await db.posts.where("title").equalsIgnoreCase(title).toArray()
     const reviewPost = await db.posts.where("postId").equals(postId).toArray()
@@ -67,6 +67,10 @@ async function loadReviews(title, postId) {
     const reviewTitle = await db.posts.where("bookId").equals(book.bookId).toArray()
     reviewTitle.forEach((result) => {
         resultPost.push(result)
+    })
+
+    resultPost = resultPost.reverse(function(a, b) {
+        return a - b
     })
 
     if (resultPost.length >= 5) {
@@ -195,7 +199,7 @@ async function loadSpecificPost() {
     const strBookRating = `
     <div class="col-md-5 pl-3 pt-2 pr-4 text-center">
     <img src="${ post.picture }" width="100%" height="120px">
-    <h2 class="display-4 pt-3 mt-4 font-weight-bold text-warning">${ post.rating }</h2>
+    <h2 class="display-4 pt-3 font-weight-bold text-warning">${ post.rating }</h2>
     <p>Average Rating</p>
 </div>
 <div class="col-md-6 pl-0 pt-3">
