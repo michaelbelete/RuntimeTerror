@@ -28,6 +28,11 @@
 
 <body>
   <div id="header"></div>
+  <div class="d-flex justify-content-center pt-3">
+    <div class="spinner-border text-primary" role="status" id="postLoader">
+      <span class="sr-only">Loading posts...</span>
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-2">&nbsp;</div>
     <div class="col-md-8">
@@ -143,6 +148,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
           <h4>Add Book</h4>
+          <div class="alert alert-dismissible fade show alert-success" style="display: none;" id="addMessage" role="alert">Book Added</div>
           <form action="#" id="addBook">
               <div class="form-group">
                   <label for="title">Book Title</label>
@@ -181,6 +187,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
           <h4>Modify Book</h4>
+          <div class="alert alert-dismissible fade show alert-success" style="display: none;" id="editMessage" role="alert">Book Modified</div>
           <form action="#" id="modifyBook">
               <div class="form-group">
                   <label for="title">Book Title</label>
@@ -210,7 +217,7 @@
     </div>
   </div>
 
-  <div class="modal" id="alert2" tabindex="-1" role="dialog">
+  <!-- <div class="modal" id="alert2" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -248,7 +255,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
 
   <!-- JQuery -->

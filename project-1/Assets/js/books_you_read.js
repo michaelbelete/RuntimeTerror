@@ -244,6 +244,9 @@ function bookValidate(e){
 }
 
 
+let addMessage = document.querySelector("#addMessage");
+let editMessage = document.querySelector("#editMessage");
+
 function addNewBook() {
     // e.preventDefault();
 
@@ -268,6 +271,12 @@ function addNewBook() {
         console.log("book created succesfully")
         addBook.reset();
         displayMyBooks();
+        addMessage.setAttribute("style","display: block !important"); 
+        setTimeout(()=>{
+           addMessage.setAttribute("style","display: none !important");
+           document.querySelector("#postmodal span").click()
+        },1500)
+        
     }).catch((error) => console.log(error))
     
 
@@ -290,6 +299,11 @@ function modifyBookF(id){
             // console.log(x);
             console.log('updated successfully');
             displayMyBooks();
+            editMessage.setAttribute("style","display: block !important"); 
+            setTimeout(() => {
+                editMessage.setAttribute("style", "display: none !important");
+                document.querySelector("#postmodalModify span").click()
+            }, 1500)
         } 
         else console.log("modification failed: either key doesn't exist or no modification made.");
     })
@@ -364,6 +378,7 @@ function displayMyBooks() {
             d.appendChild(p);
             bookList.appendChild(d);
         }
+        document.querySelector('.spinner-border').parentElement.setAttribute("style", "display: none !important");
     })
 
 }
@@ -544,39 +559,39 @@ function updateBookPrivacyStatus(e){
 
 
 
-function alert2ui(){
-    $('#alert2').modal({
-        keyboard: false
-    })
-}
+// function alert2ui(){
+//     $('#alert2').modal({
+//         keyboard: false
+//     })
+// }
 
-function confirm2ui(){
-    $('#confirm2').modal({
-        keyboard: false
-    })
-}
+// function confirm2ui(){
+//     $('#confirm2').modal({
+//         keyboard: false
+//     })
+// }
 
-let confirmQ = null;
+// let confirmQ = null;
 
-function confirm2(message){
-    "document.querySelector('..').innerHTML += message;"
-    let ok_btn = "document.querySelector(...)";
-    // let no_btn = "...";
-    ok_btn.addEventListener('click', compare);
-    //???
-    while(confirmQ == null){
-    setTimeout(() => {if (confirmQ != null) return confrimQ}, 500);
-    }
-    console.log(confirmQ);
-    return confirmQ;
-}
+// function confirm2(message){
+//     "document.querySelector('..').innerHTML += message;"
+//     let ok_btn = "document.querySelector(...)";
+//     // let no_btn = "...";
+//     ok_btn.addEventListener('click', compare);
+//     //???
+//     while(confirmQ == null){
+//     setTimeout(() => {if (confirmQ != null) return confrimQ}, 500);
+//     }
+//     console.log(confirmQ);
+//     return confirmQ;
+// }
 
-function compare(e){
-    if(e.target == ok_btn){
-        console.log(confirmQ);
-        confrimQ = true;
-    }
-    else {
-        confirmQ = false;
-    }
-}
+// function compare(e){
+//     if(e.target == ok_btn){
+//         console.log(confirmQ);
+//         confrimQ = true;
+//     }
+//     else {
+//         confirmQ = false;
+//     }
+// }

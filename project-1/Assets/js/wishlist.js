@@ -245,6 +245,9 @@ function wishListValidate(e){
 // )
 
 
+let addWishMessage = document.querySelector("#addWishMessage");
+let editWishMessage = document.querySelector("#editWishMessage");
+
 // function addNewBook(e) {
 function addNewBook() {
     // e.preventDefault();
@@ -287,6 +290,11 @@ function addNewBook() {
         console.log("book created succesfully _ RUNTIME TeRROR")
         addBook.reset();
         displayMyBooks();
+        addWishMessage.setAttribute("style","display: block !important"); 
+        setTimeout(()=>{
+           addWishMessage.setAttribute("style","display: none !important");
+           document.querySelector("#postmodal span").click()
+        },1500)
     }).catch((error) => console.log(error))
     
 
@@ -309,6 +317,11 @@ function modifyBookF(id){
             // console.log(x);
             console.log('updated successfully');
             displayMyBooks();
+            editWishMessage.setAttribute("style","display: block !important"); 
+            setTimeout(() => {
+                editWishMessage.setAttribute("style", "display: none !important");
+                document.querySelector("#postmodalModify span").click()
+            }, 1500)
         } 
         else console.log("modification failed: either key doesn't exist or no modification made.");
     })
@@ -383,6 +396,7 @@ function displayMyBooks() {
             d.appendChild(p);
             bookList.appendChild(d);
         }
+        document.querySelector('.spinner-border').parentElement.setAttribute("style", "display: none !important");
     })
     // .then(console.log("HERE"))
     // .catch(console.log("there"))
