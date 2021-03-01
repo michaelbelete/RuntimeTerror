@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
   loadMyBooks();
   loadPosts();
   loadRecentBooks();
+  loadPopularMembers();
 });
 
 function loadMyBooks() {
@@ -212,47 +213,155 @@ function loadRecentBooks() {
   });
 }
 
-function averageRatingOfBook(bookID) {
-  var bookPosts, avgRating, sum, numberOfBookPosts;
-  return regeneratorRuntime.async(function averageRatingOfBook$(_context5) {
+function loadPopularMembers() {
+  var totalPostNumberList, posts, users, firstUserIdDistanceFromZero, sortedTotalPostNumberList, popularUsersNumberOfPosts, popularUsersId, i, j, _i, popularUser, popularUsersList, div;
+
+  return regeneratorRuntime.async(function loadPopularMembers$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
-          _context5.next = 2;
-          return regeneratorRuntime.awrap(db.posts.where("bookId").equals(bookID).toArray());
+          //finding id's of the five most popular users - users with most posts
+          totalPostNumberList = []; //total number of posts for each user - the index of the array corresponds to the id of the user
 
-        case 2:
-          bookPosts = _context5.sent;
-          avgRating = 0;
-          sum = 0;
-          numberOfBookPosts = bookPosts.length;
+          _context5.next = 3;
+          return regeneratorRuntime.awrap(db.posts.toArray());
 
-          if (!numberOfBookPosts) {
-            _context5.next = 10;
+        case 3:
+          posts = _context5.sent;
+          _context5.next = 6;
+          return regeneratorRuntime.awrap(db.users.toArray());
+
+        case 6:
+          users = _context5.sent;
+          firstUserIdDistanceFromZero = users[0].userId; //gap between 0 and first user id //so as not to have an array with many empties when the gap is big
+
+          users.forEach(function (user) {
+            posts.forEach(function (post) {
+              if (post.userId == user.userId) totalPostNumberList[user.userId - firstUserIdDistanceFromZero] ? totalPostNumberList[user.userId - firstUserIdDistanceFromZero] += 1 : totalPostNumberList[user.userId - firstUserIdDistanceFromZero] = 1;
+            });
+          });
+          sortedTotalPostNumberList = totalPostNumberList;
+          sortedTotalPostNumberList.sort();
+          popularUsersNumberOfPosts = sortedTotalPostNumberList.length >= 5 ? sortedTotalPostNumberList.splice(sortedTotalPostNumberList.length - 5, 5) : sortedTotalPostNumberList; // let popularUsersId = totalPostNumberList.length >= 5? range(totalPostNumberList.length-4, totalPostNumberList.length+1) : range(1, totalPostNumberList.length+1)
+
+          popularUsersId = [];
+          i = 0;
+
+        case 14:
+          if (!(i < popularUsersNumberOfPosts.length)) {
+            _context5.next = 26;
             break;
           }
 
-          bookPosts.forEach(function (bookPost) {
-            sum += bookPost.rating;
-          });
-          avgRating = sum / numberOfBookPosts;
-          return _context5.abrupt("return", {
-            rating: avgRating,
-            rateNumber: numberOfBookPosts
-          });
+          j = 0;
 
-        case 10:
-          return _context5.abrupt("return", -1);
+        case 16:
+          if (!(j < totalPostNumberList.length)) {
+            _context5.next = 23;
+            break;
+          }
 
-        case 11:
+          if (!(popularUsersNumberOfPosts[i] == totalPostNumberList[j])) {
+            _context5.next = 20;
+            break;
+          }
+
+          popularUsersId[i] = j + firstUserIdDistanceFromZero;
+          return _context5.abrupt("break", 23);
+
+        case 20:
+          j++;
+          _context5.next = 16;
+          break;
+
+        case 23:
+          i++;
+          _context5.next = 14;
+          break;
+
+        case 26:
+          _i = popularUsersId.length - 1;
+
+        case 27:
+          if (!(_i >= 0)) {
+            _context5.next = 39;
+            break;
+          }
+
+          _context5.next = 30;
+          return regeneratorRuntime.awrap(db.users.where("userId").equals(popularUsersId[_i]).toArray());
+
+        case 30:
+          popularUser = _context5.sent;
+          popularUsersList = document.querySelector("section > div > div:nth-child(2) > div");
+          div = document.createElement('div');
+          div.className = "row mb-4";
+          div.innerHTML += "<div class=\"col-3 px-3\">\n            <img src=\"".concat(popularUser[_i].profilePicture, "\" class=\"rounded-circle\" height=\"60\" />\n        </div>\n        <div class=\"col-8 pt-2\">\n            <p class=\"title font-wight-bold p-0 m-0\">").concat(popularUser[_i].firstName, " ").concat(popularUser[_i].lastName, "</p>\n            <small class=\"text-muted\">").concat(popularUser[_i].username, "</small>\n        </div>");
+          popularUsersList.appendChild(div);
+
+        case 36:
+          _i--;
+          _context5.next = 27;
+          break;
+
+        case 39:
         case "end":
           return _context5.stop();
       }
     }
   });
-}
+} // function range(begin,end){
+//     let arr = [];
+//     for (let i = begin; i < end; i++) arr.push(i);
+//     return arr;
+// }
+// possibly temporary
+// for header
+// search
+
 
 $(document).ready(function () {
   $('#header').load('includes/header.html');
   $('#books').select2();
 });
+var search = document.querySelector("#search");
+search.addEventListener('keyup', filter);
+
+function filter() {
+  var noResult = true; // var noMatch = document.createElement('p');
+  // clearing sides
+
+  if (search.value) {
+    document.querySelector('section > div > div:nth-child(2) > div:last-child > div').setAttribute("style", "display: none !important");
+    document.querySelector('section > div > div:last-child > div:last-child > div').setAttribute("style", "display: none !important");
+    document.querySelector('section > div > div:first-child > div > p').innerHTML = "Search Results";
+    document.querySelector('section > div > div:first-child > div > p:last-child').innerHTML = "&nbsp";
+  } else {
+    document.querySelector('section > div > div:nth-child(2) > div:last-child > div').setAttribute("style", "display: flex !important");
+    document.querySelector('section > div > div:last-child > div:last-child > div').setAttribute("style", "display: flex !important");
+    document.querySelector('section > div > div:first-child > div > p').innerHTML = "Feeds";
+    document.querySelector('section > div > div:first-child > div > p:last-child').innerHTML = "Check what others user have been up to!";
+  } // filter
+
+
+  var feeds = document.querySelectorAll('section > div > div:nth-child(3) > div:last-child > div');
+  feeds.forEach(function (postDiv) {
+    if (postDiv.textContent.toLocaleLowerCase().includes(search.value.toLocaleLowerCase())) {
+      postDiv.style.display = "flex";
+      noResult = false;
+      return;
+    }
+
+    postDiv.setAttribute("style", "display: none !important");
+  }); // no match message
+
+  if (noResult) {
+    document.querySelector('section > div > div:first-child > div > p:last-child').innerHTML = "Oops. No match was found. Try changing your search phrase."; // noMath.className = "text-center h5";
+    // noMatch.textContent = "Oops. No match was found. Try changing your search phrase.";
+    // feeds.appendChild(noMatch);
+    // noMatch.setAttribute("style", "display: block !important");
+  } else {
+    document.querySelector('section > div > div:first-child > div > p:last-child').innerHTML = "&nbsp"; // document.querySelector('section').appendChild(noMatch);
+    // noMatch.style.display = null;
+  }
+}

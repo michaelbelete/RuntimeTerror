@@ -217,55 +217,40 @@ async function loadRecentBooks() {
     })
 }
 
-async function averageRatingOfBook(bookID) {
-    let bookPosts = await db.posts.where("bookId").equals(bookID).toArray()
-    let avgRating = 0;
-    let sum = 0;
-    let numberOfBookPosts = bookPosts.length;
-    if (numberOfBookPosts) {
-        bookPosts.forEach(bookPost => {
-            sum += bookPost.rating
-        })
-        avgRating = sum / numberOfBookPosts;
-
-        return { rating: avgRating, rateNumber: numberOfBookPosts };
-    }
-
-    return -1
-}
 
 
 
-async function loadPopularMembers(){
 
-        //finding id's of the five most popular users - users with most posts
-    let totalPostNumberList = [];//total number of posts for each user - the index of the array corresponds to the id of the user
+async function loadPopularMembers() {
+
+    //finding id's of the five most popular users - users with most posts
+    let totalPostNumberList = []; //total number of posts for each user - the index of the array corresponds to the id of the user
     let posts = await db.posts.toArray();
     let users = await db.users.toArray();
-    let firstUserIdDistanceFromZero = users[0].userId;//gap between 0 and first user id //so as not to have an array with many empties when the gap is big
+    let firstUserIdDistanceFromZero = users[0].userId; //gap between 0 and first user id //so as not to have an array with many empties when the gap is big
     users.forEach(user => {
         posts.forEach(post => {
-            if (post.userId == user.userId) totalPostNumberList[user.userId-firstUserIdDistanceFromZero]? totalPostNumberList[user.userId-firstUserIdDistanceFromZero] += 1 : totalPostNumberList[user.userId-firstUserIdDistanceFromZero] = 1;
+            if (post.userId == user.userId) totalPostNumberList[user.userId - firstUserIdDistanceFromZero] ? totalPostNumberList[user.userId - firstUserIdDistanceFromZero] += 1 : totalPostNumberList[user.userId - firstUserIdDistanceFromZero] = 1;
         })
     })
     let sortedTotalPostNumberList = totalPostNumberList;
     sortedTotalPostNumberList.sort();
-    let popularUsersNumberOfPosts = sortedTotalPostNumberList.length >= 5? sortedTotalPostNumberList.splice(sortedTotalPostNumberList.length-5,5): sortedTotalPostNumberList;
+    let popularUsersNumberOfPosts = sortedTotalPostNumberList.length >= 5 ? sortedTotalPostNumberList.splice(sortedTotalPostNumberList.length - 5, 5) : sortedTotalPostNumberList;
     // let popularUsersId = totalPostNumberList.length >= 5? range(totalPostNumberList.length-4, totalPostNumberList.length+1) : range(1, totalPostNumberList.length+1)
     let popularUsersId = [];
-    for (let i = 0; i < popularUsersNumberOfPosts.length; i++){
-        for (let j = 0; j < totalPostNumberList.length; j++){
-            if(popularUsersNumberOfPosts[i] == totalPostNumberList[j]) {
+    for (let i = 0; i < popularUsersNumberOfPosts.length; i++) {
+        for (let j = 0; j < totalPostNumberList.length; j++) {
+            if (popularUsersNumberOfPosts[i] == totalPostNumberList[j]) {
                 popularUsersId[i] = j + firstUserIdDistanceFromZero;
                 break;
-            }    
+            }
         }
     }
 
 
 
-        // for each id, get the user json and appened date from it to the html
-    for (let i = popularUsersId.length-1; i >= 0; i--){
+    // for each id, get the user json and appened date from it to the html
+    for (let i = popularUsersId.length - 1; i >= 0; i--) {
         let popularUser = await db.users.where("userId").equals(popularUsersId[i]).toArray()
 
         let popularUsersList = document.querySelector("section > div > div:nth-child(2) > div");
@@ -280,11 +265,11 @@ async function loadPopularMembers(){
         </div>`
         popularUsersList.appendChild(div);
     }
-    
+
     // popularUsersId.forEach(popularUserId => {
-        
+
     // })
-    
+
 }
 
 // function range(begin,end){
@@ -315,18 +300,18 @@ $(document).ready(function() {
 
 let search = document.querySelector("#search");
 search.addEventListener('keyup', filter);
-function filter(){
+
+function filter() {
     var noResult = true;
     // var noMatch = document.createElement('p');
 
     // clearing sides
-    if (search.value){
+    if (search.value) {
         document.querySelector('section > div > div:nth-child(2) > div:last-child > div').setAttribute("style", "display: none !important");
         document.querySelector('section > div > div:last-child > div:last-child > div').setAttribute("style", "display: none !important");
         document.querySelector('section > div > div:first-child > div > p').innerHTML = "Search Results";
         document.querySelector('section > div > div:first-child > div > p:last-child').innerHTML = "&nbsp";
-    }
-    else{
+    } else {
         document.querySelector('section > div > div:nth-child(2) > div:last-child > div').setAttribute("style", "display: flex !important");
         document.querySelector('section > div > div:last-child > div:last-child > div').setAttribute("style", "display: flex !important");
         document.querySelector('section > div > div:first-child > div > p').innerHTML = "Feeds";

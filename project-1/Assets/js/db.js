@@ -65,15 +65,15 @@ const newUser3 = {
 //         shortDesc: "slorem aiusbasbjhbasjdbjasbbs",
 //         userId: 1,
 //     }
-db.users.put(newUser).then(function() {
-    console.log("user created successfully")
-}).catch((error) => console.log(error))
-db.users.put(newUser2).then(function() {
-    console.log("user created successfully")
-}).catch((error) => console.log(error))
-db.users.put(newUser3).then(function() {
-    console.log("user created successfully")
-}).catch((error) => console.log(error))
+// db.users.put(newUser).then(function() {
+//     console.log("user created successfully")
+// }).catch((error) => console.log(error))
+// db.users.put(newUser2).then(function() {
+//     console.log("user created successfully")
+// }).catch((error) => console.log(error))
+// db.users.put(newUser3).then(function() {
+//     console.log("user created successfully")
+// }).catch((error) => console.log(error))
 
 // db.books.put(book)
 //creating a sample user

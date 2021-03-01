@@ -82,6 +82,23 @@ async function loadReviews(title, postId) {
 }
 
 
+async function averageRatingOfBook(bookID) {
+    let bookPosts = await db.posts.where("bookId").equals(bookID).toArray()
+    let avgRating = 0;
+    let sum = 0;
+    let numberOfBookPosts = bookPosts.length;
+    if (numberOfBookPosts) {
+        bookPosts.forEach(bookPost => {
+            sum += bookPost.rating
+        })
+        avgRating = sum / numberOfBookPosts;
+
+        return { rating: avgRating, rateNumber: numberOfBookPosts };
+    }
+
+    return -1
+}
+
 async function loadSpecificPost() {
 
     loader.style.display = "block"
@@ -196,11 +213,16 @@ async function loadSpecificPost() {
     specificComment.innerHTML = ""
     bookRating.innerHTML = ""
 
+    var avgRating = await averageRatingOfBook(book.bookId).then((avgBook) => {
+        return avgBook
+    })
+
     const strBookRating = `
     <div class="col-md-5 pl-3 pt-2 pr-4 text-center">
     <img src="${ post.picture }" width="100%" height="120px">
-    <h2 class="display-4 pt-3 font-weight-bold text-warning">${ post.rating }</h2>
-    <p>Average Rating</p>
+    <h2 class="display-4 pt-2 font-weight-bold text-warning">${ avgRating.rating }</h2>
+    <p class="mb-1">Average Rating</p>
+    <small class="text-muted">${ avgRating.rateNumber } Total Ratings</small>
 </div>
 <div class="col-md-6 pl-0 pt-3">
     <h4 class="pl-3 font-weight-bold">${ book.title }</h4>
@@ -217,7 +239,7 @@ async function loadSpecificPost() {
     bookRating.innerHTML = strBookRating
     $(function() {
         $(`#starRating`).rateYo({
-            rating: 3.5,
+            rating: avgRating.rating,
             starWidth: "30px",
             ratedFill: "#ffaf01",
             halfStar: true,
@@ -271,6 +293,7 @@ async function addComment() {
             alert.className = "alert alert-success"
             alert.textContent = "commented"
             commentMessage.appendChild(alert)
+            comment.value = ''
         }).catch((error) => {
             commentMessage.innerHTML = ""
             const alert = document.createElement("div")
