@@ -179,7 +179,9 @@ function loadSpecificPost() {
         case 18:
           comments = _context5.sent;
           loadReviews(book.title, post.postId).then(function (result) {
-            var reviews = result;
+            var reviews = result.filter(function (posts) {
+              return posts.postType === 'review';
+            });
             reviews.forEach(function _callee(review) {
               var usr, strReview, htmlReview;
               return regeneratorRuntime.async(function _callee$(_context3) {

@@ -112,7 +112,7 @@ async function loadSpecificPost() {
     const comments = await commentData.toArray()
 
     loadReviews(book.title, post.postId).then((result) => {
-        const reviews = result
+        const reviews = result.filter((posts => posts.postType === 'review'))
 
         reviews.forEach(async(review) => {
             let usr = await db.users.where("userId").equals(review.userId).first()
