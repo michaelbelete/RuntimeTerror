@@ -321,47 +321,47 @@ function loadPopularMembers() {
 
 
 $(document).ready(function () {
-  $('#header').load('includes/header.html');
-  $('#books').select2();
-});
-var search = document.querySelector("#search");
-search.addEventListener('keyup', filter);
+  $('#header').load('includes/header.html', function () {
+    var search = document.querySelector("#search");
+    search.addEventListener('keyup', filter);
 
-function filter() {
-  var noResult = true; // var noMatch = document.createElement('p');
-  // clearing sides
+    function filter() {
+      var noResult = true; // var noMatch = document.createElement('p');
+      // clearing sides
 
-  if (search.value) {
-    document.querySelector('section > div > div:nth-child(2) > div:last-child > div').setAttribute("style", "display: none !important");
-    document.querySelector('section > div > div:last-child > div:last-child > div').setAttribute("style", "display: none !important");
-    document.querySelector('section > div > div:first-child > div > p').innerHTML = "Search Results";
-    document.querySelector('section > div > div:first-child > div > p:last-child').innerHTML = "&nbsp";
-  } else {
-    document.querySelector('section > div > div:nth-child(2) > div:last-child > div').setAttribute("style", "display: flex !important");
-    document.querySelector('section > div > div:last-child > div:last-child > div').setAttribute("style", "display: flex !important");
-    document.querySelector('section > div > div:first-child > div > p').innerHTML = "Feeds";
-    document.querySelector('section > div > div:first-child > div > p:last-child').innerHTML = "Check what others user have been up to!";
-  } // filter
+      if (search.value) {
+        document.querySelector('section > div > div:nth-child(2) > div:last-child > div').setAttribute("style", "display: none !important");
+        document.querySelector('section > div > div:last-child > div:last-child > div').setAttribute("style", "display: none !important");
+        document.querySelector('section > div > div:first-child > div > p').innerHTML = "Search Results";
+        document.querySelector('section > div > div:first-child > div > p:last-child').innerHTML = "&nbsp";
+      } else {
+        document.querySelector('section > div > div:nth-child(2) > div:last-child > div').setAttribute("style", "display: flex !important");
+        document.querySelector('section > div > div:last-child > div:last-child > div').setAttribute("style", "display: flex !important");
+        document.querySelector('section > div > div:first-child > div > p').innerHTML = "Feeds";
+        document.querySelector('section > div > div:first-child > div > p:last-child').innerHTML = "Check what others user have been up to!";
+      } // filter
 
 
-  var feeds = document.querySelectorAll('section > div > div:nth-child(3) > div:last-child > div');
-  feeds.forEach(function (postDiv) {
-    if (postDiv.textContent.toLocaleLowerCase().includes(search.value.toLocaleLowerCase())) {
-      postDiv.style.display = "flex";
-      noResult = false;
-      return;
+      var feeds = document.querySelectorAll('section > div > div:nth-child(3) > div:last-child > div');
+      feeds.forEach(function (postDiv) {
+        if (postDiv.textContent.toLocaleLowerCase().includes(search.value.toLocaleLowerCase())) {
+          postDiv.style.display = "flex";
+          noResult = false;
+          return;
+        }
+
+        postDiv.setAttribute("style", "display: none !important");
+      }); // no match message
+
+      if (noResult) {
+        document.querySelector('section > div > div:first-child > div > p:last-child').innerHTML = "Oops. No match was found. Try changing your search phrase."; // noMath.className = "text-center h5";
+        // noMatch.textContent = "Oops. No match was found. Try changing your search phrase.";
+        // feeds.appendChild(noMatch);
+        // noMatch.setAttribute("style", "display: block !important");
+      } else {
+        document.querySelector('section > div > div:first-child > div > p:last-child').innerHTML = "&nbsp"; // document.querySelector('section').appendChild(noMatch);
+        // noMatch.style.display = null;
+      }
     }
-
-    postDiv.setAttribute("style", "display: none !important");
-  }); // no match message
-
-  if (noResult) {
-    document.querySelector('section > div > div:first-child > div > p:last-child').innerHTML = "Oops. No match was found. Try changing your search phrase."; // noMath.className = "text-center h5";
-    // noMatch.textContent = "Oops. No match was found. Try changing your search phrase.";
-    // feeds.appendChild(noMatch);
-    // noMatch.setAttribute("style", "display: block !important");
-  } else {
-    document.querySelector('section > div > div:first-child > div > p:last-child').innerHTML = "&nbsp"; // document.querySelector('section').appendChild(noMatch);
-    // noMatch.style.display = null;
-  }
-}
+  });
+});
