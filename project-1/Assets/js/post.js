@@ -21,6 +21,9 @@ const commentBtn = document.querySelector("#commentBtn")
 
 const loader = document.querySelector('#specificPostLoader')
 
+//book rating vars
+const bookRating = document.querySelector('#bookRating')
+const recentReviews = document.querySelector('#recentReviews')
 document.addEventListener('DOMContentLoaded', function() {
     checkPostId()
     loadSpecificPost()
@@ -48,6 +51,37 @@ function generateStar(id, rating) {
         })
     })
 }
+
+
+async function loadReviews(title, postId) {
+    console.log(title)
+    let resultPost = []
+        // console.log("mike")
+        // const reviewWithTitle = await db.posts.where("title").equalsIgnoreCase(title).toArray()
+    const reviewPost = await db.posts.where("postId").equals(postId).toArray()
+    reviewPost.forEach((result) => {
+        resultPost.push(result)
+    })
+    const book = await db.books.where('title').equalsIgnoreCase(title).first()
+
+    const reviewTitle = await db.posts.where("bookId").equals(book.bookId).toArray()
+    reviewTitle.forEach((result) => {
+        resultPost.push(result)
+    })
+
+    resultPost = resultPost.reverse(function(a, b) {
+        return a - b
+    })
+
+    if (resultPost.length >= 5) {
+        return resultPost.slice(0, 5)
+    } else {
+        return resultPost
+    }
+    // console.log(resultPost.slice(0))
+}
+
+
 async function loadSpecificPost() {
 
     loader.style.display = "block"
@@ -60,6 +94,30 @@ async function loadSpecificPost() {
     const commentCount = await commentData.count()
     const comments = await commentData.toArray()
 
+    loadReviews(book.title, post.postId).then((result) => {
+        const reviews = result
+
+        reviews.forEach(async(review) => {
+            let usr = await db.users.where("userId").equals(review.userId).first()
+            let strReview = `
+                <div class="row pl-2 border-bottom py-2">
+                    <div class="col-sm-3">
+                        <a href="profile.html?id=${ usr.userId }"><img src="${usr.profilePicture}" alt="profile" class="rounded-circle ml-3"
+                                width="70" height="70">
+                        </a>
+                    </div>
+                    <div class="col-sm-8">
+                        <h5 class="text-primary pt-1 m-0">${ usr.firstName} ${ usr.lastName }</h5>
+                        <small class="text-muted">${ review.post.replace(/(<([^>]+)>)/gi, "") }</small>
+                    </div>
+            </div>
+            `
+
+            let htmlReview = new DOMParser().parseFromString(strReview, 'text/html')
+            recentReviews.appendChild(htmlReview.body.firstChild)
+
+        })
+    })
     if (post.picture == "") {
         var strPost = `
     <div class="card card-body mb-4 p-0">
@@ -136,13 +194,38 @@ async function loadSpecificPost() {
     }
     specificPost.innerHTML = ""
     specificComment.innerHTML = ""
+    bookRating.innerHTML = ""
+
+    const strBookRating = `
+    <div class="col-md-5 pl-3 pt-2 pr-4 text-center">
+    <img src="${ post.picture }" width="100%" height="120px">
+    <h2 class="display-4 pt-3 font-weight-bold text-warning">${ post.rating }</h2>
+    <p>Average Rating</p>
+</div>
+<div class="col-md-6 pl-0 pt-3">
+    <h4 class="pl-3 font-weight-bold">${ book.title }</h4>
+    <p class="font-weight-lighter text-muted pt-2 pl-3 mb-1">Author: ${ book.author }</p>
+    <small class="font-weight-lighter text-muted pl-3 p-0">Publisher: ${ book.publisher }</small>
+    <div id="starRating" class="pt-5"></div>
+</div>
+    `
 
     let htmlPost = new DOMParser().parseFromString(strPost, 'text/html')
     specificPost.appendChild(htmlPost.body.firstChild)
     generateStar(post.postId, post.rating)
 
+    bookRating.innerHTML = strBookRating
+    $(function() {
+        $(`#starRating`).rateYo({
+            rating: 3.5,
+            starWidth: "30px",
+            ratedFill: "#ffaf01",
+            halfStar: true,
+            readOnly: true,
+        })
+    })
+
     comments.forEach(async comment => {
-        console.log(comment)
         const user = await db.users.where("userId").equals(comment.userId).first()
         let strComment = `
             <div class="row px-4 pb-2" id="comments">

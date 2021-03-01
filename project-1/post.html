@@ -17,7 +17,6 @@
     <!-- star rating  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
     <!-- select 2 -->
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- material icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <title>Post</title>
@@ -35,74 +34,8 @@
     <section class="p-4 mt-1">
         <div class="row">
             <div class="col-md-1"></div>
-            <div class="col-md-7" id="specificPost">
-            </div>
-            <div class="col-md-4">
-                <div class="card p-4">
-                    <div class="row">
-                        <div class="col-md-5 pl-3 pt-2 pr-4 text-center">
-                            <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=853&q=80" width="100%" height="120px">
-                            <h2 class="display-5 pt-3">4.5</h2>
-                            <p>Average Rating</p>
-                        </div>
-                        <div class="col-md-6 pl-0 pt-3">
-                            <h3 class="pl-3">Book Title</h3>
-                            <p class="font-weight-lighter text-muted pt-2 pl-3 mb-1">Author: Mike Belete</p>
-                            <small class="font-weight-lighter text-muted pl-3 p-0">Publisher: Mike Plc.</small>
-
-                            <div id="starRating" class="pt-5"></div>
-                        </div>
-                    </div>
-                    <div class="row border-top mt-4 pt-3 pb-3">
-                        <div class="col-md-12">
-                            <h5 class="title font-weight-bold pt-2 pb-4">Recent Reviews</h5>
-                        </div>
-                        <div id="recentReviews" class="col-md-12 p-0">
-                            <div class="row pl-2 border-bottom py-2">
-                                <div class="col-sm-3">
-                                    <a href="profile.html?id=1"><img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=500&amp;q=80" alt="profile" class="rounded-circle ml-3"
-                                            width="70" height="70">
-                                    </a>
-                                </div>
-                                <div class="col-sm-8">
-                                    <h5 class="text-primary pt-1 m-0">michael belete</h5>
-                                    <small class="text-muted">hello world</small>
-                                </div>
-                            </div>
-
-                            <div class="row pl-2 border-bottom py-2">
-                                <div class="col-sm-3">
-                                    <a href="profile.html?id=1"><img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=500&amp;q=80" alt="profile" class="rounded-circle ml-3"
-                                            width="70" height="70">
-                                    </a>
-                                </div>
-                                <div class="col-sm-8">
-                                    <h5 class="text-primary pt-1 m-0">michael belete</h5>
-                                    <small class="text-muted">hello world</small>
-                                </div>
-                            </div>
-                            <div class="row pl-2 border-bottom py-2">
-                                <div class="col-sm-3">
-                                    <a href="profile.html?id=1"><img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=500&amp;q=80" alt="profile" class="rounded-circle ml-3"
-                                            width="70" height="70">
-                                    </a>
-                                </div>
-                                <div class="col-sm-8">
-                                    <h5 class="text-primary pt-1 m-0">michael belete</h5>
-                                    <small class="text-muted">hello world</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="p-4 mt-1">
-        <div class="row">
-            <div class="col-md-1"></div>
             <div class="col-md-7">
-
+                <div id="specificPost"></div>
                 <div class="d-flex justify-content-center">
                     <div class="spinner-border text-primary" role="status" id="specificPostLoader" style="display: none;">
                         <span class="sr-only">Loading posts...</span>
@@ -136,6 +69,28 @@
 
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="card p-4">
+                    <div class="row" id="bookRating">
+                    </div>
+                    <div class="row border-top mt-4 pt-3 pb-3">
+                        <div class="col-md-12">
+                            <h5 class="title font-weight-bold pt-2 pb-4">Recent Reviews</h5>
+                        </div>
+                        <div id="recentReviews" class="col-md-12 p-0">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="p-4 mt-1">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-7">
+
+
+            </div>
         </div>
     </section>
 
@@ -150,7 +105,6 @@
     <!-- Bootstrap core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
     </script>
-    <script src="https://def drawcdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/25.0.0/classic/ckeditor.js"></script>
     <script src="Assets/js/jquery.custom-scrollbar.js"></script>
 
