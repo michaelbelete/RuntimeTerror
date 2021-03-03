@@ -48,35 +48,36 @@ bookList.addEventListener('click', fillInForm);
 // bookList.addEventListener('click', getIdEveryTwoClicks);
 
 
-const db = new Dexie('Bookacholics');
+// const db = new Dexie('Bookacholics');
 
-db.version(3).stores({
-    users: "++useId, firstName, lastName, email, &username, bio, hobbies, birthDate, currentCity, homeTown, education, registeredAt",
-    books: "++bookId, title, author, edition, publisher, dateAdded, shortDesc, userId",
-    wishlist: "++bookId, title, author, edition, publisher, dateAdded, whyWish, userId",
-    posts: "++postId, bookId, postType, rating, comments, createdAt, updatedAt, userId",
-    comments: "++commentId, comment, userId, createdAt, updatedAt"
-});
+// db.version(3).stores({
+//     users: "++useId, firstName, lastName, email, &username, bio, hobbies, birthDate, currentCity, homeTown, education, registeredAt",
+//     books: "++bookId, title, author, edition, publisher, dateAdded, shortDesc, userId",
+//     wishlist: "++bookId, title, author, edition, publisher, dateAdded, whyWish, userId",
+//     posts: "++postId, bookId, postType, rating, comments, createdAt, updatedAt, userId",
+//     comments: "++commentId, comment, userId, createdAt, updatedAt"
+// });
 
-db.open().then(displayMyBooks());
+// db.open().then(displayMyBooks());
+displayMyBooks();
 
-const newUser = {
-    firstName: "michael",
-    lastName: "belete",
-    email: "it.michael.belete@gmail.com",
-    username: "@abc",
-    bio: "some bio...",
-    hobbies: "programming",
-    birthDate: Date(),
-    currentCity: "Addis Ababa",
-    homeTown: "Bahir Dar",
-    education: "BSC",
-    registeredAt: Date(),
-}
+// const newUser = {
+//     firstName: "michael",
+//     lastName: "belete",
+//     email: "it.michael.belete@gmail.com",
+//     username: "@abc",
+//     bio: "some bio...",
+//     hobbies: "programming",
+//     birthDate: Date(),
+//     currentCity: "Addis Ababa",
+//     homeTown: "Bahir Dar",
+//     education: "BSC",
+//     registeredAt: Date(),
+// }
 
-db.users.put(newUser).then(function() {
-    console.log("user created succesfully")
-}).catch((error) => console.log(error))
+// db.users.put(newUser).then(function() {
+//     console.log("user created succesfully")
+// }).catch((error) => console.log(error))
 
 
 
@@ -151,7 +152,7 @@ function bookValidate(e){
         // console.log('if',e.target.id);
         db.books.each( book => {
             // await db.books.each( book => {
-            if (    (titleInput.value == book.title )  &&   (authorInput.value == book.author)  && (  editionInput.value == book.edition)   ){
+            if (    (titleInput.value == book.title )  &&   (authorInput.value == book.author)  && (  editionInput.value == book.edition) ){
                     alert("You've already added the book."); //will change it
                     isNotRead = false;
                     return;
@@ -166,7 +167,7 @@ function bookValidate(e){
                         // alert("You've already added the book."); //will change it
                         // isNotRead = false;
                         // return;
-                        alert("You finally read it! The book will to be removed from your wishlist.");
+                        alert("You finally read it! The book will be removed from your wishlist.");
                         console.log(book.bookId);
                         db.wishlist.delete(book.bookId);
                     }
@@ -210,7 +211,8 @@ function bookValidate(e){
         ).then( 
             db.books.each( book => {
                 // await db.books.each( book => {
-                if (    (titleMInput.value == book.title )  &&   (authorMInput.value == book.author)  && (  editionMInput.value == book.edition)   ){
+                console.log(modifyBkId, book.bookId)
+                if (    (titleMInput.value == book.title )  &&   (authorMInput.value == book.author)  && (  editionMInput.value == book.edition)  && (book.bookId != modifyBkId) ){
                         alert("You've already added the book. You can delete this book by clicking the red bin icon."); //will change it
                         isNotRead = false;
                         return;
@@ -243,6 +245,9 @@ function bookValidate(e){
 }
 
 
+let addMessage = document.querySelector("#addMessage");
+let editMessage = document.querySelector("#editMessage");
+
 function addNewBook() {
     // e.preventDefault();
 
@@ -267,6 +272,12 @@ function addNewBook() {
         console.log("book created succesfully")
         addBook.reset();
         displayMyBooks();
+        addMessage.setAttribute("style","display: block !important"); 
+        setTimeout(()=>{
+           addMessage.setAttribute("style","display: none !important");
+           document.querySelector("#postmodal span").click()
+        },1500)
+        
     }).catch((error) => console.log(error))
     
 
@@ -289,6 +300,11 @@ function modifyBookF(id){
             // console.log(x);
             console.log('updated successfully');
             displayMyBooks();
+            editMessage.setAttribute("style","display: block !important"); 
+            setTimeout(() => {
+                editMessage.setAttribute("style", "display: none !important");
+                document.querySelector("#postmodalModify span").click()
+            }, 1500)
         } 
         else console.log("modification failed: either key doesn't exist or no modification made.");
     })
@@ -359,10 +375,11 @@ function displayMyBooks() {
             let d = document.createElement('div');
             let p = document.createElement('p');
             p.textContent = "Seems like you have not added any books in your wishlist. Click the Add New Book button above to start adding.";
-            p.className = "text-center";
+            p.className = "text-center h5";
             d.appendChild(p);
             bookList.appendChild(d);
         }
+        document.querySelector('.spinner-border').parentElement.setAttribute("style", "display: none !important");
     })
 
 }
@@ -543,39 +560,39 @@ function updateBookPrivacyStatus(e){
 
 
 
-function alert2ui(){
-    $('#alert2').modal({
-        keyboard: false
-    })
-}
+// function alert2ui(){
+//     $('#alert2').modal({
+//         keyboard: false
+//     })
+// }
 
-function confirm2ui(){
-    $('#confirm2').modal({
-        keyboard: false
-    })
-}
+// function confirm2ui(){
+//     $('#confirm2').modal({
+//         keyboard: false
+//     })
+// }
 
-let confirmQ = null;
+// let confirmQ = null;
 
-function confirm2(message){
-    "document.querySelector('..').innerHTML += message;"
-    let ok_btn = "document.querySelector(...)";
-    // let no_btn = "...";
-    ok_btn.addEventListener('click', compare);
-    //???
-    while(confirmQ == null){
-    setTimeout(() => {if (confirmQ != null) return confrimQ}, 500);
-    }
-    console.log(confirmQ);
-    return confirmQ;
-}
+// function confirm2(message){
+//     "document.querySelector('..').innerHTML += message;"
+//     let ok_btn = "document.querySelector(...)";
+//     // let no_btn = "...";
+//     ok_btn.addEventListener('click', compare);
+//     //???
+//     while(confirmQ == null){
+//     setTimeout(() => {if (confirmQ != null) return confrimQ}, 500);
+//     }
+//     console.log(confirmQ);
+//     return confirmQ;
+// }
 
-function compare(e){
-    if(e.target == ok_btn){
-        console.log(confirmQ);
-        confrimQ = true;
-    }
-    else {
-        confirmQ = false;
-    }
-}
+// function compare(e){
+//     if(e.target == ok_btn){
+//         console.log(confirmQ);
+//         confrimQ = true;
+//     }
+//     else {
+//         confirmQ = false;
+//     }
+// }
