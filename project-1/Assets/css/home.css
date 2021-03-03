@@ -6,6 +6,10 @@ body {
     font-size: 14px;
 }
 
+.text-warning {
+    color: #ffaf01!important;
+}
+
 .bg-primary {
     background-color: #07a8e2 !important;
 }

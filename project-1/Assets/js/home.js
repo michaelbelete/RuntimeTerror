@@ -15,6 +15,7 @@ const selectBooks = document.querySelector("#selectBooks")
 const postType = document.querySelector('#type')
 const post = document.querySelector("#postArea")
 const postMessage = document.querySelector("#postMessage")
+const pictureUrl = document.querySelector('#picture')
 const feeds = document.querySelector("#feeds")
 const postLoader = document.querySelector("#postLoader")
 const noPost = document.querySelector("#noPost")
@@ -23,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
     loadMyBooks()
     loadPosts()
     loadRecentBooks();
+    loadPopularMembers();
 })
 
 async function loadMyBooks() {
@@ -69,7 +71,7 @@ $(function() {
                 postType: postType.value, //rec, rev
                 rating: rating,
                 post: editor.getData(),
-                picture: "https://images.unsplash.com/photo-1549122728-f519709caa9c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=625&q=80",
+                picture: pictureUrl.value,
                 createdAt: new Date(),
                 updatedAt: ""
             }
@@ -95,6 +97,9 @@ $(function() {
 
 
 async function loadPosts() {
+    //clearing the data before staring
+
+    feeds.innerHTML = ""
 
     const postCount = await db.posts.count()
     console.log(postCount)
@@ -106,9 +111,8 @@ async function loadPosts() {
             let book = await db.books.where("bookId").equals(parseInt(post.bookId)).first()
             let user = await db.users.where("userId").equals(post.userId).first()
             let comments = await db.comments.where("postId").equals(post.postId).count()
-
+            console.log(user)
             let postNoHtmlTag = post.post.replace(/(<([^>]+)>)/gi, "")
-
             if (post.picture == "") {
                 var strPost = `
             <div class="card card-body mb-4 p-0">
@@ -138,7 +142,7 @@ async function loadPosts() {
                         <div id="post-rate${post.postId}">${ post.rating }</div>
                     </div>
                     <div class="col-md-4">
-                        <a href="post.html" class=" text-primary  float-right"><i class="fa fa-comment"></i>
+                        <a href="post.html?id=${post.postId}" class=" text-primary  float-right"><i class="fa fa-comment"></i>
                             ${ comments } Comments</a>
                     </div>
                 </div>
@@ -176,7 +180,7 @@ async function loadPosts() {
                         <div id="post-rate${ post.postId }">${ post.rating }</div>
                     </div>
                     <div class="col-md-4">
-                        <a href="post.html" class=" text-primary  float-right"><i class="fa fa-comment"></i>
+                        <a href="post.html?id=${post.postId}" class=" text-primary  float-right"><i class="fa fa-comment"></i>
                             ${ comments } Comments</a>
                     </div>
                 </div>
@@ -196,10 +200,10 @@ async function loadPosts() {
 
 
 
-async function loadRecentBooks(){
+async function loadRecentBooks() {
     let bookList = document.querySelector('section > div > div:last-child > div');
     let books = await db.books.orderBy('bookId').reverse().limit(5).toArray();
-    books.forEach(book =>{
+    books.forEach(book => {
         let div = document.createElement('div');
         div.className = "row mb-4";
         div.innerHTML += `<div class="col-3 px-2">
@@ -215,7 +219,125 @@ async function loadRecentBooks(){
 
 
 
+
+
+async function loadPopularMembers() {
+
+    //finding id's of the five most popular users - users with most posts
+    let totalPostNumberList = []; //total number of posts for each user - the index of the array corresponds to the id of the user
+    let posts = await db.posts.toArray();
+    let users = await db.users.toArray();
+    let firstUserIdDistanceFromZero = users[0].userId; //gap between 0 and first user id //so as not to have an array with many empties when the gap is big
+    users.forEach(user => {
+        posts.forEach(post => {
+            if (post.userId == user.userId) totalPostNumberList[user.userId - firstUserIdDistanceFromZero] ? totalPostNumberList[user.userId - firstUserIdDistanceFromZero] += 1 : totalPostNumberList[user.userId - firstUserIdDistanceFromZero] = 1;
+        })
+    })
+    let sortedTotalPostNumberList = totalPostNumberList;
+    sortedTotalPostNumberList.sort();
+    let popularUsersNumberOfPosts = sortedTotalPostNumberList.length >= 5 ? sortedTotalPostNumberList.splice(sortedTotalPostNumberList.length - 5, 5) : sortedTotalPostNumberList;
+    // let popularUsersId = totalPostNumberList.length >= 5? range(totalPostNumberList.length-4, totalPostNumberList.length+1) : range(1, totalPostNumberList.length+1)
+    let popularUsersId = [];
+    for (let i = 0; i < popularUsersNumberOfPosts.length; i++) {
+        for (let j = 0; j < totalPostNumberList.length; j++) {
+            if (popularUsersNumberOfPosts[i] == totalPostNumberList[j]) {
+                popularUsersId[i] = j + firstUserIdDistanceFromZero;
+                break;
+            }
+        }
+    }
+
+
+
+    // for each id, get the user json and appened date from it to the html
+    for (let i = popularUsersId.length - 1; i >= 0; i--) {
+        let popularUser = await db.users.where("userId").equals(popularUsersId[i]).toArray()
+
+        let popularUsersList = document.querySelector("section > div > div:nth-child(2) > div");
+        let div = document.createElement('div');
+        div.className = "row mb-4";
+        div.innerHTML += `<div class="col-3 px-3">
+            <img src="${popularUser[i].profilePicture}" class="rounded-circle" height="60" />
+        </div>
+        <div class="col-8 pt-2">
+            <p class="title font-wight-bold p-0 m-0">${popularUser[i].firstName} ${popularUser[i].lastName}</p>
+            <small class="text-muted">${popularUser[i].username}</small>
+        </div>`
+        popularUsersList.appendChild(div);
+    }
+
+    // popularUsersId.forEach(popularUserId => {
+
+    // })
+
+}
+
+// function range(begin,end){
+//     let arr = [];
+//     for (let i = begin; i < end; i++) arr.push(i);
+//     return arr;
+// }
+
+
+
+
+// possibly temporary
+// for header
+
+// search
+
+
+
+
+
+
 $(document).ready(function() {
-    $('#header').load('includes/header.html')
-    $('#books').select2();
+
+    $('#header').load('includes/header.html', function() {
+        let search = document.querySelector("#search");
+
+        search.addEventListener('keyup', filter);
+
+        function filter() {
+            var noResult = true;
+            // var noMatch = document.createElement('p');
+
+            // clearing sides
+            if (search.value) {
+                document.querySelector('section > div > div:nth-child(2) > div:last-child > div').setAttribute("style", "display: none !important");
+                document.querySelector('section > div > div:last-child > div:last-child > div').setAttribute("style", "display: none !important");
+                document.querySelector('section > div > div:first-child > div > p').innerHTML = "Search Results";
+                document.querySelector('section > div > div:first-child > div > p:last-child').innerHTML = "&nbsp";
+            } else {
+                document.querySelector('section > div > div:nth-child(2) > div:last-child > div').setAttribute("style", "display: flex !important");
+                document.querySelector('section > div > div:last-child > div:last-child > div').setAttribute("style", "display: flex !important");
+                document.querySelector('section > div > div:first-child > div > p').innerHTML = "Feeds";
+                document.querySelector('section > div > div:first-child > div > p:last-child').innerHTML = "Check what others user have been up to!";
+            }
+
+            // filter
+            let feeds = document.querySelectorAll('section > div > div:nth-child(3) > div:last-child > div')
+            feeds.forEach(postDiv => {
+                if (postDiv.textContent.toLocaleLowerCase().includes(search.value.toLocaleLowerCase())) {
+                    postDiv.style.display = "flex";
+                    noResult = false;
+                    return;
+                }
+                postDiv.setAttribute("style", "display: none !important");
+            })
+
+            // no match message
+            if (noResult) {
+                document.querySelector('section > div > div:first-child > div > p:last-child').innerHTML = "Oops. No match was found. Try changing your search phrase.";
+                // noMath.className = "text-center h5";
+                // noMatch.textContent = "Oops. No match was found. Try changing your search phrase.";
+                // feeds.appendChild(noMatch);
+                // noMatch.setAttribute("style", "display: block !important");
+            } else {
+                document.querySelector('section > div > div:first-child > div > p:last-child').innerHTML = "&nbsp";
+                // document.querySelector('section').appendChild(noMatch);
+                // noMatch.style.display = null;
+            }
+        }
+    })
 });

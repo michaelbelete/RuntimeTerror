@@ -1,7 +1,7 @@
 // need to change the active status of nav to Wishlist
-$(document).ready(function () {
+$(document).ready(function() {
     $('#header').load('includes/header.html')
-    // $('#books').select2();
+        // $('#books').select2();
 });
 
 const searchFilter = document.querySelector('.search-filter');
@@ -45,35 +45,35 @@ bookList.addEventListener('click', fillInForm);
 
 
 
-const db = new Dexie('Bookacholics');
+// const db = new Dexie('Bookacholics');
 
-db.version(3).stores({
-    users: "++useId, firstName, lastName, email, &username, bio, hobbies, birthDate, currentCity, homeTown, education, registeredAt",
-    books: "++bookId, title, author, edition, publisher, dateAdded, shortDesc, userId",
-    wishlist: "++bookId, title, author, edition, publisher, dateAdded, whyWish, userId",
-    posts: "++postId, bookId, postType, rating, comments, createdAt, updatedAt, userId",
-    comments: "++commentId, comment, userId, createdAt, updatedAt"
-});
+// db.version(3).stores({
+//     users: "++useId, firstName, lastName, email, &username, bio, hobbies, birthDate, currentCity, homeTown, education, registeredAt",
+//     books: "++bookId, title, author, edition, publisher, dateAdded, shortDesc, userId",
+//     wishlist: "++bookId, title, author, edition, publisher, dateAdded, whyWish, userId",
+//     posts: "++postId, bookId, postType, rating, comments, createdAt, updatedAt, userId",
+//     comments: "++commentId, comment, userId, createdAt, updatedAt"
+// });
 
-db.open().then(displayMyBooks());
+// db.open().then(displayMyBooks());
+displayMyBooks();
+// const newUser = {
+//     firstName: "michael",
+//     lastName: "belete",
+//     email: "it.michael.belete@gmail.com",
+//     username: "@abc",
+//     bio: "some bio...",
+//     hobbies: "programming",
+//     birthDate: Date(),
+//     currentCity: "Addis Ababa",
+//     homeTown: "Bahir Dar",
+//     education: "BSC",
+//     registeredAt: Date(),
+// }
 
-const newUser = {
-    firstName: "michael",
-    lastName: "belete",
-    email: "it.michael.belete@gmail.com",
-    username: "@abc",
-    bio: "some bio...",
-    hobbies: "programming",
-    birthDate: Date(),
-    currentCity: "Addis Ababa",
-    homeTown: "Bahir Dar",
-    education: "BSC",
-    registeredAt: Date(),
-}
-
-db.users.put(newUser).then(function() {
-    console.log("user created succesfully")
-}).catch((error) => console.log(error))
+// db.users.put(newUser).then(function() {
+//     console.log("user created succesfully")
+// }).catch((error) => console.log(error))
 
 
 
@@ -148,32 +148,30 @@ let userID = sessionStorage.getItem('userId');
 
 let modifyBkId;
 
-function wishListValidate(e){
-// async function wishListValidate(e){
+function wishListValidate(e) {
+    // async function wishListValidate(e){
     e.preventDefault();
     // console.log(typeof(e.target.id));
     let isNotRead = true;
     // console.log('outside', e.target.id);
-    if (e.target.id == "addBook"){
+    if (e.target.id == "addBook") {
         // console.log('if',e.target.id);
-        db.books.each( book => {
+        db.books.each(book => {
             // await db.books.each( book => {
-            if (    (titleInput.value == book.title )  &&   (authorInput.value == book.author)  && (  editionInput.value == book.edition)   ){
-                    alert("Can't wish for a book you've already read (added to the book read page). Sorry."); //will change it
+            if ((titleInput.value == book.title) && (authorInput.value == book.author) && (editionInput.value == book.edition)) {
+                alert("Can't wish for a book you've already read (added to the book read page). Sorry."); //will change it
+                isNotRead = false;
+                return;
+            }
+        }).then(
+            db.wishlist.each(book => {
+                // await db.books.each( book => {
+                if ((titleInput.value == book.title) && (authorInput.value == book.author) && (editionInput.value == book.edition)) {
+                    alert("You've already wishlisted the book."); //will change it
                     isNotRead = false;
                     return;
                 }
-        }
-        ).then( 
-            db.wishlist.each( book => {
-                // await db.books.each( book => {
-                if (    (titleInput.value == book.title )  &&   (authorInput.value == book.author)  && (  editionInput.value == book.edition)   ){
-                        alert("You've already wishlisted the book."); //will change it
-                        isNotRead = false;
-                        return;
-                    }
-            }
-            ).then(
+            }).then(
                 () => {
                     // console.log(x);
                     if (!isNotRead) {
@@ -188,31 +186,28 @@ function wishListValidate(e){
                     addNewBook();
                 }
             )
-            
-            
+
+
         )
 
-    }
-    else{
+    } else {
         // console.log('else', e.target.id);
-        db.books.each( book => {
+        db.books.each(book => {
             // await db.books.each( book => {
-            if (    (titleMInput.value == book.title )  &&   (authorMInput.value == book.author)  && (  editionMInput.value == book.edition)   ){
-                    alert("Can't wish for a book you've already read (added to the book read page). Sorry. You can delete this wishlist by clicking the red bin icon."); //will change it
+            if ((titleMInput.value == book.title) && (authorMInput.value == book.author) && (editionMInput.value == book.edition)) {
+                alert("Can't wish for a book you've already read (added to the book read page). Sorry. You can delete this wishlist by clicking the red bin icon."); //will change it
+                isNotRead = false;
+                return;
+            }
+        }).then(
+            db.wishlist.each(book => {
+                // await db.books.each( book => {
+                if ((titleMInput.value == book.title) && (authorMInput.value == book.author) && (editionMInput.value == book.edition) && (book.bookId != modifyBkId) ) {
+                    alert("You've already wishlisted the book. You can delete this wishlist by clicking the red bin icon."); //will change it
                     isNotRead = false;
                     return;
                 }
-        }
-        ).then( 
-            db.wishlist.each( book => {
-                // await db.books.each( book => {
-                if (    (titleMInput.value == book.title )  &&   (authorMInput.value == book.author)  && (  editionMInput.value == book.edition)   ){
-                        alert("You've already wishlisted the book. You can delete this wishlist by clicking the red bin icon."); //will change it
-                        isNotRead = false;
-                        return;
-                    }
-            }
-            ).then(
+            }).then(
                 () => {
                     // console.log(x);
                     if (!isNotRead) {
@@ -227,13 +222,13 @@ function wishListValidate(e){
                     modifyBookF(modifyBkId);
                 }
             )
-            
-            
-            
+
+
+
         )
     }
-    
-    
+
+
 
 }
 
@@ -244,6 +239,9 @@ function wishListValidate(e){
 
 // )
 
+
+let addWishMessage = document.querySelector("#addWishMessage");
+let editWishMessage = document.querySelector("#editWishMessage");
 
 // function addNewBook(e) {
 function addNewBook() {
@@ -284,15 +282,20 @@ function addNewBook() {
     }
 
     db.wishlist.put(newBook).then(function() {
-        console.log("book created succesfully _ RUNTIME TeRROR")
+        console.log("book created successfully")
         addBook.reset();
         displayMyBooks();
+        addWishMessage.setAttribute("style","display: block !important"); 
+        setTimeout(()=>{
+           addWishMessage.setAttribute("style","display: none !important");
+           document.querySelector("#postmodal span").click()
+        },1500)
     }).catch((error) => console.log(error))
-    
+
 
 }
 
-function modifyBookF(id){
+function modifyBookF(id) {
     console.log('inside modifyBookF()');
     let bookID = id;
     db.wishlist.update(bookID, {
@@ -304,11 +307,16 @@ function modifyBookF(id){
         whyWish: whyWishMInput.value,
         // userId: userID
         userId: 1
-    }).then( x => {
+    }).then(x => {
         if (x) {
             // console.log(x);
             console.log('updated successfully');
             displayMyBooks();
+            editWishMessage.setAttribute("style","display: block !important"); 
+            setTimeout(() => {
+                editWishMessage.setAttribute("style", "display: none !important");
+                document.querySelector("#postmodalModify span").click()
+            }, 1500)
         } 
         else console.log("modification failed: either key doesn't exist or no modification made.");
     })
@@ -323,11 +331,11 @@ function displayMyBooks() {
 
 
     db.wishlist.each(book => {
-        let div = document.createElement('div');
-        div.className = "row py-2 px-4 w-100 book";
-        div.setAttribute('my-book-id', book.bookId); // will be useful for deleting [through .delete()]
+            let div = document.createElement('div');
+            div.className = "row py-2 px-4 w-100 book";
+            div.setAttribute('my-book-id', book.bookId); // will be useful for deleting [through .delete()]
 
-        div.innerHTML = `<div class="col-lg-7 d-flex">
+            div.innerHTML = `<div class="col-lg-7 d-flex">
               <div class="col-1 p-0 mr-3">
                 <i class="fa fa-book fa-3x text-secondary"></i>
               </div>
@@ -379,10 +387,11 @@ function displayMyBooks() {
             let d = document.createElement('div');
             let p = document.createElement('p');
             p.textContent = "Seems like you have not added any books in your wishlist. Click the Add New Book button above to start adding.";
-            p.className = "text-center";
+            p.className = "text-center h5";
             d.appendChild(p);
             bookList.appendChild(d);
         }
+        document.querySelector('.spinner-border').parentElement.setAttribute("style", "display: none !important");
     })
     // .then(console.log("HERE"))
     // .catch(console.log("there"))
@@ -439,8 +448,8 @@ function removeBookF(e) {
             // console.log(bookID)
             e.target.parentElement.parentElement.parentElement.remove();
             displayMyBooks();
-            
-            
+
+
         }
     }
 }
@@ -482,7 +491,7 @@ function filterBooks() {
 
 
 // let isInvisbile = true;
-function displayMoreInfo(e){
+function displayMoreInfo(e) {
     // console.log(isInvisbile);
     if (e.target.classList.contains('more-info')) {
         // console.log(isInvisbile);
@@ -491,8 +500,7 @@ function displayMoreInfo(e){
             moreInfoDiv.setAttribute("style", `display: none !important`);
             moreInfoDiv.parentElement.style.backgroundColor = "initial";
             // moreInfoDiv.style.backgroundColor = "initial";
-        }
-        else {
+        } else {
             moreInfoDiv.setAttribute("style", `display: flex !important`);
             moreInfoDiv.parentElement.style.backgroundColor = "#f2f2f2";
             // moreInfoDiv.style.backgroundColor = "#f2f2f2";
@@ -505,8 +513,8 @@ function displayMoreInfo(e){
 }
 
 
-async function fillInForm(e){
-// async function fillInForm(){
+async function fillInForm(e) {
+    // async function fillInForm(){
     // console.log('here');
     if (e.target.classList.contains('edit')) {
         modifyBkId = Number(e.target.parentElement.parentElement.parentElement.getAttribute('my-book-id'));
@@ -531,11 +539,11 @@ async function fillInForm(e){
 
 // let privacyBookId;
 
-function getId(e){
+function getId(e) {
     let sel = e.target;
     // console.log("getID", e.target)
-    if (sel.classList.contains('privacyStatus')){
-    // if (sel.classList.contains('privacyStatus') && Boolean(parseInt(sel.getAttribute('oneZero'))) ){
+    if (sel.classList.contains('privacyStatus')) {
+        // if (sel.classList.contains('privacyStatus') && Boolean(parseInt(sel.getAttribute('oneZero'))) ){
         // if (sel.parentElement.classList.contains('privacyStatus')){
         // console.log(sel.value);
         // console.log(sel.parentElement.value);
@@ -545,7 +553,7 @@ function getId(e){
     }
     // sel.setAttribute('oneZero','1');
     // updatebookPrivacyStatus(Number(sel.parentElement.parentElement.getAttribute('my-book-id')), sel);
-    
+
     // updatebookPrivacyStatus(sel.parentElement.parentElement.getAttribute('my-book-id'));
     // console.log("privacyBoodId",privacyBookId);
 }
@@ -553,34 +561,33 @@ function getId(e){
 
 // function updatebookPrivacyStatus(){
 // function updatebookPrivacyStatus(privacyBookId){
-function updatebookPrivacyStatus(bookID, val){
+function updatebookPrivacyStatus(bookID, val) {
     // console.log(e.target);
     // db.books.update(privacyBookId,{
-    db.wishlist.update(bookID,{
+    db.wishlist.update(bookID, {
         // isPublic: Boolean(targ.value)
         isPublic: val
-    }).then( x => {
+    }).then(x => {
         if (x) {
             // console.log(x);
             console.log('privacy status updated successfully');
-        } 
-        else console.log("modification failed: either key doesn't exist or no modification made.");
+        } else console.log("modification failed: either key doesn't exist or no modification made.");
     })
 }
 
 
 bookList.addEventListener('change', updateBookPrivacyStatus);
-function updateBookPrivacyStatus(e){
-    if(e.target.classList.contains('privacyStatus')){
-        db.books.update(Number(e.target.parentElement.parentElement.getAttribute('my-book-id')),{
+
+function updateBookPrivacyStatus(e) {
+    if (e.target.classList.contains('privacyStatus')) {
+        db.wishlist.update(Number(e.target.parentElement.parentElement.getAttribute('my-book-id')), {
             // isPublic: Boolean(targ.value)
             isPublic: Boolean(parseInt(e.target.value))
-        }).then( x => {
+        }).then(x => {
             if (x) {
                 // console.log(x);
                 console.log('privacy status updated successfully');
-            } 
-            else console.log("modification failed: either key doesn't exist or no modification made.");
+            } else console.log("modification failed: either key doesn't exist or no modification made.");
         })
     }
 }
