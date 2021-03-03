@@ -33,6 +33,7 @@ function loadMyBooks() {
 
         case 2:
           mybooks = _context.sent;
+          console.log(mybooks);
           mybooks.forEach(function (book) {
             var option = document.createElement("option");
             option.setAttribute("value", book.bookId);
@@ -40,7 +41,7 @@ function loadMyBooks() {
             selectBooks.appendChild(option);
           });
 
-        case 4:
+        case 5:
         case "end":
           return _context.stop();
       }

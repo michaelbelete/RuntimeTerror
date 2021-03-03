@@ -61,8 +61,7 @@ displayMyBooks(); // const newUser = {
 // }).catch((error) => console.log(error))
 // --------------
 // let DB;
-
-var userID = sessionStorage.getItem('userId'); // // If we added sorting
+// // If we added sorting
 // // var isAlphaBeticalAsc = true;
 // // var isDateAsc = true;
 // let myBookDB = indexedDB.open('Bookaholics', 2);
@@ -162,7 +161,7 @@ function wishListValidate(e) {
       }
     }).then(db.wishlist.each(function (book) {
       // await db.books.each( book => {
-      if (titleMInput.value == book.title && authorMInput.value == book.author && editionMInput.value == book.edition) {
+      if (titleMInput.value == book.title && authorMInput.value == book.author && editionMInput.value == book.edition && book.bookId != modifyBkId) {
         alert("You've already wishlisted the book. You can delete this wishlist by clicking the red bin icon."); //will change it
 
         isNotRead = false;
@@ -183,8 +182,10 @@ function wishListValidate(e) {
   }
 } // comparison function
 // )
-// function addNewBook(e) {
 
+
+var addWishMessage = document.querySelector("#addWishMessage");
+var editWishMessage = document.querySelector("#editWishMessage"); // function addNewBook(e) {
 
 function addNewBook() {
   // e.preventDefault();
@@ -215,12 +216,17 @@ function addNewBook() {
     dateAdded: new Date(),
     whyWish: whyWishInput.value,
     // userId: userID
-    userId: 1
+    userId: loggedInUser()
   };
   db.wishlist.put(newBook).then(function () {
     console.log("book created successfully");
     addBook.reset();
     displayMyBooks();
+    addWishMessage.setAttribute("style", "display: block !important");
+    setTimeout(function () {
+      addWishMessage.setAttribute("style", "display: none !important");
+      document.querySelector("#postmodal span").click();
+    }, 1500);
   })["catch"](function (error) {
     return console.log(error);
   });
@@ -237,12 +243,17 @@ function modifyBookF(id) {
     // dateAdded: new Date(),
     whyWish: whyWishMInput.value,
     // userId: userID
-    userId: 1
+    userId: loggedInUser()
   }).then(function (x) {
     if (x) {
       // console.log(x);
       console.log('updated successfully');
       displayMyBooks();
+      editWishMessage.setAttribute("style", "display: block !important");
+      setTimeout(function () {
+        editWishMessage.setAttribute("style", "display: none !important");
+        document.querySelector("#postmodalModify span").click();
+      }, 1500);
     } else console.log("modification failed: either key doesn't exist or no modification made.");
   });
 }
@@ -270,6 +281,8 @@ function displayMyBooks() {
       d.appendChild(p);
       bookList.appendChild(d);
     }
+
+    document.querySelector('.spinner-border').parentElement.setAttribute("style", "display: none !important");
   }); // .then(console.log("HERE"))
   // .catch(console.log("there"))
   // // console.log(bookList.firstElementChild);
@@ -446,7 +459,7 @@ bookList.addEventListener('change', updateBookPrivacyStatus);
 
 function updateBookPrivacyStatus(e) {
   if (e.target.classList.contains('privacyStatus')) {
-    db.books.update(Number(e.target.parentElement.parentElement.getAttribute('my-book-id')), {
+    db.wishlist.update(Number(e.target.parentElement.parentElement.getAttribute('my-book-id')), {
       // isPublic: Boolean(targ.value)
       isPublic: Boolean(parseInt(e.target.value))
     }).then(function (x) {

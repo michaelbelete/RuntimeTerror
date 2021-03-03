@@ -87,8 +87,6 @@ displayMyBooks();
 
 // --------------
 // let DB;
-let userID = sessionStorage.getItem('userId');
-
 // // If we added sorting
 // // var isAlphaBeticalAsc = true;
 // // var isDateAsc = true;
@@ -202,7 +200,7 @@ function wishListValidate(e) {
         }).then(
             db.wishlist.each(book => {
                 // await db.books.each( book => {
-                if ((titleMInput.value == book.title) && (authorMInput.value == book.author) && (editionMInput.value == book.edition) && (book.bookId != modifyBkId) ) {
+                if ((titleMInput.value == book.title) && (authorMInput.value == book.author) && (editionMInput.value == book.edition) && (book.bookId != modifyBkId)) {
                     alert("You've already wishlisted the book. You can delete this wishlist by clicking the red bin icon."); //will change it
                     isNotRead = false;
                     return;
@@ -278,18 +276,18 @@ function addNewBook() {
         dateAdded: new Date(),
         whyWish: whyWishInput.value,
         // userId: userID
-        userId: 1
+        userId: loggedInUser()
     }
 
     db.wishlist.put(newBook).then(function() {
         console.log("book created successfully")
         addBook.reset();
         displayMyBooks();
-        addWishMessage.setAttribute("style","display: block !important"); 
-        setTimeout(()=>{
-           addWishMessage.setAttribute("style","display: none !important");
-           document.querySelector("#postmodal span").click()
-        },1500)
+        addWishMessage.setAttribute("style", "display: block !important");
+        setTimeout(() => {
+            addWishMessage.setAttribute("style", "display: none !important");
+            document.querySelector("#postmodal span").click()
+        }, 1500)
     }).catch((error) => console.log(error))
 
 
@@ -306,19 +304,18 @@ function modifyBookF(id) {
         // dateAdded: new Date(),
         whyWish: whyWishMInput.value,
         // userId: userID
-        userId: 1
+        userId: loggedInUser()
     }).then(x => {
         if (x) {
             // console.log(x);
             console.log('updated successfully');
             displayMyBooks();
-            editWishMessage.setAttribute("style","display: block !important"); 
+            editWishMessage.setAttribute("style", "display: block !important");
             setTimeout(() => {
                 editWishMessage.setAttribute("style", "display: none !important");
                 document.querySelector("#postmodalModify span").click()
             }, 1500)
-        } 
-        else console.log("modification failed: either key doesn't exist or no modification made.");
+        } else console.log("modification failed: either key doesn't exist or no modification made.");
     })
 
 }
@@ -380,30 +377,30 @@ function displayMyBooks() {
             // <a href="modifyBook.html?id=${book.bookId}"><i class="fas fa-edit text-secondary"></i></a>
 
 
-        bookList.prepend(div); //may wanna prepend
-        // console.log("not");
-    }).then(() => {
-        if (!bookList.firstElementChild) {
-            let d = document.createElement('div');
-            let p = document.createElement('p');
-            p.textContent = "Seems like you have not added any books in your wishlist. Click the Add New Book button above to start adding.";
-            p.className = "text-center h5";
-            d.appendChild(p);
-            bookList.appendChild(d);
-        }
-        document.querySelector('.spinner-border').parentElement.setAttribute("style", "display: none !important");
-    })
-    // .then(console.log("HERE"))
-    // .catch(console.log("there"))
-    // // console.log(bookList.firstElementChild);
-    // if (!bookList.firstElementChild) {
-    //     let d = document.createElement('div');
-    //     let p = document.createElement('p');
-    //     p.textContent = "Seems like you have not added any books in your wishlist. Click the Add New Book button above to start adding.";
-    //     p.className = "text-center";
-    //     d.appendChild(p);
-    //     bookList.appendChild(d);
-    // }
+            bookList.prepend(div); //may wanna prepend
+            // console.log("not");
+        }).then(() => {
+            if (!bookList.firstElementChild) {
+                let d = document.createElement('div');
+                let p = document.createElement('p');
+                p.textContent = "Seems like you have not added any books in your wishlist. Click the Add New Book button above to start adding.";
+                p.className = "text-center h5";
+                d.appendChild(p);
+                bookList.appendChild(d);
+            }
+            document.querySelector('.spinner-border').parentElement.setAttribute("style", "display: none !important");
+        })
+        // .then(console.log("HERE"))
+        // .catch(console.log("there"))
+        // // console.log(bookList.firstElementChild);
+        // if (!bookList.firstElementChild) {
+        //     let d = document.createElement('div');
+        //     let p = document.createElement('p');
+        //     p.textContent = "Seems like you have not added any books in your wishlist. Click the Add New Book button above to start adding.";
+        //     p.className = "text-center";
+        //     d.appendChild(p);
+        //     bookList.appendChild(d);
+        // }
 }
 
 

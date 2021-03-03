@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function loadMyBooks() {
     const mybooks = await db.books.where("userId").equals(loggedInUser()).toArray()
-
+    console.log(mybooks)
     mybooks.forEach(book => {
         let option = document.createElement("option")
         option.setAttribute("value", book.bookId)
