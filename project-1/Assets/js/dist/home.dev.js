@@ -101,6 +101,7 @@ $(function () {
         postMessage.textContent = "Error ".concat(error);
         postMessage.style.display = "block";
       });
+      loadPosts();
     }
   });
 });

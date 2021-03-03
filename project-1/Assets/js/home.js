@@ -91,6 +91,8 @@ $(function() {
                 postMessage.textContent = `Error ${ error }`
                 postMessage.style.display = "block"
             })
+
+            loadPosts()
         }
     })
 });
