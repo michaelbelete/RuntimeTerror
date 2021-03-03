@@ -1,20 +1,13 @@
 "use strict";
 
-<<<<<<< HEAD
 var db = new Dexie('Bookaholics');
 db.version(6).stores({
   users: "++userId, firstName, lastName, sex, email, &username, bio, hobbies, birthDate, currentCity, homeTown, education, registeredAt",
-=======
-var db = new Dexie("Bookacholics");
-db.version(8).stores({
-  users: "++userId, firstName, sex, lastName, email, username, bio, hobbies, birthDate, currentCity, homeTown, education, profilePicture, registeredAt",
->>>>>>> backEnd-signUp
   books: "++bookId, title, author, edition, publisher, dateAdded, shortDesc, userId",
   wishlist: "++bookId, title, author, edition, publisher, dateAdded, whyWish, userId",
   posts: "++postId, bookId, postType, rating, comments, createdAt, updatedAt, userId",
-  comments: "++commentId, comment,postId, userId, createdAt, updatedAt"
+  comments: "++commentId, postId, comment, userId, createdAt, updatedAt"
 });
-<<<<<<< HEAD
 var newUser = {
   firstName: "michael",
   lastName: "belete",
@@ -29,62 +22,7 @@ var newUser = {
   education: "BSC",
   profilePicture: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
   registeredAt: new Date()
-};
-var newUser2 = {
-  firstName: "Michael",
-  lastName: "Mesfin",
-  sex: 'male',
-  email: "it.michael.mesfin@gmail.com",
-  username: "@cde",
-  bio: "some bio...",
-  hobbies: "programming",
-  birthDate: new Date(),
-  currentCity: "Addis Ababa",
-  homeTown: "Bahir Dar",
-  education: "BSC",
-  profilePicture: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-  registeredAt: new Date()
-};
-var newUser3 = {
-  firstName: "Liyu",
-  lastName: "Belete",
-  sex: 'male',
-  email: "it.liyu.belete@gmail.com",
-  username: "@fgh",
-  bio: "some bio...",
-  hobbies: "programming",
-  birthDate: new Date(),
-  currentCity: "Addis Ababa",
-  homeTown: "Bahir Dar",
-  education: "BSC",
-  profilePicture: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-  registeredAt: new Date()
-}; // const book = {
-//         title: "some wwww",
-//         author: "me",
-//         edition: "sidk",
-//         publisher: "me",
-//         dateAdded: new Date(),
-//         shortDesc: "slorem aiusbasbjhbasjdbjasbbs",
-//         userId: 1,
-//     }
-// db.users.put(newUser).then(function() {
-//     console.log("user created successfully")
-// }).catch((error) => console.log(error))
-// db.users.put(newUser2).then(function() {
-//     console.log("user created successfully")
-// }).catch((error) => console.log(error))
-// db.users.put(newUser3).then(function() {
-//     console.log("user created successfully")
-// }).catch((error) => console.log(error))
-// db.books.put(book)
-//creating a sample user
-=======
->>>>>>> backEnd-signUp
-
-function loggedInUser() {
-  return 1;
-} //creating a sample user
+}; //creating a sample user
 // const user = {
 //     "userId": 1,
 //     "firstName": "Michael",
@@ -144,3 +82,58 @@ function loggedInUser() {
 // }).catch((error) => {
 //     console.log(error)
 // })
+
+var newUser2 = {
+  firstName: "Michael",
+  lastName: "Mesfin",
+  sex: 'male',
+  email: "it.michael.mesfin@gmail.com",
+  username: "@cde",
+  bio: "some bio...",
+  hobbies: "programming",
+  birthDate: new Date(),
+  currentCity: "Addis Ababa",
+  homeTown: "Bahir Dar",
+  education: "BSC",
+  profilePicture: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+  registeredAt: new Date()
+};
+var newUser3 = {
+  firstName: "Liyu",
+  lastName: "Belete",
+  sex: 'male',
+  email: "it.liyu.belete@gmail.com",
+  username: "@fgh",
+  bio: "some bio...",
+  hobbies: "programming",
+  birthDate: new Date(),
+  currentCity: "Addis Ababa",
+  homeTown: "Bahir Dar",
+  education: "BSC",
+  profilePicture: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+  registeredAt: new Date()
+}; // const book = {
+//         title: "some wwww",
+//         author: "me",
+//         edition: "sidk",
+//         publisher: "me",
+//         dateAdded: new Date(),
+//         shortDesc: "slorem aiusbasbjhbasjdbjasbbs",
+//         userId: 1,
+//     }
+// db.users.put(newUser).then(function() {
+//     console.log("user created successfully")
+// }).catch((error) => console.log(error))
+// db.users.put(newUser2).then(function() {
+//     console.log("user created successfully")
+// }).catch((error) => console.log(error))
+// db.users.put(newUser3).then(function() {
+//     console.log("user created successfully")
+// }).catch((error) => console.log(error))
+// db.books.put(book)
+//creating a sample user
+
+function loggedInUser() {
+  var userId = sessionStorage.getItem("userId");
+  return userId;
+}
