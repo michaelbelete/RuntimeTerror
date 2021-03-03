@@ -177,7 +177,7 @@ async function loadPosts() {
             <div class="rating-comment px-4 py-2 pb-3">
                 <div class="row">
                     <div class="col-md-8">
-                        <div id="post-rate${post.postId }">${ post.rating }</div>
+                        <div id="post-rate${ post.postId }">${ post.rating }</div>
                     </div>
                     <div class="col-md-4">
                         <a href="post.html?id=${post.postId}" class=" text-primary  float-right"><i class="fa fa-comment"></i>
