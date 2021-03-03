@@ -202,7 +202,7 @@ function wishListValidate(e) {
         }).then(
             db.wishlist.each(book => {
                 // await db.books.each( book => {
-                if ((titleMInput.value == book.title) && (authorMInput.value == book.author) && (editionMInput.value == book.edition)) {
+                if ((titleMInput.value == book.title) && (authorMInput.value == book.author) && (editionMInput.value == book.edition) && (book.bookId != modifyBkId) ) {
                     alert("You've already wishlisted the book. You can delete this wishlist by clicking the red bin icon."); //will change it
                     isNotRead = false;
                     return;
@@ -580,7 +580,7 @@ bookList.addEventListener('change', updateBookPrivacyStatus);
 
 function updateBookPrivacyStatus(e) {
     if (e.target.classList.contains('privacyStatus')) {
-        db.books.update(Number(e.target.parentElement.parentElement.getAttribute('my-book-id')), {
+        db.wishlist.update(Number(e.target.parentElement.parentElement.getAttribute('my-book-id')), {
             // isPublic: Boolean(targ.value)
             isPublic: Boolean(parseInt(e.target.value))
         }).then(x => {

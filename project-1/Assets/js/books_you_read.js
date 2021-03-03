@@ -152,7 +152,7 @@ function bookValidate(e){
         // console.log('if',e.target.id);
         db.books.each( book => {
             // await db.books.each( book => {
-            if (    (titleInput.value == book.title )  &&   (authorInput.value == book.author)  && (  editionInput.value == book.edition)   ){
+            if (    (titleInput.value == book.title )  &&   (authorInput.value == book.author)  && (  editionInput.value == book.edition) ){
                     alert("You've already added the book."); //will change it
                     isNotRead = false;
                     return;
@@ -167,7 +167,7 @@ function bookValidate(e){
                         // alert("You've already added the book."); //will change it
                         // isNotRead = false;
                         // return;
-                        alert("You finally read it! The book will to be removed from your wishlist.");
+                        alert("You finally read it! The book will be removed from your wishlist.");
                         console.log(book.bookId);
                         db.wishlist.delete(book.bookId);
                     }
@@ -211,7 +211,8 @@ function bookValidate(e){
         ).then( 
             db.books.each( book => {
                 // await db.books.each( book => {
-                if (    (titleMInput.value == book.title )  &&   (authorMInput.value == book.author)  && (  editionMInput.value == book.edition)   ){
+                console.log(modifyBkId, book.bookId)
+                if (    (titleMInput.value == book.title )  &&   (authorMInput.value == book.author)  && (  editionMInput.value == book.edition)  && (book.bookId != modifyBkId) ){
                         alert("You've already added the book. You can delete this book by clicking the red bin icon."); //will change it
                         isNotRead = false;
                         return;
