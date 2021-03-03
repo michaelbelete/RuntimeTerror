@@ -107,7 +107,7 @@ async function loadSpecificPost() {
     }).first()
 
     const book = await db.books.where("bookId").equals(parseInt(post.bookId)).first()
-    const user = await db.users.where("userId").equals(post.userId).first()
+    const user = await db.users.where("userId").equals(parseInt(post.userId)).first()
     const commentData = await db.comments.where("postId").equals(post.postId)
     const commentCount = await commentData.count()
     const comments = await commentData.toArray()
@@ -116,7 +116,7 @@ async function loadSpecificPost() {
         const reviews = result.filter((posts => posts.postType === 'review'))
 
         reviews.forEach(async(review) => {
-            let usr = await db.users.where("userId").equals(review.userId).first()
+            let usr = await db.users.where("userId").equals(parseInt(review.userId)).first()
             let strReview = `
                 <div class="row pl-2 border-bottom py-2">
                     <div class="col-sm-3">
@@ -249,7 +249,7 @@ async function loadSpecificPost() {
     })
 
     comments.forEach(async comment => {
-        const user = await db.users.where("userId").equals(comment.userId).first()
+        const user = await db.users.where("userId").equals(parseInt(comment.userId)).first()
         let strComment = `
             <div class="row px-4 pb-2" id="comments">
             <div class="col-sm-1 p-4">

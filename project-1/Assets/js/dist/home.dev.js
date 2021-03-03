@@ -93,15 +93,16 @@ $(function () {
         postMessage.style.display = "block"; //clear post form
 
         postType.value = null;
+        pictureUrl.value = null;
         $rateYo.rateYo("rating", 0);
         editor.setData(" ");
         loadPosts();
+        noPost.style.display = "none";
       })["catch"](function (error) {
         postMessage.classList.add("alert-danger");
         postMessage.textContent = "Error ".concat(error);
         postMessage.style.display = "block";
       });
-      loadPosts();
     }
   });
 });
@@ -148,16 +149,15 @@ function loadPosts() {
                   case 2:
                     book = _context2.sent;
                     _context2.next = 5;
-                    return regeneratorRuntime.awrap(db.users.where("userId").equals(post.userId).first());
+                    return regeneratorRuntime.awrap(db.users.where("userId").equals(parseInt(post.userId)).first());
 
                   case 5:
                     user = _context2.sent;
                     _context2.next = 8;
-                    return regeneratorRuntime.awrap(db.comments.where("postId").equals(post.postId).count());
+                    return regeneratorRuntime.awrap(db.comments.where("postId").equals(parseInt(post.postId)).count());
 
                   case 8:
                     comments = _context2.sent;
-                    console.log(user);
                     postNoHtmlTag = post.post.replace(/(<([^>]+)>)/gi, "");
 
                     if (post.picture == "") {
@@ -172,7 +172,7 @@ function loadPosts() {
                     feeds.appendChild(htmlPost.body.firstChild);
                     generateStar(post.postId, post.rating);
 
-                  case 17:
+                  case 16:
                   case "end":
                     return _context2.stop();
                 }

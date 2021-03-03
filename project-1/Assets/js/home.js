@@ -83,16 +83,18 @@ $(function() {
                 postMessage.style.display = "block"
                     //clear post form
                 postType.value = null
+                pictureUrl.value = null
                 $rateYo.rateYo("rating", 0)
                 editor.setData(" ")
                 loadPosts()
+                noPost.style.display = "none"
+
             }).catch((error) => {
                 postMessage.classList.add("alert-danger")
                 postMessage.textContent = `Error ${ error }`
                 postMessage.style.display = "block"
             })
 
-            loadPosts()
         }
     })
 });
@@ -111,9 +113,9 @@ async function loadPosts() {
         const posts = await db.table("posts").orderBy("postId").reverse().toArray()
         posts.forEach(async function(post) {
             let book = await db.books.where("bookId").equals(parseInt(post.bookId)).first()
-            let user = await db.users.where("userId").equals(post.userId).first()
-            let comments = await db.comments.where("postId").equals(post.postId).count()
-            console.log(user)
+            let user = await db.users.where("userId").equals(parseInt(post.userId)).first()
+            let comments = await db.comments.where("postId").equals(parseInt(post.postId)).count()
+
             let postNoHtmlTag = post.post.replace(/(<([^>]+)>)/gi, "")
             if (post.picture == "") {
                 var strPost = `
