@@ -102,8 +102,8 @@ async function loadPosts() {
     feeds.innerHTML = ""
 
     const postCount = await db.posts.count()
-    console.log(postCount)
     if (postCount == 0) {
+        postLoader.style.display = "none"
         noPost.style.display = "block"
     } else {
         const posts = await db.table("posts").orderBy("postId").reverse().toArray()

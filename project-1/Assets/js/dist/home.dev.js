@@ -117,13 +117,13 @@ function loadPosts() {
 
         case 3:
           postCount = _context3.sent;
-          console.log(postCount);
 
           if (!(postCount == 0)) {
             _context3.next = 9;
             break;
           }
 
+          postLoader.style.display = "none";
           noPost.style.display = "block";
           _context3.next = 13;
           break;
