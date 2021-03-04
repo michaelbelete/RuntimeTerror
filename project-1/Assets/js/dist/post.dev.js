@@ -22,9 +22,75 @@ var bookRating = document.querySelector('#bookRating');
 var recentReviews = document.querySelector('#recentReviews');
 document.addEventListener('DOMContentLoaded', function () {
   checkPostId();
-  loadSpecificPost();
+  loadSpecificPost().then(function _callee() {
+    var post, book, countFromMyBook, countFromWish, addToWishList, wishListData;
+    return regeneratorRuntime.async(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return regeneratorRuntime.awrap(db.posts.where({
+              postId: id
+            }).first());
+
+          case 2:
+            post = _context.sent;
+            _context.next = 5;
+            return regeneratorRuntime.awrap(db.books.where({
+              bookId: post.bookId
+            }).first());
+
+          case 5:
+            book = _context.sent;
+            _context.next = 8;
+            return regeneratorRuntime.awrap(db.books.where("title").equals(book.title).count());
+
+          case 8:
+            countFromMyBook = _context.sent;
+            _context.next = 11;
+            return regeneratorRuntime.awrap(db.wishlist.where("title").equals(book.title).count());
+
+          case 11:
+            countFromWish = _context.sent;
+            addToWishList = document.querySelector("#addToWishList");
+            wishListData = document.querySelector("#wishListData");
+
+            if (countFromMyBook !== 0) {
+              addToWishList.textContent = "Already Read";
+              addToWishList.setAttribute("disabled", "disabled");
+            } else {
+              if (countFromWish) {
+                addToWishList.textContent = "Added";
+                addToWishList.setAttribute("disabled", "disabled");
+              }
+            }
+
+            addToWishList.addEventListener("click", function () {
+              var newWish = {
+                title: book.title,
+                author: book.author,
+                edition: book.edition,
+                publisher: book.publisher,
+                dateAdded: new Date(),
+                whyWish: book.whyWish,
+                userId: loggedInUser()
+              };
+              db.wishlist.put(newWish).then(function () {
+                addToWishList.textContent = "Added";
+                addToWishList.setAttribute("disabled", "disabled");
+              })["catch"](function (error) {
+                return console.log(error);
+              });
+            });
+
+          case 16:
+          case "end":
+            return _context.stop();
+        }
+      }
+    });
+  });
 });
-commentBtn.addEventListener("click", addComment);
 
 function checkPostId() {
   if (id || id === undefined || id === null) {
@@ -48,31 +114,29 @@ function generateStar(id, rating) {
 
 function loadReviews(title, postId) {
   var resultPost, reviewPost, book, reviewTitle;
-  return regeneratorRuntime.async(function loadReviews$(_context) {
+  return regeneratorRuntime.async(function loadReviews$(_context2) {
     while (1) {
-      switch (_context.prev = _context.next) {
+      switch (_context2.prev = _context2.next) {
         case 0:
-          resultPost = []; // console.log("mike")
-          // const reviewWithTitle = await db.posts.where("title").equalsIgnoreCase(title).toArray()
-
-          _context.next = 3;
+          resultPost = [];
+          _context2.next = 3;
           return regeneratorRuntime.awrap(db.posts.where("postId").equals(postId).toArray());
 
         case 3:
-          reviewPost = _context.sent;
+          reviewPost = _context2.sent;
           reviewPost.forEach(function (result) {
             resultPost.push(result);
           });
-          _context.next = 7;
+          _context2.next = 7;
           return regeneratorRuntime.awrap(db.books.where('title').equalsIgnoreCase(title).first());
 
         case 7:
-          book = _context.sent;
-          _context.next = 10;
+          book = _context2.sent;
+          _context2.next = 10;
           return regeneratorRuntime.awrap(db.posts.where("bookId").equals(book.bookId).toArray());
 
         case 10:
-          reviewTitle = _context.sent;
+          reviewTitle = _context2.sent;
           reviewTitle.forEach(function (result) {
             resultPost.push(result);
           });
@@ -86,56 +150,16 @@ function loadReviews(title, postId) {
           });
 
           if (!(resultPost.length >= 5)) {
-            _context.next = 18;
+            _context2.next = 18;
             break;
           }
 
-          return _context.abrupt("return", resultPost.slice(0, 5));
+          return _context2.abrupt("return", resultPost.slice(0, 5));
 
         case 18:
-          return _context.abrupt("return", resultPost);
+          return _context2.abrupt("return", resultPost);
 
         case 19:
-        case "end":
-          return _context.stop();
-      }
-    }
-  });
-}
-
-function averageRatingOfBook(bookID) {
-  var bookPosts, avgRating, sum, numberOfBookPosts;
-  return regeneratorRuntime.async(function averageRatingOfBook$(_context2) {
-    while (1) {
-      switch (_context2.prev = _context2.next) {
-        case 0:
-          _context2.next = 2;
-          return regeneratorRuntime.awrap(db.posts.where("bookId").equals(bookID).toArray());
-
-        case 2:
-          bookPosts = _context2.sent;
-          avgRating = 0;
-          sum = 0;
-          numberOfBookPosts = bookPosts.length;
-
-          if (!numberOfBookPosts) {
-            _context2.next = 10;
-            break;
-          }
-
-          bookPosts.forEach(function (bookPost) {
-            sum += bookPost.rating;
-          });
-          avgRating = sum / numberOfBookPosts;
-          return _context2.abrupt("return", {
-            rating: avgRating,
-            rateNumber: numberOfBookPosts
-          });
-
-        case 10:
-          return _context2.abrupt("return", -1);
-
-        case 11:
         case "end":
           return _context2.stop();
       }
@@ -143,69 +167,109 @@ function averageRatingOfBook(bookID) {
   });
 }
 
+function averageRatingOfBook(bookID) {
+  var bookPosts, avgRating, sum, numberOfBookPosts;
+  return regeneratorRuntime.async(function averageRatingOfBook$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          _context3.next = 2;
+          return regeneratorRuntime.awrap(db.posts.where("bookId").equals(bookID).toArray());
+
+        case 2:
+          bookPosts = _context3.sent;
+          avgRating = 0;
+          sum = 0;
+          numberOfBookPosts = bookPosts.length;
+
+          if (!numberOfBookPosts) {
+            _context3.next = 10;
+            break;
+          }
+
+          bookPosts.forEach(function (bookPost) {
+            sum += bookPost.rating;
+          });
+          avgRating = sum / numberOfBookPosts;
+          return _context3.abrupt("return", {
+            rating: avgRating,
+            rateNumber: numberOfBookPosts
+          });
+
+        case 10:
+          return _context3.abrupt("return", -1);
+
+        case 11:
+        case "end":
+          return _context3.stop();
+      }
+    }
+  });
+}
+
 function loadSpecificPost() {
   var post, book, user, commentData, commentCount, comments, strPost, avgRating, strBookRating, htmlPost;
-  return regeneratorRuntime.async(function loadSpecificPost$(_context5) {
+  return regeneratorRuntime.async(function loadSpecificPost$(_context6) {
     while (1) {
-      switch (_context5.prev = _context5.next) {
+      switch (_context6.prev = _context6.next) {
         case 0:
           loader.style.display = "block";
-          _context5.next = 3;
+          _context6.next = 3;
           return regeneratorRuntime.awrap(db.posts.where({
             postId: id
           }).first());
 
         case 3:
-          post = _context5.sent;
-          _context5.next = 6;
+          post = _context6.sent;
+          _context6.next = 6;
           return regeneratorRuntime.awrap(db.books.where("bookId").equals(parseInt(post.bookId)).first());
 
         case 6:
-          book = _context5.sent;
-          _context5.next = 9;
+          book = _context6.sent;
+          _context6.next = 9;
           return regeneratorRuntime.awrap(db.users.where("userId").equals(parseInt(post.userId)).first());
 
         case 9:
-          user = _context5.sent;
-          _context5.next = 12;
+          user = _context6.sent;
+          _context6.next = 12;
           return regeneratorRuntime.awrap(db.comments.where("postId").equals(post.postId));
 
         case 12:
-          commentData = _context5.sent;
-          _context5.next = 15;
+          commentData = _context6.sent;
+          _context6.next = 15;
           return regeneratorRuntime.awrap(commentData.count());
 
         case 15:
-          commentCount = _context5.sent;
-          _context5.next = 18;
+          commentCount = _context6.sent;
+          _context6.next = 18;
           return regeneratorRuntime.awrap(commentData.toArray());
 
         case 18:
-          comments = _context5.sent;
+          comments = _context6.sent;
           loadReviews(book.title, post.postId).then(function (result) {
             console.log(result);
             var reviews = result.filter(function (posts) {
               return posts.postType === 'review';
             });
             console.log(reviews);
-            reviews.forEach(function _callee(review) {
+            reviews.forEach(function _callee2(review) {
               var usr, strReview, htmlReview;
-              return regeneratorRuntime.async(function _callee$(_context3) {
+              return regeneratorRuntime.async(function _callee2$(_context4) {
                 while (1) {
-                  switch (_context3.prev = _context3.next) {
+                  switch (_context4.prev = _context4.next) {
                     case 0:
-                      _context3.next = 2;
+                      _context4.next = 2;
                       return regeneratorRuntime.awrap(db.users.where("userId").equals(parseInt(review.userId)).first());
 
                     case 2:
-                      usr = _context3.sent;
+                      usr = _context4.sent;
                       strReview = "\n                <div class=\"row pl-2 border-bottom py-2\">\n                    <div class=\"col-sm-3\">\n                        <a href=\"profile.html?id=".concat(usr.userId, "\"><img src=\"").concat(usr.profilePicture, "\" alt=\"profile\" class=\"rounded-circle ml-3\"\n                                width=\"70\" height=\"70\">\n                        </a>\n                    </div>\n                    <div class=\"col-sm-8\">\n                        <h5 class=\"text-primary pt-1 m-0\">").concat(usr.firstName, " ").concat(usr.lastName, "</h5>\n                        <small class=\"text-muted\">").concat(review.post.replace(/(<([^>]+)>)/gi, ""), "</small>\n                    </div>\n            </div>\n            ");
                       htmlReview = new DOMParser().parseFromString(strReview, 'text/html');
                       recentReviews.appendChild(htmlReview.body.firstChild);
 
                     case 6:
                     case "end":
-                      return _context3.stop();
+                      return _context4.stop();
                   }
                 }
               });
@@ -221,14 +285,14 @@ function loadSpecificPost() {
           specificPost.innerHTML = "";
           specificComment.innerHTML = "";
           bookRating.innerHTML = "";
-          _context5.next = 26;
+          _context6.next = 26;
           return regeneratorRuntime.awrap(averageRatingOfBook(book.bookId).then(function (avgBook) {
             return avgBook;
           }));
 
         case 26:
-          avgRating = _context5.sent;
-          strBookRating = "\n    <div class=\"col-md-5 pl-3 pt-2 pr-4 text-center\">\n    <img src=\"".concat(post.picture, "\" width=\"100%\" height=\"120px\">\n    <h2 class=\"display-4 pt-2 font-weight-bold text-warning\">").concat(avgRating.rating, "</h2>\n    <p class=\"mb-1\">Average Rating</p>\n    <small class=\"text-muted\">").concat(avgRating.rateNumber, " Total Ratings</small>\n</div>\n<div class=\"col-md-6 pl-0 pt-3\">\n    <h4 class=\"pl-3 font-weight-bold\">").concat(book.title, "</h4>\n    <p class=\"font-weight-lighter text-muted pt-2 pl-3 mb-1\">Author: ").concat(book.author, "</p>\n    <small class=\"font-weight-lighter text-muted pl-3 p-0\">Publisher: ").concat(book.publisher, "</small>\n    <div id=\"starRating\" class=\"pt-5\"></div>\n</div>\n    ");
+          avgRating = _context6.sent;
+          strBookRating = "\n    <div class=\"col-md-5 pl-3 pt-2 pr-4 text-center\">\n    <img src=\"".concat(post.picture, "\" width=\"100%\" height=\"120px\">\n    <h2 class=\"display-4 pt-2 font-weight-bold text-warning\">").concat(avgRating.rating, "</h2>\n    <p class=\"mb-1\">Average Rating</p>\n    <small class=\"text-muted\">").concat(avgRating.rateNumber, " Total Ratings</small>\n</div>\n<div class=\"col-md-6 pl-0 pt-3\">\n    <h4 class=\"pl-3 font-weight-bold\">").concat(book.title, "</h4>\n    <p class=\"font-weight-lighter text-muted pt-2 pl-3 mb-1\">Author: ").concat(book.author, "</p>\n    <small class=\"font-weight-lighter text-muted pl-3 p-0\">Publisher: ").concat(book.publisher, "</small>\n    <div id=\"starRating\" class=\"pt-3 pb-2\"></div>\n    <button class=\"btn btn-outline-primary btn-sm p-2 mt-2 ml-2\" id=\"addToWishList\">Add to wishlist</button>\n    </div>\n    ");
           htmlPost = new DOMParser().parseFromString(strPost, 'text/html');
           specificPost.appendChild(htmlPost.body.firstChild);
           generateStar(post.postId, post.rating);
@@ -242,24 +306,24 @@ function loadSpecificPost() {
               readOnly: true
             });
           });
-          comments.forEach(function _callee2(comment) {
+          comments.forEach(function _callee3(comment) {
             var user, strComment, htmlPost;
-            return regeneratorRuntime.async(function _callee2$(_context4) {
+            return regeneratorRuntime.async(function _callee3$(_context5) {
               while (1) {
-                switch (_context4.prev = _context4.next) {
+                switch (_context5.prev = _context5.next) {
                   case 0:
-                    _context4.next = 2;
+                    _context5.next = 2;
                     return regeneratorRuntime.awrap(db.users.where("userId").equals(parseInt(comment.userId)).first());
 
                   case 2:
-                    user = _context4.sent;
+                    user = _context5.sent;
                     strComment = "\n            <div class=\"row px-4 pb-2\" id=\"comments\">\n            <div class=\"col-sm-1 p-4\">\n                <a href=\"profile.html?id=".concat(comment.userId, "\"><img src=\"").concat(user.profilePicture, "\" alt=\"profile\" class=\"rounded-circle\" width=\"70\"\n                        height=\"70\">\n                </a>\n            </div>\n            <div class=\"col-sm-10 p-4 ml-3\">\n                <h5 class=\"text-primary pt-1 m-0\">").concat(user.firstName, " ").concat(user.lastName, " <span class=\"text-muted\" style=\"font-size: 14px;\"><i class=\"fa fa-angle-right\"></i> ").concat(comment.createdAt, "</span></h5>\n                <small class=\"text-muted\">").concat(comment.comment, "</small>\n            </div>\n        </div>\n        ");
                     htmlPost = new DOMParser().parseFromString(strComment, 'text/html');
                     specificComment.appendChild(htmlPost.body.firstChild);
 
                   case 6:
                   case "end":
-                    return _context4.stop();
+                    return _context5.stop();
                 }
               }
             });
@@ -268,7 +332,7 @@ function loadSpecificPost() {
 
         case 35:
         case "end":
-          return _context5.stop();
+          return _context6.stop();
       }
     }
   });
@@ -276,14 +340,14 @@ function loadSpecificPost() {
 
 function addComment() {
   var commentMessage, alert, newComment;
-  return regeneratorRuntime.async(function addComment$(_context6) {
+  return regeneratorRuntime.async(function addComment$(_context7) {
     while (1) {
-      switch (_context6.prev = _context6.next) {
+      switch (_context7.prev = _context7.next) {
         case 0:
           commentMessage = document.querySelector('#commentMessage');
 
           if (!(comment.value === "")) {
-            _context6.next = 9;
+            _context7.next = 9;
             break;
           }
 
@@ -292,7 +356,7 @@ function addComment() {
           alert.className = "alert alert-danger";
           alert.textContent = "please fill the required form";
           commentMessage.appendChild(alert);
-          _context6.next = 13;
+          _context7.next = 13;
           break;
 
         case 9:
@@ -303,7 +367,7 @@ function addComment() {
             createdAt: new Date(),
             updatedAt: ""
           };
-          _context6.next = 12;
+          _context7.next = 12;
           return regeneratorRuntime.awrap(db.comments.add(newComment).then(function (result) {
             commentMessage.innerHTML = "";
             var alert = document.createElement("div");
@@ -324,7 +388,7 @@ function addComment() {
 
         case 13:
         case "end":
-          return _context6.stop();
+          return _context7.stop();
       }
     }
   });

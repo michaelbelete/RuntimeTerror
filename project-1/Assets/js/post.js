@@ -24,12 +24,59 @@ const loader = document.querySelector('#specificPostLoader')
 //book rating vars
 const bookRating = document.querySelector('#bookRating')
 const recentReviews = document.querySelector('#recentReviews')
+
 document.addEventListener('DOMContentLoaded', function() {
     checkPostId()
-    loadSpecificPost()
+    loadSpecificPost().then(async() => {
+
+        let post = await db.posts.where({
+            postId: id
+        }).first()
+
+        let book = await db.books.where({
+            bookId: post.bookId
+        }).first()
+
+        let countFromMyBook = await db.books.where("title").equals(book.title).count()
+        let countFromWish = await db.wishlist.where("title").equals(book.title).count()
+
+
+        const addToWishList = document.querySelector("#addToWishList")
+        const wishListData = document.querySelector("#wishListData")
+
+        if (countFromMyBook !== 0) {
+            addToWishList.textContent = "Already Read"
+            addToWishList.setAttribute("disabled", "disabled")
+        } else {
+            if (countFromWish) {
+                addToWishList.textContent = "Added"
+                addToWishList.setAttribute("disabled", "disabled")
+            }
+        }
+
+
+        addToWishList.addEventListener("click", function() {
+
+            const newWish = {
+                title: book.title,
+                author: book.author,
+                edition: book.edition,
+                publisher: book.publisher,
+                dateAdded: new Date(),
+                whyWish: book.whyWish,
+                userId: loggedInUser()
+            }
+
+
+
+            db.wishlist.put(newWish).then(function() {
+                addToWishList.textContent = "Added"
+                addToWishList.setAttribute("disabled", "disabled")
+            }).catch((error) => console.log(error))
+        })
+    })
 })
 
-commentBtn.addEventListener("click", addComment)
 
 
 function checkPostId() {
@@ -55,8 +102,7 @@ function generateStar(id, rating) {
 
 async function loadReviews(title, postId) {
     let resultPost = []
-        // console.log("mike")
-        // const reviewWithTitle = await db.posts.where("title").equalsIgnoreCase(title).toArray()
+
     const reviewPost = await db.posts.where("postId").equals(postId).toArray()
     reviewPost.forEach((result) => {
         resultPost.push(result)
@@ -82,7 +128,6 @@ async function loadReviews(title, postId) {
     } else {
         return resultPost
     }
-    // console.log(resultPost.slice(0))
 }
 
 
@@ -224,6 +269,7 @@ async function loadSpecificPost() {
         return avgBook
     })
 
+
     const strBookRating = `
     <div class="col-md-5 pl-3 pt-2 pr-4 text-center">
     <img src="${ post.picture }" width="100%" height="120px">
@@ -235,8 +281,9 @@ async function loadSpecificPost() {
     <h4 class="pl-3 font-weight-bold">${ book.title }</h4>
     <p class="font-weight-lighter text-muted pt-2 pl-3 mb-1">Author: ${ book.author }</p>
     <small class="font-weight-lighter text-muted pl-3 p-0">Publisher: ${ book.publisher }</small>
-    <div id="starRating" class="pt-5"></div>
-</div>
+    <div id="starRating" class="pt-3 pb-2"></div>
+    <button class="btn btn-outline-primary btn-sm p-2 mt-2 ml-2" id="addToWishList">Add to wishlist</button>
+    </div>
     `
 
     let htmlPost = new DOMParser().parseFromString(strPost, 'text/html')
