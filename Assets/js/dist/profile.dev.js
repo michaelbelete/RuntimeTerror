@@ -67,3 +67,35 @@ function profileSetter(user) {
     imgElementCreate("Assets/images/woman.png");
   }
 }
+
+var checkLogin = document.querySelector("#loginCheck");
+var username = document.querySelector("#username");
+var userId = sessionStorage.getItem("userId");
+
+if (userId) {
+  var getProfile = function getProfile() {
+    var user;
+    return regeneratorRuntime.async(function getProfile$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return regeneratorRuntime.awrap(db.users.where("userId").equals(Number(userId)).first());
+
+          case 2:
+            user = _context.sent;
+            username.firstElementChild.innerHTML = "<i class=\"fa fa-user pr-1\"></i>  ".concat(user.firstName, " ").concat(user.lastName);
+
+          case 4:
+          case "end":
+            return _context.stop();
+        }
+      }
+    });
+  }; //fetch logged in user
+
+
+  checkLogin.style.display = "none";
+  getProfile();
+  username.style.display = "block";
+}

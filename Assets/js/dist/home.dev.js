@@ -29,7 +29,7 @@ function loadMyBooks() {
       switch (_context.prev = _context.next) {
         case 0:
           _context.next = 2;
-          return regeneratorRuntime.awrap(db.books.where("userId").equals(loggedInUser()).toArray());
+          return regeneratorRuntime.awrap(db.books.where("userId").equals(parseInt(loggedInUser())).toArray());
 
         case 2:
           mybooks = _context.sent;

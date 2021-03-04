@@ -5,8 +5,14 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.SignUpUser = SignUpUser;
 exports.LogInUser = LogInUser;
+exports.editAboutMe = editAboutMe;
+exports.editButtonAboutMe = editButtonAboutMe;
+exports.saveHobbies = saveHobbies;
+exports.editHobbies = editHobbies;
 
 var _common = require("./common.js");
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var fName = document.querySelector("#firstName");
 var lName = document.querySelector("#lastName");
@@ -22,6 +28,20 @@ var userNameLogin = document.querySelector("#userNameLogin");
 var passwordLogin = document.querySelector("#passwordLogin");
 var passwordLoginError = document.querySelector("#passwordLoginError");
 var userNameLoginError = document.querySelector("#userNameLoginError");
+var nationality = document.querySelector("#nationality");
+var homeTown = document.querySelector("#home_town");
+var currentCity = document.querySelector("#current_city");
+var education = document.querySelector("#education");
+var nationalityEdit = document.querySelector("#nationality_edit");
+var homeTownEdit = document.querySelector("#home_town_edit");
+var currentCityEdit = document.querySelector("#current_city_edit");
+var educationEdit = document.querySelector("#education_edit");
+var hobby_1_edit = document.querySelector("#hobby_1_edit");
+var hobby_2_edit = document.querySelector("#hobby_2_edit");
+var hobby_3_edit = document.querySelector("#hobby_3_edit");
+var hobby_4_edit = document.querySelector("#hobby_4_edit");
+var save = document.querySelector("#save");
+var id = window.sessionStorage.getItem("userId");
 var sex = ""; // function for the sign up
 
 function SignUpUser(e) {
@@ -50,18 +70,23 @@ function SignUpUser(e) {
     var confirmPasswordEncrypted = _common.crypt.encrypt(confirmPassword.value);
 
     if (confirmPasswordInputs(_common.crypt.decrypt(passwordEncrypted), _common.crypt.decrypt(confirmPasswordEncrypted))) {
+      var _db$users$add;
+
       sexChecker();
-      return db.users.add({
+      return db.users.add((_db$users$add = {
         firstName: fName.value,
         lastName: lName.value,
         username: userNameInput.value,
         email: emailInput.value,
         password: passwordEncrypted,
         birthDate: birthDate.value,
+        edu: "-",
         sex: sex,
-        registeredAt: new Date(),
-        profilePicture: "https://img.icons8.com/clouds/100/000000/user-male.png"
-      }).then(function (id) {
+        nationality: "-",
+        currentCity: "-",
+        homeTown: "-",
+        hobby_1: "Enter your hobby here"
+      }, _defineProperty(_db$users$add, "hobby_1", "-"), _defineProperty(_db$users$add, "hobby_1", "-"), _defineProperty(_db$users$add, "hobby_1", "-"), _defineProperty(_db$users$add, "registeredAt", new Date()), _db$users$add)).then(function (id) {
         window.sessionStorage.setItem("userId", id);
         location.href = "profile.html";
         history.replaceState({}, "", "home.html");
@@ -112,6 +137,44 @@ function LogInUser(e) {
       });
     });
   }
+}
+
+function editAboutMe() {
+  db.users.update(parseInt(id), {
+    nationality: nationalityEdit.value,
+    currentCity: currentCityEdit.value,
+    homeTown: homeTownEdit.value,
+    edu: educationEdit.value
+  });
+  location.reload();
+}
+
+function saveHobbies() {
+  db.users.update(parseInt(id), {
+    hobby_1: hobby_1_edit.value,
+    hobby_2: hobby_2_edit.value,
+    hobby_3: hobby_3_edit.value,
+    hobby_4: hobby_4_edit.value
+  });
+  location.reload();
+}
+
+function editButtonAboutMe() {
+  db.users.get(parseInt(id)).then(function (user) {
+    nationalityEdit.value = user.nationality;
+    currentCityEdit.value = user.currentCity;
+    homeTownEdit.value = user.homeTown;
+    educationEdit.value = user.edu;
+  });
+}
+
+function editHobbies() {
+  db.users.get(parseInt(id)).then(function (user) {
+    hobby_1_edit.value = user.hobby_1;
+    hobby_2_edit.value = user.hobby_2;
+    hobby_3_edit.value = user.hobby_3;
+    hobby_4_edit.value = user.hobby_4;
+  });
 } //Check the value of radio button for sex
 
 
