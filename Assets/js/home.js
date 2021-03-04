@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
 })
 
 async function loadMyBooks() {
-    const mybooks = await db.books.where("userId").equals(loggedInUser()).toArray()
+    const mybooks = await db.books.where("userId").equals(parseInt(loggedInUser())).toArray()
     console.log(mybooks)
     mybooks.forEach(book => {
         let option = document.createElement("option")
