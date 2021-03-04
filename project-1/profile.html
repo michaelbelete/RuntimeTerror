@@ -83,36 +83,104 @@
                         <div class="card shadow-sm mt-3 rounded-small">
                             <div class="card-body">
                                 <h5>About me</h5>
-                                <p class="mt-4">Vestibulum mi dolor, dictum consectetur imperdiet eu, pellentesque ac
-                                    eros. Etiam aliquam urna nunc. Aliquam
-                                    ultricies eget augue ac venenatis. Sed sed fringilla libero. Morbi vitae varius
-                                    odio, dapibus posuere ligula.</p>
                                 <ul style="list-style-type: none;" class="pl-0 mt-4">
-                                    <div class="row mt-1">
-                                        <div class="col-md"><strong>Sex</strong></div>
-                                        <div class="col-md" id="sex"></div>
-                                    </div>
+                                    
                                     <div class="row mt-1">
                                         <div class="col-md"><strong>Nationality</strong></div>
-                                        <div class="col-md">Some country</div>
+                                        <div class="col-md" id="nationality">-</div>
                                     </div>
                                     <div class="row mt-1">
                                         <div class="col-md"><strong>Current city</strong></div>
-                                        <div class="col-md">Some city</div>
+                                        <div class="col-md" id="current_city">-</div>
                                     </div>
                                     <div class="row mt-1">
                                         <div class="col-md"><strong>Hometown</strong></div>
-                                        <div class="col-md">Some city</div>
+                                        <div class="col-md" id="home_town">-</div>
                                     </div>
                                     <div class="row mt-1">
                                         <div class="col-md"><strong>Education</strong></div>
-                                        <div class="col-md">Education level</div>
+                                        <div class="col-md" id="education">-</div>
                                     </div>
                                 </ul>
+                                <div class="row">
+                                    <div class="col-md text-right">
+                                        <button type="button" class="btn btn-primary btn-sm" id="editButton" data-toggle="modal" data-target="#exampleModalCenter">
+                                            <i class="far fa-edit"></i> Edit
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
 
+                        </div>
+
+                    </div>
+                    <!-- Button trigger modal -->
+                   
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">About me</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body px-4">
+                                    <div class="formModal">
+                            
+                                        <div class="row mt-2">
+                                            <div class="col-md-3">
+                                                <label for="nationality_edit">Nationality</label>
+                                                
+                                            </div>
+                                            <div class="col-md">
+                                                <input type="text" id="nationality_edit" class="form-control">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row mt-2">
+                                            <div class="col-md-3">
+                                                <label for="current_city_edit">Current city</label>
+                                                
+                                            </div>
+                                            <div class="col-md">
+                                                <input type="text" id="current_city_edit" class="form-control">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row mt-2">
+                                            <div class="col-md-3">
+                                                <label for="home_town_edit">Hometown</label>
+                                            </div>
+                                            <div class="col-md">
+                                                <input type="text" id="home_town_edit" class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-2">
+                                            <div class="col-md-3">
+                                                <label for="education_edit">Education</label>
+                                            </div>
+                                            <div class="col-md">
+                                                <input type="text" id="education_edit" class="form-control">
+                                            </div>
+                                        </div>
+                                        
+                                        
+
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close">Close</button>
+                                    <button type="button" class="btn btn-primary" id="save">Save changes</button>
+                                </div>
                             </div>
                         </div>
                     </div>
+
                     <div class="col-md-5">
                         <div class="card shadow-sm mt-3 rounded-small">
                             <div class="card-body">
@@ -153,12 +221,8 @@
                                     <div class="col-md text-left" id="b_date"></div>
                                 </div>
                                 <div class="row mt-1">
-                                    <div class="col-md-4"><strong>Hometown</strong></div>
-                                    <div class="col-md">Some city</div>
-                                </div>
-                                <div class="row mt-1">
-                                    <div class="col-md-4"><strong>Education</strong></div>
-                                    <div class="col-md">Education level</div>
+                                    <div class="col-md-4"><strong>Sex</strong></div>
+                                    <div class="col-md" id="sex"></div>
                                 </div>
                                 </ul>
                             </div>
@@ -228,7 +292,7 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="./Assets/js/db.js"></script>
     <!-- <script src="./Assets/js/app.js" type="module"></script> -->
-    <script src="./Assets/js/profile.js"></script>
+    <script type="module" src="./Assets/js/profile.js"></script>
 
     <script>
         AOS.init({

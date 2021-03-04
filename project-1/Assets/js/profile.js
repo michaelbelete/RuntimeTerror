@@ -1,11 +1,26 @@
+import { editAboutMe, editButtonAboutMe } from "./methods.js";
+
 const fullName = document.querySelector("#full_name");
 const userName = document.querySelector("#user_name");
 const email = document.querySelector("#email");
 const bDate = document.querySelector("#b_date");
 const sex = document.querySelector("#sex");
 const pp_container = document.querySelector("#pp_container");
+const nationality = document.querySelector("#nationality");
+const homeTown = document.querySelector("#home_town");
+const currentCity = document.querySelector("#current_city");
+const education = document.querySelector("#education");
+const nationalityEdit = document.querySelector("#nationality_edit");
+const homeTownEdit = document.querySelector("#home_town_edit");
+const currentCityEdit = document.querySelector("#current_city_edit");
+const educationEdit = document.querySelector("#education");
+const edit = document.querySelector("#editButton");
+const save = document.querySelector("#save");
 
 const id = window.sessionStorage.getItem("userId");
+
+edit.addEventListener("click", editButtonAboutMe);
+save.addEventListener("click", editAboutMe);
 
 db.users.get(parseInt(id)).then((user) => {
   fullName.innerHTML = user.firstName + " " + user.lastName;
@@ -13,6 +28,11 @@ db.users.get(parseInt(id)).then((user) => {
   email.innerHTML = user.email;
   bDate.innerHTML = user.birthDate;
   sex.innerHTML = user.sex;
+  nationality.innerHTML = user.nationality;
+  currentCity.innerHTML = user.currentCity;
+  homeTown.innerHTML = user.homeTown;
+  education.innerHTML = user.edu;
+
   profileSetter(user);
 });
 

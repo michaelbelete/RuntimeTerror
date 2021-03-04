@@ -10,6 +10,7 @@ const signUp = document.querySelector("#signUpButton");
 const login = document.querySelector("#loginButton");
 const services = document.querySelector("#services");
 const learnMore = document.querySelector("#learnMore");
+const features = document.querySelector("#features");
 
 signUp.addEventListener("click", SignUpUser);
 login.addEventListener("click", LogInUser);

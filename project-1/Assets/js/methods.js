@@ -13,7 +13,16 @@ const userNameLogin = document.querySelector("#userNameLogin");
 const passwordLogin = document.querySelector("#passwordLogin");
 const passwordLoginError = document.querySelector("#passwordLoginError");
 const userNameLoginError = document.querySelector("#userNameLoginError");
-
+const nationality = document.querySelector("#nationality");
+const homeTown = document.querySelector("#home_town");
+const currentCity = document.querySelector("#current_city");
+const education = document.querySelector("#education");
+const nationalityEdit = document.querySelector("#nationality_edit");
+const homeTownEdit = document.querySelector("#home_town_edit");
+const currentCityEdit = document.querySelector("#current_city_edit");
+const educationEdit = document.querySelector("#education_edit");
+const save = document.querySelector("#save");
+const id = window.sessionStorage.getItem("userId");
 let sex = "";
 
 // function for the sign up
@@ -55,7 +64,11 @@ function SignUpUser(e) {
           email: emailInput.value,
           password: passwordEncrypted,
           birthDate: birthDate.value,
+          edu: "-",
           sex: sex,
+          nationality: "-",
+          currentCity: "-",
+          homeTown: "-",
           registeredAt: new Date(),
         })
         .then((id) => {
@@ -111,6 +124,24 @@ function LogInUser(e) {
   }
 }
 
+function editAboutMe() {
+  db.users.update(parseInt(id), {
+    nationality: nationalityEdit.value,
+    currentCity: currentCityEdit.value,
+    homeTown: homeTownEdit.value,
+    edu: educationEdit.value,
+  });
+  location.reload();
+}
+
+function editButtonAboutMe() {
+  db.users.get(parseInt(id)).then((user) => {
+    nationalityEdit.value = user.nationality;
+    currentCityEdit.value = user.currentCity;
+    homeTownEdit.value = user.homeTown;
+    educationEdit.value = user.edu;
+  });
+}
 //Check the value of radio button for sex
 function sexChecker() {
   if (male.checked) {
@@ -142,4 +173,4 @@ function userChecker(username, usersArray) {
   }
   return null;
 }
-export { SignUpUser, LogInUser };
+export { SignUpUser, LogInUser, editAboutMe, editButtonAboutMe };
