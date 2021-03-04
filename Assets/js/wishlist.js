@@ -277,8 +277,8 @@ function addNewBook() {
         publisher: publisherInput.value,
         dateAdded: new Date(),
         whyWish: whyWishInput.value,
-        // userId: userID
-        userId: 1
+        userId: userID
+        // userId: 1
     }
 
     db.wishlist.put(newBook).then(function() {
@@ -305,8 +305,8 @@ function modifyBookF(id) {
         publisher: publisherMInput.value,
         // dateAdded: new Date(),
         whyWish: whyWishMInput.value,
-        // userId: userID
-        userId: 1
+        userId: userID
+        // userId: 1
     }).then(x => {
         if (x) {
             // console.log(x);
@@ -330,6 +330,7 @@ function displayMyBooks() {
 
 
     db.wishlist.each(book => {
+        if (book.userId == userID){
             let div = document.createElement('div');
             div.className = "row py-2 px-4 w-100 book";
             div.setAttribute('my-book-id', book.bookId); // will be useful for deleting [through .delete()]
@@ -381,6 +382,7 @@ function displayMyBooks() {
 
             bookList.prepend(div); //may wanna prepend
             // console.log("not");
+        }
         }).then(() => {
             if (!bookList.firstElementChild) {
                 let d = document.createElement('div');

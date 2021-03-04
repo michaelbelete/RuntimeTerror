@@ -203,11 +203,13 @@ async function loadPosts() {
 }
 
 
+var userID = sessionStorage.getItem("userId")
 
 async function loadRecentBooks() {
     let bookList = document.querySelector('section > div > div:last-child > div');
     let books = await db.books.orderBy('bookId').reverse().limit(5).toArray();
     books.forEach(book => {
+        if (book.userId == userID){
         let div = document.createElement('div');
         div.className = "row mb-4";
         div.innerHTML += `<div class="col-3 px-2">
@@ -218,6 +220,7 @@ async function loadRecentBooks() {
             <small class="text-muted">${book.author}</small>
         </div>`;
         bookList.insertBefore(div, bookList.lastElementChild);
+        }
     })
 }
 
