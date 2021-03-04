@@ -1,9 +1,15 @@
 import {
-  editAboutMe,
-  editButtonAboutMe,
-  saveHobbies,
-  editHobbies,
+    editAboutMe,
+    editButtonAboutMe,
+    saveHobbies,
+    editHobbies,
 } from "./methods.js";
+
+$(document).ready(function() {
+    $('#header').load('includes/header.html')
+        // $('#books').select2();
+});
+
 
 const fullName = document.querySelector("#full_name");
 const userName = document.querySelector("#user_name");
@@ -35,37 +41,37 @@ save_hobbies.addEventListener("click", saveHobbies);
 editHobbiesButton.addEventListener("click", editHobbies);
 
 db.users.get(parseInt(id)).then((user) => {
-  fullName.innerHTML = user.firstName + " " + user.lastName;
-  userName.innerHTML = "@" + user.username;
-  email.innerHTML = user.email;
-  bDate.innerHTML = user.birthDate;
-  sex.innerHTML = user.sex;
-  nationality.innerHTML = user.nationality;
-  currentCity.innerHTML = user.currentCity;
-  homeTown.innerHTML = user.homeTown;
-  education.innerHTML = user.edu;
-  hobby_1.innerHTML = user.hobby_1;
-  hobby_2.innerHTML = user.hobby_2;
-  hobby_3.innerHTML = user.hobby_3;
-  hobby_4.innerHTML = user.hobby_4;
-  profileSetter(user);
+    fullName.innerHTML = user.firstName + " " + user.lastName;
+    userName.innerHTML = "@" + user.username;
+    email.innerHTML = user.email;
+    bDate.innerHTML = user.birthDate;
+    sex.innerHTML = user.sex;
+    nationality.innerHTML = user.nationality;
+    currentCity.innerHTML = user.currentCity;
+    homeTown.innerHTML = user.homeTown;
+    education.innerHTML = user.edu;
+    hobby_1.innerHTML = user.hobby_1;
+    hobby_2.innerHTML = user.hobby_2;
+    hobby_3.innerHTML = user.hobby_3;
+    hobby_4.innerHTML = user.hobby_4;
+    profileSetter(user);
 });
 
 function imgElementCreate(imgSrc) {
-  var img = document.createElement("img");
-  img.src = imgSrc;
-  img.height = "150";
-  img.width = "150";
-  img.id = "profile_p";
-  // img.style.border = "0.1px solid black";
-  img.className = "shadow p-1";
-  pp_container.insertBefore(img, fullName);
+    var img = document.createElement("img");
+    img.src = imgSrc;
+    img.height = "150";
+    img.width = "150";
+    img.id = "profile_p";
+    // img.style.border = "0.1px solid black";
+    img.className = "shadow p-1";
+    pp_container.insertBefore(img, fullName);
 }
 
 function profileSetter(user) {
-  if (user.sex.toLowerCase() == "male") {
-    imgElementCreate("Assets/images/boss.png");
-  } else if (user.sex.toLowerCase() == "female") {
-    imgElementCreate("Assets/images/woman.png");
-  }
+    if (user.sex.toLowerCase() == "male") {
+        imgElementCreate("Assets/images/boss.png");
+    } else if (user.sex.toLowerCase() == "female") {
+        imgElementCreate("Assets/images/woman.png");
+    }
 }
