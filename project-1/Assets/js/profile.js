@@ -75,3 +75,21 @@ function profileSetter(user) {
         imgElementCreate("Assets/images/woman.png");
     }
 }
+
+
+const checkLogin = document.querySelector("#loginCheck")
+
+const username = document.querySelector("#username")
+
+const userId = sessionStorage.getItem("userId")
+if (userId) {
+    checkLogin.style.display = "none"
+    async function getProfile() {
+        let user = await db.users.where("userId").equals(Number(userId)).first()
+        username.firstElementChild.innerHTML = `<i class="fa fa-user pr-1"></i>  ${user.firstName} ${user.lastName}`
+
+    }
+    //fetch logged in user
+    getProfile()
+    username.style.display = "block"
+}

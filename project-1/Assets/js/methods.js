@@ -13,7 +13,20 @@ const userNameLogin = document.querySelector("#userNameLogin");
 const passwordLogin = document.querySelector("#passwordLogin");
 const passwordLoginError = document.querySelector("#passwordLoginError");
 const userNameLoginError = document.querySelector("#userNameLoginError");
-
+const nationality = document.querySelector("#nationality");
+const homeTown = document.querySelector("#home_town");
+const currentCity = document.querySelector("#current_city");
+const education = document.querySelector("#education");
+const nationalityEdit = document.querySelector("#nationality_edit");
+const homeTownEdit = document.querySelector("#home_town_edit");
+const currentCityEdit = document.querySelector("#current_city_edit");
+const educationEdit = document.querySelector("#education_edit");
+const hobby_1_edit = document.querySelector("#hobby_1_edit");
+const hobby_2_edit = document.querySelector("#hobby_2_edit");
+const hobby_3_edit = document.querySelector("#hobby_3_edit");
+const hobby_4_edit = document.querySelector("#hobby_4_edit");
+const save = document.querySelector("#save");
+const id = window.sessionStorage.getItem("userId");
 let sex = "";
 
 // function for the sign up
@@ -55,9 +68,16 @@ function SignUpUser(e) {
                     email: emailInput.value,
                     password: passwordEncrypted,
                     birthDate: birthDate.value,
+                    edu: "-",
                     sex: sex,
+                    nationality: "-",
+                    currentCity: "-",
+                    homeTown: "-",
+                    hobby_1: "Enter your hobby here",
+                    hobby_1: "-",
+                    hobby_1: "-",
+                    hobby_1: "-",
                     registeredAt: new Date(),
-                    profilePicture: "https://img.icons8.com/clouds/100/000000/user-male.png"
                 })
                 .then((id) => {
                     window.sessionStorage.setItem("userId", id);
@@ -112,6 +132,43 @@ function LogInUser(e) {
     }
 }
 
+function editAboutMe() {
+    db.users.update(parseInt(id), {
+        nationality: nationalityEdit.value,
+        currentCity: currentCityEdit.value,
+        homeTown: homeTownEdit.value,
+        edu: educationEdit.value,
+    });
+    location.reload();
+}
+
+function saveHobbies() {
+    db.users.update(parseInt(id), {
+        hobby_1: hobby_1_edit.value,
+        hobby_2: hobby_2_edit.value,
+        hobby_3: hobby_3_edit.value,
+        hobby_4: hobby_4_edit.value,
+    });
+    location.reload();
+}
+
+function editButtonAboutMe() {
+    db.users.get(parseInt(id)).then((user) => {
+        nationalityEdit.value = user.nationality;
+        currentCityEdit.value = user.currentCity;
+        homeTownEdit.value = user.homeTown;
+        educationEdit.value = user.edu;
+    });
+}
+
+function editHobbies() {
+    db.users.get(parseInt(id)).then((user) => {
+        hobby_1_edit.value = user.hobby_1;
+        hobby_2_edit.value = user.hobby_2;
+        hobby_3_edit.value = user.hobby_3;
+        hobby_4_edit.value = user.hobby_4;
+    });
+}
 //Check the value of radio button for sex
 function sexChecker() {
     if (male.checked) {
@@ -143,4 +200,11 @@ function userChecker(username, usersArray) {
     }
     return null;
 }
-export { SignUpUser, LogInUser };
+export {
+    SignUpUser,
+    LogInUser,
+    editAboutMe,
+    editButtonAboutMe,
+    saveHobbies,
+    editHobbies,
+};
