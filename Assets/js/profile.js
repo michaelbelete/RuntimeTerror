@@ -1,15 +1,14 @@
 import {
-    editAboutMe,
-    editButtonAboutMe,
-    saveHobbies,
-    editHobbies,
+  editAboutMe,
+  editButtonAboutMe,
+  saveHobbies,
+  editHobbies,
 } from "./methods.js";
 
-$(document).ready(function() {
-    $('#header').load('includes/header.html')
-        // $('#books').select2();
-});
-
+// $(document).ready(function() {
+//     $('#header').load('includes/header.html')
+//         // $('#books').select2();
+// });
 
 const fullName = document.querySelector("#full_name");
 const userName = document.querySelector("#user_name");
@@ -29,10 +28,10 @@ const edit = document.querySelector("#editButton");
 const editHobbiesButton = document.querySelector("#editButtonHobby");
 const save = document.querySelector("#save");
 const save_hobbies = document.querySelector("#save_hobbies");
-const hobby_1 = document.querySelector("#hobby-1");
-const hobby_2 = document.querySelector("#hobby-2");
-const hobby_3 = document.querySelector("#hobby-3");
-const hobby_4 = document.querySelector("#hobby-4");
+const hobby1 = document.querySelector("#hobby-1");
+const hobby2 = document.querySelector("#hobby-2");
+const hobby3 = document.querySelector("#hobby-3");
+const hobby4 = document.querySelector("#hobby-4");
 const id = window.sessionStorage.getItem("userId");
 
 edit.addEventListener("click", editButtonAboutMe);
@@ -41,55 +40,53 @@ save_hobbies.addEventListener("click", saveHobbies);
 editHobbiesButton.addEventListener("click", editHobbies);
 
 db.users.get(parseInt(id)).then((user) => {
-    fullName.innerHTML = user.firstName + " " + user.lastName;
-    userName.innerHTML = "@" + user.username;
-    email.innerHTML = user.email;
-    bDate.innerHTML = user.birthDate;
-    sex.innerHTML = user.sex;
-    nationality.innerHTML = user.nationality;
-    currentCity.innerHTML = user.currentCity;
-    homeTown.innerHTML = user.homeTown;
-    education.innerHTML = user.edu;
-    hobby_1.innerHTML = user.hobby_1;
-    hobby_2.innerHTML = user.hobby_2;
-    hobby_3.innerHTML = user.hobby_3;
-    hobby_4.innerHTML = user.hobby_4;
-    profileSetter(user);
+  fullName.innerHTML = user.firstName + " " + user.lastName;
+  userName.innerHTML = "@" + user.username;
+  email.innerHTML = user.email;
+  bDate.innerHTML = user.birthDate;
+  sex.innerHTML = user.sex;
+  nationality.innerHTML = user.nationality;
+  currentCity.innerHTML = user.currentCity;
+  homeTown.innerHTML = user.homeTown;
+  education.innerHTML = user.edu;
+  hobby1.innerHTML = user.hobby_1;
+  hobby2.innerHTML = user.hobby_2;
+  hobby3.innerHTML = user.hobby_3;
+  hobby4.innerHTML = user.hobby_4;
+  profileSetter(user);
 });
 
 function imgElementCreate(imgSrc) {
-    var img = document.createElement("img");
-    img.src = imgSrc;
-    img.height = "150";
-    img.width = "150";
-    img.id = "profile_p";
-    // img.style.border = "0.1px solid black";
-    img.className = "shadow p-1";
-    pp_container.insertBefore(img, fullName);
+  var img = document.createElement("img");
+  img.src = imgSrc;
+  img.height = "150";
+  img.width = "150";
+  img.id = "profile_p";
+  // img.style.border = "0.1px solid black";
+  img.className = "shadow p-1";
+  pp_container.insertBefore(img, fullName);
 }
 
 function profileSetter(user) {
-    if (user.sex.toLowerCase() == "male") {
-        imgElementCreate("Assets/images/boss.png");
-    } else if (user.sex.toLowerCase() == "female") {
-        imgElementCreate("Assets/images/woman.png");
-    }
+  if (user.sex.toLowerCase() == "male") {
+    imgElementCreate("Assets/images/boss.png");
+  } else if (user.sex.toLowerCase() == "female") {
+    imgElementCreate("Assets/images/woman.png");
+  }
 }
 
+const checkLogin = document.querySelector("#loginCheck");
 
-const checkLogin = document.querySelector("#loginCheck")
+const username = document.querySelector("#username");
 
-const username = document.querySelector("#username")
-
-const userId = sessionStorage.getItem("userId")
+const userId = sessionStorage.getItem("userId");
 if (userId) {
-    checkLogin.style.display = "none"
-    async function getProfile() {
-        let user = await db.users.where("userId").equals(Number(userId)).first()
-        username.firstElementChild.innerHTML = `<i class="fa fa-user pr-1"></i>  ${user.firstName} ${user.lastName}`
-
-    }
-    //fetch logged in user
-    getProfile()
-    username.style.display = "block"
+  checkLogin.style.display = "none";
+  async function getProfile() {
+    let user = await db.users.where("userId").equals(Number(userId)).first();
+    username.firstElementChild.innerHTML = `<i class="fa fa-user pr-1"></i>  ${user.firstName} ${user.lastName}`;
+  }
+  //fetch logged in user
+  getProfile();
+  username.style.display = "block";
 }
