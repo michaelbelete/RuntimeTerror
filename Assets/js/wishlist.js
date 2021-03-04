@@ -277,7 +277,7 @@ function addNewBook() {
         publisher: publisherInput.value,
         dateAdded: new Date(),
         whyWish: whyWishInput.value,
-        userId: userID
+        userId: parseInt(loggedInUser())
         // userId: 1
     }
 
@@ -305,7 +305,7 @@ function modifyBookF(id) {
         publisher: publisherMInput.value,
         // dateAdded: new Date(),
         whyWish: whyWishMInput.value,
-        userId: userID
+        userId: parseInt(loggedInUser())
         // userId: 1
     }).then(x => {
         if (x) {

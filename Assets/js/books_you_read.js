@@ -258,7 +258,7 @@ function addNewBook() {
         publisher: publisherInput.value,
         dateAdded: new Date(),
         shortDesc: shortDescInput.value,
-        userId: userID
+        userId: parseInt(loggedInUser())
         // userId: 1
     }
 
@@ -287,7 +287,7 @@ function modifyBookF(id) {
         publisher: publisherMInput.value,
         // dateAdded: new Date(),
         shortDesc: shortDescMInput.value,
-        userId: userID
+        userId: parseInt(loggedInUser())
         // userId: 1
     }).then(x => {
         if (x) {
@@ -588,4 +588,25 @@ function updateBookPrivacyStatus(e) {
 //     else {
 //         confirmQ = false;
 //     }
+// }
+
+
+
+// async function alert2(m){
+//     let div = document.createElement('div');
+//     div.className = "card-body";
+//     div.style.position = "absolute";
+//     div.style.zIndex = "99";
+//     div.style.width = "30%";
+//     div.style.height = "20%";
+//     div.style.left = "35%";
+//     div.style.top = "20%";
+//     div.style.background = "grey";
+//     div.style.border = "1px grey"
+//     div.style.borderRadius = "5px"
+//     div.style.boxShadow = "grey 1px";
+//     div.innerHTML = `<p>${m}</p>`;
+//     document.querySelector('body').appendChild(div);
+//     console.log(div)
+//     await setTimeout(()=> body.removeChild(div), 15000);
 // }

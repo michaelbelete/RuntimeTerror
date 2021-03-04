@@ -229,19 +229,22 @@ async function loadRecentBooks() {
 
 
 async function loadPopularMembers() {
-
+    // console.log("lpm")
     //finding id's of the five most popular users - users with most posts
     let totalPostNumberList = []; //total number of posts for each user - the index of the array corresponds to the id of the user
     let posts = await db.posts.toArray();
     let users = await db.users.toArray();
     let firstUserIdDistanceFromZero = users[0].userId; //gap between 0 and first user id //so as not to have an array with many empties when the gap is big
+    console.log(users, posts)
     users.forEach(user => {
         posts.forEach(post => {
-            if (post.userId == user.userId) totalPostNumberList[user.userId - firstUserIdDistanceFromZero] ? totalPostNumberList[user.userId - firstUserIdDistanceFromZero] += 1 : totalPostNumberList[user.userId - firstUserIdDistanceFromZero] = 1;
+            if (parseInt(post.userId) == user.userId) totalPostNumberList[user.userId - firstUserIdDistanceFromZero] ? (totalPostNumberList[user.userId - firstUserIdDistanceFromZero] += 1) : (totalPostNumberList[user.userId - firstUserIdDistanceFromZero] = 1);
         })
     })
+    console.log(totalPostNumberList)
     let sortedTotalPostNumberList = totalPostNumberList;
     sortedTotalPostNumberList.sort();
+    console.log(sortedTotalPostNumberList)
     let popularUsersNumberOfPosts = sortedTotalPostNumberList.length >= 5 ? sortedTotalPostNumberList.splice(sortedTotalPostNumberList.length - 5, 5) : sortedTotalPostNumberList;
     // let popularUsersId = totalPostNumberList.length >= 5? range(totalPostNumberList.length-4, totalPostNumberList.length+1) : range(1, totalPostNumberList.length+1)
     let popularUsersId = [];
@@ -255,7 +258,7 @@ async function loadPopularMembers() {
     }
 
 
-
+    // console.log(popularUsersId);
     // for each id, get the user json and appened date from it to the html
     for (let i = popularUsersId.length - 1; i >= 0; i--) {
         let popularUser = await db.users.where("userId").equals(popularUsersId[i]).toArray()
@@ -263,12 +266,13 @@ async function loadPopularMembers() {
         let popularUsersList = document.querySelector("section > div > div:nth-child(2) > div");
         let div = document.createElement('div');
         div.className = "row mb-4";
+        // console.log('pu' + popularUser[i])
         div.innerHTML += `<div class="col-3 px-3">
             <img src="${popularUser[i].profilePicture}" class="rounded-circle" height="60" />
         </div>
         <div class="col-8 pt-2">
             <p class="title font-wight-bold p-0 m-0">${popularUser[i].firstName} ${popularUser[i].lastName}</p>
-            <small class="text-muted">${popularUser[i].username}</small>
+            <a href="profile.html?id=${popularUser[i].userId}" class="text-muted">${popularUser[i].username}</a>
         </div>`
         popularUsersList.appendChild(div);
     }
