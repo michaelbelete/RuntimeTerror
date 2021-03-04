@@ -26,17 +26,125 @@ const whyWishMInput = document.querySelector('.why-wishM');
 
 const modifyBook = document.querySelector('#modifyBook');
 
+// const removeBooks = document.querySelector('.remove-all') //possible under the more options (three dots)
+// const removeBook = document.querySelector('.remove-book'); //without delegation
+
+
 // Event Listeners
 // addBook.addEventListener('submit', addNewBook);
 addBook.addEventListener('submit', wishListValidate);
 modifyBook.addEventListener('submit', wishListValidate);
-
+// addBook.addEventListener('submit', awt);
+// // removeBooks.addEventListener('click', removeAllBooks);
+// removeBook.addEventListener('click', removeBookF);
 bookList.addEventListener('click', removeBookF);
 searchFilter.addEventListener('keyup', filterBooks);
 bookList.addEventListener('click', displayMoreInfo);
 bookList.addEventListener('click', fillInForm);
+// bookList.addEventListener('click', getId);
 
+
+
+// const db = new Dexie('Bookacholics');
+
+// db.version(3).stores({
+//     users: "++useId, firstName, lastName, email, &username, bio, hobbies, birthDate, currentCity, homeTown, education, registeredAt",
+//     books: "++bookId, title, author, edition, publisher, dateAdded, shortDesc, userId",
+//     wishlist: "++bookId, title, author, edition, publisher, dateAdded, whyWish, userId",
+//     posts: "++postId, bookId, postType, rating, comments, createdAt, updatedAt, userId",
+//     comments: "++commentId, comment, userId, createdAt, updatedAt"
+// });
+
+// db.open().then(displayMyBooks());
 displayMyBooks();
+// const newUser = {
+//     firstName: "michael",
+//     lastName: "belete",
+//     email: "it.michael.belete@gmail.com",
+//     username: "@abc",
+//     bio: "some bio...",
+//     hobbies: "programming",
+//     birthDate: Date(),
+//     currentCity: "Addis Ababa",
+//     homeTown: "Bahir Dar",
+//     education: "BSC",
+//     registeredAt: Date(),
+// }
+
+// db.users.put(newUser).then(function() {
+//     console.log("user created succesfully")
+// }).catch((error) => console.log(error))
+
+
+
+
+
+
+
+
+
+
+
+// --------------
+// let DB;
+let userID = sessionStorage.getItem('userId');
+
+// // If we added sorting
+// // var isAlphaBeticalAsc = true;
+// // var isDateAsc = true;
+
+
+// let myBookDB = indexedDB.open('Bookaholics', 2);
+
+// myBookDB.onerror = function () {
+//     console.log('There was an error');
+// }
+
+// myBookDB.onsuccess = function () {
+//     // console.log('Database Ready');
+//     DB = myBookDB.result;
+//     displayMyBooks();
+// }
+
+// myBookDB.onupgradeneeded = function (e) {
+//     let db = e.target.result;
+//     let objectStore = db.createObjectStore('myWishlist', {
+//         keyPath: 'bookid',
+//         autoIncrement: true
+//     });
+//     objectStore.createIndex('userId', 'userId', {
+//         unique: false
+//     });
+//     objectStore.createIndex('bookTitle', 'bookTitle', {
+//         unique: false
+//     });
+//     objectStore.createIndex('edition', 'edition', {
+//         unique: false
+//     }); //might need us to add it in the My Books page
+//     // objectStore.createIndex('publicationDate', 'publicationDate', { unique: false }); //
+//     objectStore.createIndex('author', 'author', {
+//         unique: false
+//     });
+//     objectStore.createIndex('publisher', 'publisher', {
+//         unique: false
+//     });
+//     objectStore.createIndex('dateAdded', 'dateAdded', {
+//         unique: true
+//     });
+//     objectStore.createIndex('shortDesc', 'shortDesc', {
+//         unique: false
+//     });
+//     console.log('Database created.');
+// }
+
+
+// async function awt(){
+//     let isNotRead = await wishListValidate();
+//     if (!isNotRead){
+//         return;
+//     }
+//     let y = await addNewBook();
+// }
 
 let modifyBkId;
 
@@ -48,7 +156,7 @@ function wishListValidate(e) {
     // console.log('outside', e.target.id);
     if (e.target.id == "addBook") {
         // console.log('if',e.target.id);
-        db.books.where("userId").equals(loggedInUser).each(book => {
+        db.books.each(book => {
             // await db.books.each( book => {
             if ((titleInput.value == book.title) && (authorInput.value == book.author) && (editionInput.value == book.edition)) {
                 alert("Can't wish for a book you've already read (added to the book read page). Sorry."); //will change it
@@ -56,7 +164,7 @@ function wishListValidate(e) {
                 return;
             }
         }).then(
-            db.wishlist.where("userId").equals(loggedInUser)(book => {
+            db.wishlist.each(book => {
                 // await db.books.each( book => {
                 if ((titleInput.value == book.title) && (authorInput.value == book.author) && (editionInput.value == book.edition)) {
                     alert("You've already wishlisted the book."); //will change it
@@ -67,8 +175,14 @@ function wishListValidate(e) {
                 () => {
                     // console.log(x);
                     if (!isNotRead) {
+                        // addNewBook()
                         return;
+                        // return false;
                     }
+
+                    // return true;
+                    // if(e.target.id = "addBook") addNewBook();
+                    // else modifyBookF();
                     addNewBook();
                 }
             )
@@ -77,7 +191,8 @@ function wishListValidate(e) {
         )
 
     } else {
-        db.books.where("userId").equals(loggedInUser).each(book => {
+        // console.log('else', e.target.id);
+        db.books.each(book => {
             // await db.books.each( book => {
             if ((titleMInput.value == book.title) && (authorMInput.value == book.author) && (editionMInput.value == book.edition)) {
                 alert("Can't wish for a book you've already read (added to the book read page). Sorry. You can delete this wishlist by clicking the red bin icon."); //will change it
@@ -85,7 +200,7 @@ function wishListValidate(e) {
                 return;
             }
         }).then(
-            db.wishlist.where("userId").equals(loggedInUser)(book => {
+            db.wishlist.each(book => {
                 // await db.books.each( book => {
                 if ((titleMInput.value == book.title) && (authorMInput.value == book.author) && (editionMInput.value == book.edition) && (book.bookId != modifyBkId)) {
                     alert("You've already wishlisted the book. You can delete this wishlist by clicking the red bin icon."); //will change it
@@ -94,12 +209,23 @@ function wishListValidate(e) {
                 }
             }).then(
                 () => {
+                    // console.log(x);
                     if (!isNotRead) {
+                        // addNewBook()
                         return;
+                        // return false;
                     }
 
+                    // return true;
+                    // if(e.target.id = "addBook") addNewBook();
+                    // else modifyBookF();
                     modifyBookF(modifyBkId);
-                }))
+                }
+            )
+
+
+
+        )
     }
 
 
@@ -152,7 +278,7 @@ function addNewBook() {
         dateAdded: new Date(),
         whyWish: whyWishInput.value,
         // userId: userID
-        userId: loggedInUser()
+        userId: 1
     }
 
     db.wishlist.put(newBook).then(function() {
@@ -180,7 +306,7 @@ function modifyBookF(id) {
         // dateAdded: new Date(),
         whyWish: whyWishMInput.value,
         // userId: userID
-        userId: loggedInUser()
+        userId: 1
     }).then(x => {
         if (x) {
             // console.log(x);
@@ -203,7 +329,7 @@ function displayMyBooks() {
     }
 
 
-    db.wishlist.where("userId").equals(loggedInUser)(book => {
+    db.wishlist.each(book => {
             let div = document.createElement('div');
             div.className = "row py-2 px-4 w-100 book";
             div.setAttribute('my-book-id', book.bookId); // will be useful for deleting [through .delete()]
