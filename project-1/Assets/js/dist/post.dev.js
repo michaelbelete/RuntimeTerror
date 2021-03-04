@@ -52,33 +52,37 @@ function loadReviews(title, postId) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          console.log(title);
           resultPost = []; // console.log("mike")
           // const reviewWithTitle = await db.posts.where("title").equalsIgnoreCase(title).toArray()
 
-          _context.next = 4;
+          _context.next = 3;
           return regeneratorRuntime.awrap(db.posts.where("postId").equals(postId).toArray());
 
-        case 4:
+        case 3:
           reviewPost = _context.sent;
           reviewPost.forEach(function (result) {
             resultPost.push(result);
           });
-          _context.next = 8;
+          _context.next = 7;
           return regeneratorRuntime.awrap(db.books.where('title').equalsIgnoreCase(title).first());
 
-        case 8:
+        case 7:
           book = _context.sent;
-          _context.next = 11;
+          _context.next = 10;
           return regeneratorRuntime.awrap(db.posts.where("bookId").equals(book.bookId).toArray());
 
-        case 11:
+        case 10:
           reviewTitle = _context.sent;
           reviewTitle.forEach(function (result) {
             resultPost.push(result);
           });
           resultPost = resultPost.reverse(function (a, b) {
             return a - b;
+          });
+          resultPost = resultPost.filter(function (post, index, self) {
+            return index === self.findIndex(function (t) {
+              return post.userId === post.userId && post.postId === post.postId;
+            });
           });
 
           if (!(resultPost.length >= 5)) {
@@ -179,9 +183,11 @@ function loadSpecificPost() {
         case 18:
           comments = _context5.sent;
           loadReviews(book.title, post.postId).then(function (result) {
+            console.log(result);
             var reviews = result.filter(function (posts) {
               return posts.postType === 'review';
             });
+            console.log(reviews);
             reviews.forEach(function _callee(review) {
               var usr, strReview, htmlReview;
               return regeneratorRuntime.async(function _callee$(_context3) {

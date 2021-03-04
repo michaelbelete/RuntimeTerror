@@ -54,7 +54,6 @@ function generateStar(id, rating) {
 
 
 async function loadReviews(title, postId) {
-    console.log(title)
     let resultPost = []
         // console.log("mike")
         // const reviewWithTitle = await db.posts.where("title").equalsIgnoreCase(title).toArray()
@@ -73,6 +72,11 @@ async function loadReviews(title, postId) {
         return a - b
     })
 
+    resultPost = resultPost.filter((post, index, self) =>
+        index === self.findIndex((t) => (
+            post.userId === post.userId && post.postId === post.postId
+        ))
+    )
     if (resultPost.length >= 5) {
         return resultPost.slice(0, 5)
     } else {
@@ -113,8 +117,10 @@ async function loadSpecificPost() {
     const comments = await commentData.toArray()
 
     loadReviews(book.title, post.postId).then((result) => {
+        console.log(result)
         const reviews = result.filter((posts => posts.postType === 'review'))
 
+        console.log(reviews)
         reviews.forEach(async(review) => {
             let usr = await db.users.where("userId").equals(parseInt(review.userId)).first()
             let strReview = `
