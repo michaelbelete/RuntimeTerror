@@ -186,24 +186,85 @@
                             <div class="card-body">
                                 <h5>Hobbies</h5>
                                 <div class="row">
-                                    <div class="col-md">
-                                        <ul style="list-style-type: none;" class="pl-0 mt-4">
-                                            <li class="mt-1">Nam sem diam, rhoncus a consectetur.</li>
-                                            <li class="mt-1">Nam porta mauris sagittis diam ornare.</li>
-                                            <li class="mt-1">Proin ultricies porttitor neque.</li>
-                                            <li class="mt-1">Nullam sed arcu tempus, porttitor.</li>
+                                    <div class="col-md ml-5">
+                                        <ul style="list-style-type: none;" class="pl-0 mt-4" id="hobbies">
+                                            <li class="mt-1" id="hobby-1"></li>
+                                            <li class="mt-1" id="hobby-2"></li>
+                                            <li class="mt-1" id="hobby-3"></li>
+                                            <li class="mt-1" id="hobby-4"></li>
                                         </ul>
                                     </div>
-                                    <div class="col-md">
-                                        <ul style="list-style-type: none;" class="pl-0 mt-4">
-                                            <li class="mt-1">Ut leo velit, tempus eget maximus vitae</li>
-                                            <li class="mt-1">consequat sed dolor. Mauris sollicitudin.</li>
-                                            <li class="mt-1">Proin ultricies porttitor neque.</li>
-                                            <li class="mt-1">velit dui pharetra felis, in elementum dolor.</li>
-                                        </ul>
+                                   
+                                </div>
+                                <div class="row">
+                                    <div class="col-md text-right">
+                                        <button type="button" class="btn btn-primary btn-sm" id="editButtonHobby" data-toggle="modal" data-target="#editHobby">
+                                            <i class="far fa-edit"></i> Edit Hobbies
+                                        </button>
+                                    </div>
+                                    <div class="modal fade" id="editHobby" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Hobbies</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body px-4">
+                                    <div class="formModal">
+                            
+                                        <div class="row mt-2">
+                                            <div class="col-md-3">
+                                                <label for="hobby_1_edit">Hobby 1</label>
+
+                                            </div>
+                                            <div class="col-md">
+                                                <input type="text" id="hobby_1_edit" class="form-control">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row mt-2">
+                                            <div class="col-md-3">
+                                                <label for="hobby_2_edit">Hobby 2</label>
+                                                
+                                            </div>
+                                            <div class="col-md">
+                                                <input type="text" id="hobby_2_edit" class="form-control">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row mt-2">
+                                            <div class="col-md-3">
+                                                <label for="hobby_3_edit">Hobby 3</label>
+                                            </div>
+                                            <div class="col-md">
+                                                <input type="text" id="hobby_3_edit" class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-2">
+                                            <div class="col-md-3">
+                                                <label for="hobby_4_edit">Hobby 4</label>
+                                            </div>
+                                            <div class="col-md">
+                                                <input type="text" id="hobby_4_edit" class="form-control">
+                                            </div>
+                                        </div>
+                                        
+                                        
+
                                     </div>
                                 </div>
-
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close">Close</button>
+                                    <button type="button" class="btn btn-primary" id="save_hobbies">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -21,6 +21,10 @@ const nationalityEdit = document.querySelector("#nationality_edit");
 const homeTownEdit = document.querySelector("#home_town_edit");
 const currentCityEdit = document.querySelector("#current_city_edit");
 const educationEdit = document.querySelector("#education_edit");
+const hobby_1_edit = document.querySelector("#hobby_1_edit");
+const hobby_2_edit = document.querySelector("#hobby_2_edit");
+const hobby_3_edit = document.querySelector("#hobby_3_edit");
+const hobby_4_edit = document.querySelector("#hobby_4_edit");
 const save = document.querySelector("#save");
 const id = window.sessionStorage.getItem("userId");
 let sex = "";
@@ -69,6 +73,10 @@ function SignUpUser(e) {
           nationality: "-",
           currentCity: "-",
           homeTown: "-",
+          hobby_1: "Enter your hobby here",
+          hobby_1: "-",
+          hobby_1: "-",
+          hobby_1: "-",
           registeredAt: new Date(),
         })
         .then((id) => {
@@ -134,12 +142,29 @@ function editAboutMe() {
   location.reload();
 }
 
+function saveHobbies() {
+  db.users.update(parseInt(id), {
+    hobby_1: hobby_1_edit.value,
+    hobby_2: hobby_2_edit.value,
+    hobby_3: hobby_3_edit.value,
+    hobby_4: hobby_4_edit.value,
+  });
+  location.reload();
+}
 function editButtonAboutMe() {
   db.users.get(parseInt(id)).then((user) => {
     nationalityEdit.value = user.nationality;
     currentCityEdit.value = user.currentCity;
     homeTownEdit.value = user.homeTown;
     educationEdit.value = user.edu;
+  });
+}
+function editHobbies() {
+  db.users.get(parseInt(id)).then((user) => {
+    hobby_1_edit.value = user.hobby_1;
+    hobby_2_edit.value = user.hobby_2;
+    hobby_3_edit.value = user.hobby_3;
+    hobby_4_edit.value = user.hobby_4;
   });
 }
 //Check the value of radio button for sex
@@ -173,4 +198,11 @@ function userChecker(username, usersArray) {
   }
   return null;
 }
-export { SignUpUser, LogInUser, editAboutMe, editButtonAboutMe };
+export {
+  SignUpUser,
+  LogInUser,
+  editAboutMe,
+  editButtonAboutMe,
+  saveHobbies,
+  editHobbies,
+};
